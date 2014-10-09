@@ -12,4 +12,20 @@ defmodule Caylir.Graph.Connection do
 
     worker(Caylir.Graph.Worker, [ graph ], id: graph)
   end
+
+  @doc """
+  Proxy implementation for `Caylir.Graph.delete/1`.
+  """
+  @spec delete(module, Keyword.t) :: Graph.t_delete
+  def delete(graph, quad) do
+    GenServer.call(graph, { :delete, quad })
+  end
+
+  @doc """
+  Proxy implementation for `Caylir.Graph.write/1`.
+  """
+  @spec write(module, Keyword.t) :: Graph.t_write
+  def write(graph, quad) do
+    GenServer.call(graph, { :write, quad })
+  end
 end

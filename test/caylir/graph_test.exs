@@ -17,4 +17,22 @@ defmodule Caylir.GraphTest do
   test "graph startup", context do
     assert [{ TestGraph, _, _, _ }] = Supervisor.which_children(context.test)
   end
+
+  test "invalid quads fail deleting" do
+    { :error, reason } = TestGraph.delete(%{ invalid: "quad" })
+
+    assert String.contains?(reason, "Invalid triple")
+  end
+  test "invalid quads fail writing" do
+    { :error, reason } = TestGraph.write(%{ invalid: "quad" })
+
+    assert String.contains?(reason, "Invalid triple")
+  end
+
+  test "quad lifecycle", context do
+    quad = %{ subject: "quad", predicate: "lifetime", object: context.test }
+
+    assert :ok = TestGraph.write(quad)
+    assert :ok = TestGraph.delete(quad)
+  end
 end

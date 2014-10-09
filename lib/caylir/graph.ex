@@ -24,8 +24,19 @@ defmodule Caylir.Graph do
       def child_spec() do
         Connection.child_spec(__MODULE__)
       end
+
+      def delete(quad) do
+        Connection.delete(__MODULE__, quad)
+      end
+
+      def write(quad) do
+        Connection.write(__MODULE__, quad)
+      end
     end
   end
+
+  @type t_delete :: :ok | { :error, String.t }
+  @type t_write :: :ok | { :error, String.t }
 
   @doc """
   Should return the configuration options used to communicate with the graph.
@@ -41,4 +52,14 @@ defmodule Caylir.Graph do
   Returns the child specification to start and supervise the graph connection.
   """
   defcallback child_spec() :: Supervisor.Spec.spec
+
+  @doc """
+  Deletes a quad from the graph.
+  """
+  defcallback delete(Keyword.t) :: t_delete
+
+  @doc """
+  Writes a quad to the graph.
+  """
+  defcallback write(Keyword.t) :: t_write
 end
