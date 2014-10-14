@@ -29,7 +29,7 @@ defmodule Caylir.Mixfile do
   end
 
   def deps(_) do
-    [ { :poison,  "~> 1.0" },
+    [ { :poison,  "~> 1.2" },
       { :poolboy, "~> 1.0" } ]
   end
 end
