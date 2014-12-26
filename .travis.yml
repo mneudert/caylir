@@ -10,8 +10,8 @@ before_install:
   - export PATH="$PATH:$PWD/vendor/elixir/bin"
 
   - wget -q "https://github.com/google/cayley/releases/download/v${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
-  - tar -xvzf "cayley_$CAYLEY_linux_amd64.tar.gz"
-  - cd "cayley_$CAYLEY_linux_amd64"
+  - tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
+  - cd "cayley_${CAYLEY}_linux_amd64"
   - ./cayley http --db=memstore --dbpath="" &
 
 install:
