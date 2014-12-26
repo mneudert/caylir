@@ -8,7 +8,7 @@ defmodule Caylir.Mixfile do
       version:       "0.0.1",
       elixir:        "~> 1.0",
       deps:          deps(Mix.env),
-      docs:          [ readme: true, main: "README" ],
+      docs:          [ readme: "README.md", main: "README" ],
       test_coverage: [ tool: ExCoveralls ]]
   end
 
