@@ -19,7 +19,7 @@ defmodule Caylir.Mixfile do
   def deps(:docs) do
     deps(:prod) ++
       [ { :earmark, "~> 0.1" },
-        { :ex_doc,  "~> 0.6" } ]
+        { :ex_doc,  "~> 0.7" } ]
   end
 
   def deps(:test) do
