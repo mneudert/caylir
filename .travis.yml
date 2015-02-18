@@ -8,6 +8,7 @@ before_install:
   - tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
   - cd "cayley_${CAYLEY}_linux_amd64"
   - ./cayley http --db=memstore --dbpath="" &
+  - cd "${TRAVIS_BUILD_DIR}"
 
 after_success:
   - mix coveralls.travis
