@@ -6,7 +6,7 @@ defmodule Caylir.Mixfile do
   def project do
     [ app:           :caylir,
       name:          "Caylir",
-      version:       "0.0.1",
+      version:       "0.1.0-dev",
       elixir:        "~> 1.0",
       deps:          deps(Mix.env),
       docs:          docs,
