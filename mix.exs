@@ -1,14 +1,15 @@
 defmodule Caylir.Mixfile do
   use Mix.Project
 
+  @url_github "https://github.com/mneudert/caylir"
+
   def project do
     [ app:           :caylir,
       name:          "Caylir",
-      source_url:    "https://github.com/mneudert/caylir",
       version:       "0.0.1",
       elixir:        "~> 1.0",
       deps:          deps(Mix.env),
-      docs:          [ readme: "README.md", main: "README" ],
+      docs:          docs,
       test_coverage: [ tool: ExCoveralls ]]
   end
 
@@ -31,5 +32,12 @@ defmodule Caylir.Mixfile do
   def deps(_) do
     [ { :poison,  "~> 1.3" },
       { :poolboy, "~> 1.4" } ]
+  end
+
+  def docs do
+    [ main:       "README",
+      readme:     "README.md",
+      source_ref: "master",
+      source_url: @url_github ]
   end
 end
