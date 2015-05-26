@@ -1,7 +1,7 @@
 language: elixir
 
 sudo: false
-env:  CAYLEY=0.4.0 MIX_ENV=test
+env:  CAYLEY=0.4.1 MIX_ENV=test
 
 before_install:
   - wget -q "https://github.com/google/cayley/releases/download/v${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"

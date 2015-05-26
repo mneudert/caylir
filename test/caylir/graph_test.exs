@@ -21,12 +21,12 @@ defmodule Caylir.GraphTest do
   test "invalid quads fail deleting" do
     { :error, reason } = TestGraph.delete(%{ invalid: "quad" })
 
-    assert String.contains?(reason, "Invalid triple")
+    assert String.contains?(reason, "invalid quad")
   end
   test "invalid quads fail writing" do
     { :error, reason } = TestGraph.write(%{ invalid: "quad" })
 
-    assert String.contains?(reason, "Invalid triple")
+    assert String.contains?(reason, "invalid quad")
   end
 
   test "quad lifecycle", context do
