@@ -15,6 +15,17 @@ defmodule Caylir.Graph.URL do
   def delete(graph), do: "#{ base_url graph }/delete"
 
   @doc """
+  Returns the URL to query the graph.
+
+  ## Example
+
+      iex> query([ host: "localhost", port: 64210 ])
+      "http://localhost:64210/api/v1/query/gremlin"
+  """
+  @spec query(Keyword.t) :: String.t
+  def query(graph), do: "#{ base_url graph }/query/gremlin"
+
+  @doc """
   Returns the URL for writing quads.
 
   ## Example

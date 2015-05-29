@@ -27,11 +27,23 @@ defmodule Caylir.GraphTest do
     assert String.contains?(reason, "invalid quad")
   end
 
+  test "invalid query string" do
+    { :error, reason } = TestGraph.query("meh!")
+
+    assert String.contains?(reason, "Unexpected token")
+  end
+
 
   test "quad lifecycle", context do
-    quad = %{ subject: "quad", predicate: "lifetime", object: context.test }
+    quad   = %{ subject: "lifecycle",
+                predicate: "for",
+                object: to_string(context.test) }
+    query  = "graph.Vertex('lifecycle').Out('for').All()"
+    result = [%{ id: to_string(context.test) }]
 
-    assert :ok = TestGraph.write(quad)
-    assert :ok = TestGraph.delete(quad)
+    assert :ok    == TestGraph.write(quad)
+    assert result == TestGraph.query(query)
+    assert :ok    == TestGraph.delete(quad)
+    assert nil    == TestGraph.query(query)
   end
 end

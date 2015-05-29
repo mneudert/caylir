@@ -21,21 +21,16 @@ defmodule Caylir.Graph do
 
       @behaviour unquote(__MODULE__)
 
-      def child_spec() do
-        Connection.child_spec(__MODULE__)
-      end
+      def child_spec, do: Connection.child_spec(__MODULE__)
 
-      def delete(quad) do
-        Connection.delete(__MODULE__, quad)
-      end
-
-      def write(quad) do
-        Connection.write(__MODULE__, quad)
-      end
+      def delete(quad), do: Connection.delete(__MODULE__, quad)
+      def query(query), do: Connection.query(__MODULE__, query)
+      def write(quad),  do: Connection.write(__MODULE__, quad)
     end
   end
 
   @type t_delete :: :ok | { :error, String.t }
+  @type t_query :: any | { :error, String.t }
   @type t_write :: :ok | { :error, String.t }
 
   @doc """
@@ -57,6 +52,11 @@ defmodule Caylir.Graph do
   Deletes a quad from the graph.
   """
   defcallback delete(Keyword.t) :: t_delete
+
+  @doc """
+  Queries the graph.
+  """
+  defcallback query(String.t) :: t_query
 
   @doc """
   Writes a quad to the graph.
