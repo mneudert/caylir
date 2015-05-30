@@ -1,11 +1,14 @@
 defmodule Caylir.Mixfile do
   use Mix.Project
 
+  @url_docs "http://hexdocs.pm/caylir"
   @url_github "https://github.com/mneudert/caylir"
 
   def project do
     [ app:           :caylir,
       name:          "Caylir",
+      description:   "Cayley driver for Elixir",
+      package:       package,
       version:       "0.1.0-dev",
       elixir:        "~> 1.0",
       deps:          deps(Mix.env),
@@ -39,5 +42,12 @@ defmodule Caylir.Mixfile do
       readme:     "README.md",
       source_ref: "master",
       source_url: @url_github ]
+  end
+
+  def package do
+    %{ contributors: [ "Marc Neudert" ],
+       files:        [ "CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib" ],
+       licenses:     [ "Apache 2.0" ],
+       links:        %{ "Docs" => @url_docs, "Github" => @url_github }}
   end
 end
