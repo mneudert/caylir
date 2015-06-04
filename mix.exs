@@ -33,8 +33,8 @@ defmodule Caylir.Mixfile do
   end
 
   def deps(_) do
-    [ { :poison,  "~> 1.3" },
-      { :poolboy, "~> 1.4" } ]
+    [ { :poison,  "~> 1.4" },
+      { :poolboy, "~> 1.5" } ]
   end
 
   def docs do
