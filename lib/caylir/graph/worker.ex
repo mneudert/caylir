@@ -25,55 +25,40 @@ defmodule Caylir.Graph.Worker do
   # GenServer Callbacks
 
   def handle_call({ :delete, quad }, _from, graph) do
-    url          = Graph.URL.delete(graph) |> :binary.bin_to_list()
-    content_type = 'application/x-www-form-urlencoded'
-    body         = [ quad ] |> Poison.encode!
-    headers      = [{ 'Content-Length', byte_size(body) }]
-    body         = body |> :binary.bin_to_list()
+    url     = Graph.URL.delete(graph)
+    body    = [ quad ] |> Poison.encode!
+    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
+               { 'Content-Length', byte_size(body) }]
+    body    = body |> :binary.bin_to_list()
 
-    request  = { url, headers, content_type, body }
-    response = :httpc.request(:post, request, [], [])
-
-    case Graph.Response.parse(response) do
+    case Graph.Request.send({ :post, url, headers, body }) do
       { :ok, 200, _success }          -> { :reply, :ok, graph }
       { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
-      { :error, reason }              -> { :reply, { :error, reason }, graph }
-      parsed                          -> raise "Invalid response: #{ inspect parsed }"
     end
   end
 
   def handle_call({ :query, query }, _from, graph) do
-    url          = Graph.URL.query(graph) |> :binary.bin_to_list()
-    content_Type = 'application/x-www-form-urlencoded'
-    headers      = [{ 'Content-Length', byte_size(query) }]
-    body         = query |> :binary.bin_to_list()
+    url     = Graph.URL.query(graph)
+    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
+               { 'Content-Length', byte_size(query) }]
+    body    = query |> :binary.bin_to_list()
 
-    request  = { url, headers, content_Type, body }
-    response = :httpc.request(:post, request, [], [])
-
-    case Graph.Response.parse(response) do
+    case Graph.Request.send({ :post, url, headers, body }) do
       { :ok, 200, %{ result: result }} -> { :reply, result, graph }
       { :ok, 400, %{ error:  reason }} -> { :reply, { :error, reason }, graph }
-      { :error, reason }               -> { :reply, { :error, reason }, graph }
-      parsed                           -> raise "Invalid response: #{ inspect parsed }"
     end
   end
 
   def handle_call({ :write, quad }, _from, graph) do
-    url          = Graph.URL.write(graph) |> :binary.bin_to_list()
-    content_type = 'application/x-www-form-urlencoded'
-    body         = [ quad ] |> Poison.encode!
-    headers      = [{ 'Content-Length', byte_size(body) }]
-    body         = body |> :binary.bin_to_list()
+    url     = Graph.URL.write(graph)
+    body    = [ quad ] |> Poison.encode!
+    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
+               { 'Content-Length', byte_size(body) }]
+    body    = body |> :binary.bin_to_list()
 
-    request  = { url, headers, content_type, body }
-    response = :httpc.request(:post, request, [], [])
-
-    case Graph.Response.parse(response) do
+    case Graph.Request.send({ :post, url, headers, body }) do
       { :ok, 200, _success }          -> { :reply, :ok, graph }
       { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
-      { :error, reason }              -> { :reply, { :error, reason }, graph }
-      parsed                          -> raise "Invalid response: #{ inspect parsed }"
     end
   end
 end

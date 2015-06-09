@@ -17,7 +17,7 @@ defmodule Caylir.Mixfile do
   end
 
   def application do
-    [ applications: [ :inets ] ]
+    [ applications: [ :hackney ] ]
   end
 
   def deps(:docs) do
@@ -33,7 +33,8 @@ defmodule Caylir.Mixfile do
   end
 
   def deps(_) do
-    [ { :poison,  "~> 1.4" },
+    [ { :hackney, "~> 1.1" },
+      { :poison,  "~> 1.4" },
       { :poolboy, "~> 1.5" } ]
   end
 
