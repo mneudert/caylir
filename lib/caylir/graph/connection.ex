@@ -30,6 +30,14 @@ defmodule Caylir.Graph.Connection do
   end
 
   @doc """
+  Proxy implementation for `Caylir.Graph.shape/1`.
+  """
+  @spec shape(module, String.t) :: Caylir.Graph.t_query
+  def shape(graph, query) do
+    GenServer.call(graph, { :shape, query })
+  end
+
+  @doc """
   Proxy implementation for `Caylir.Graph.write/1`.
   """
   @spec write(module, Keyword.t) :: Caylir.Graph.t_write

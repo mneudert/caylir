@@ -25,6 +25,7 @@ defmodule Caylir.Graph do
 
       def delete(quad), do: Connection.delete(__MODULE__, quad)
       def query(query), do: Connection.query(__MODULE__, query)
+      def shape(query), do: Connection.shape(__MODULE__, query)
       def write(quad),  do: Connection.write(__MODULE__, quad)
     end
   end
@@ -57,6 +58,11 @@ defmodule Caylir.Graph do
   Queries the graph.
   """
   defcallback query(String.t) :: t_query
+
+  @doc """
+  Gets the shape of a query.
+  """
+  defcallback shape(String.t) :: t_query
 
   @doc """
   Writes a quad to the graph.

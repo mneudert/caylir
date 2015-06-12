@@ -49,6 +49,18 @@ defmodule Caylir.Graph.Worker do
     end
   end
 
+    def handle_call({ :shape, query }, _from, graph) do
+    url     = Graph.URL.shape(graph)
+    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
+               { 'Content-Length', byte_size(query) }]
+    body    = query |> :binary.bin_to_list()
+
+    case Graph.Request.send({ :post, url, headers, body }) do
+      { :ok, 200, shape }             -> { :reply, shape, graph }
+      { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
+    end
+  end
+
   def handle_call({ :write, quad }, _from, graph) do
     url     = Graph.URL.write(graph)
     body    = [ quad ] |> Poison.encode!

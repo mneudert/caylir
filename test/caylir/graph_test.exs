@@ -33,6 +33,12 @@ defmodule Caylir.GraphTest do
     assert String.contains?(reason, "Unexpected token")
   end
 
+  test "invalid shape query string" do
+    { :error, reason } = TestGraph.shape("meh!")
+
+    assert String.contains?(reason, "Unexpected token")
+  end
+
 
   test "quad lifecycle", context do
     quad   = %{ subject: "lifecycle",
@@ -45,5 +51,15 @@ defmodule Caylir.GraphTest do
     assert result == TestGraph.query(query)
     assert :ok    == TestGraph.delete(quad)
     assert nil    == TestGraph.query(query)
+  end
+
+  test "query shape" do
+    query = "graph.Vertex('shapecycle').Out('for').All()"
+    shape = TestGraph.shape(query)
+
+    assert Map.has_key?(shape, :links)
+    assert Map.has_key?(shape, :nodes)
+
+    assert 3 == Enum.count(shape.nodes)
   end
 end

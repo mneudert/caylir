@@ -26,6 +26,17 @@ defmodule Caylir.Graph.URL do
   def query(graph), do: "#{ base_url graph }/query/gremlin"
 
   @doc """
+  Returns the URL to get the shape of a query.
+
+  ## Example
+
+      iex> shape([ host: "localhost", port: 64210 ])
+      "http://localhost:64210/api/v1/shape/gremlin"
+  """
+  @spec shape(Keyword.t) :: String.t
+  def shape(graph), do: "#{ base_url graph }/shape/gremlin"
+
+  @doc """
   Returns the URL for writing quads.
 
   ## Example
