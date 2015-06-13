@@ -9,7 +9,7 @@ defmodule Caylir.Mixfile do
       name:          "Caylir",
       description:   "Cayley driver for Elixir",
       package:       package,
-      version:       "0.2.0",
+      version:       "0.3.0-dev",
       elixir:        "~> 1.0",
       deps:          deps(Mix.env),
       docs:          docs,
@@ -41,7 +41,7 @@ defmodule Caylir.Mixfile do
   def docs do
     [ main:       "README",
       readme:     "README.md",
-      source_ref: "v0.2.0",
+      source_ref: "master",
       source_url: @url_github ]
   end
 
