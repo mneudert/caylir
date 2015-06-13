@@ -1,7 +1,7 @@
-defmodule Caylir.Graph.Connection.ConfigTest do
+defmodule Caylir.Graph.ConfigTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.Graph.Connection.Config
+  alias Caylir.Graph.Config
 
   test "otp_app configuration", %{ test: test } do
     config = [ foo: :bar ]

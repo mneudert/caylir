@@ -15,6 +15,7 @@ defmodule Caylir.Graph do
 
       config :my_application, MyGraph,
         host: "localhost",
+        pool: [ max_overflow: 10, size: 5 ],
         port: 64210
   """
 
@@ -22,18 +23,25 @@ defmodule Caylir.Graph do
 
   defmacro __using__(otp_app: otp_app) do
     quote do
-      alias Caylir.Graph.Connection
+      alias Caylir.Graph.Config
+      alias Caylir.Graph.Pool
 
       @behaviour unquote(__MODULE__)
       @otp_app   unquote(otp_app)
 
-      def child_spec, do: Connection.child_spec(__MODULE__)
-      def config,     do: Connection.Config.config(@otp_app, __MODULE__)
+      def __pool__, do: __MODULE__.Pool
 
-      def delete(quad), do: Connection.delete(__MODULE__, quad)
-      def query(query), do: Connection.query(__MODULE__, query)
-      def shape(query), do: Connection.shape(__MODULE__, query)
-      def write(quad),  do: Connection.write(__MODULE__, quad)
+      def child_spec, do: Pool.Spec.spec(__MODULE__)
+      def config,     do: Config.config(@otp_app, __MODULE__)
+
+      def delete(quad), do: send { :delete, quad }
+      def query(query), do: send { :query, query }
+      def shape(query), do: send { :shape, query }
+      def write(quad),  do: send { :write, quad }
+
+      defp send(request) do
+        :poolboy.transaction(__pool__, &GenServer.call(&1, request))
+      end
     end
   end
 
@@ -42,17 +50,17 @@ defmodule Caylir.Graph do
   @type t_write :: :ok | { :error, String.t }
 
   @doc """
-  Returns the child specification to start and supervise the graph connection.
+  Returns the (internal) pool module.
+  """
+  defcallback __pool__ :: module
+
+  @doc """
+  Returns a supervisable pool child_spec.
   """
   defcallback child_spec :: Supervisor.Spec.spec
 
   @doc """
-  Should return the configuration options used to communicate with the graph.
-
-  Needed parameters:
-
-  - host
-  - port
+  Returns the connection configuration.
   """
   defcallback config :: Keyword.t
 

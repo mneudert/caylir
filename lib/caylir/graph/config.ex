@@ -1,4 +1,4 @@
-defmodule Caylir.Graph.Connection.Config do
+defmodule Caylir.Graph.Config do
   @moduledoc """
   Configuration helper module.
   """

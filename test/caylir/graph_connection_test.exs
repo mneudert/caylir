@@ -1,4 +1,4 @@
-defmodule Caylir.Graph.ConnectionTest do
+defmodule Caylir.GraphConnectionTest do
   use ExUnit.Case, async: true
 
   @otp_app    :caylir_connection_test

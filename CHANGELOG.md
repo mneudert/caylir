@@ -4,6 +4,7 @@
 
 - Enhancements
   - Allows retrieving the shape of a query
+  - Pools connections to the graph
   - Uses `:hackney` instead of `:inets`
 
 - Backwards incompatible changes
