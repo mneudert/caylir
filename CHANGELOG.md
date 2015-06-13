@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.0-dev
+## v0.2.0 (2015-06-13)
 
 - Enhancements
   - Allows retrieving the shape of a query
