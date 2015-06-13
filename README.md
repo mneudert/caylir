@@ -35,10 +35,17 @@ Defining a graph connection requires defining a module:
 
 ```elixir
 defmodule MyApp.MyGraph do
-  use Caylir.Graph
-
-  def conf(), do: [ host: "localhost", port: 64210 ]
+  use Caylir.Graph, otp_app: :my_app
 end
+```
+
+The `:otp_app` name and the name of the module can be freely chosen.
+They only need to be linked to an entry in your `config.exs`:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  host: "localhost",
+  port: 64210
 ```
 
 You now have a graph definition you can hook into your supervision tree:

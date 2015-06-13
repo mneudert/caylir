@@ -1,18 +1,7 @@
 defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
-  defmodule TestGraph do
-    use Caylir.Graph
-
-    def conf(), do: [ host: "localhost", port: 64210 ]
-  end
-
-  setup_all context do
-    Supervisor.start_link([], name: context.case, strategy: :one_for_one)
-    Supervisor.start_child(context.case, TestGraph.child_spec)
-
-    :ok
-  end
+  alias Caylir.TestHelpers.Graph, as: TestGraph
 
 
   test "invalid quads fail deleting" do

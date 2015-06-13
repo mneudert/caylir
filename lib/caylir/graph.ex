@@ -2,26 +2,33 @@ defmodule Caylir.Graph do
   @moduledoc """
   Base module to define graph connections.
 
-  ## Example
+  All graph connections will be made using a user-defined
+  extension of this module.
 
-      defmodule SomeGraph do
-        use Caylir.Graph
+  ## Example Module
 
-        def conf() do
-          [ host: "localhost", port: 64210 ]
-        end
+      defmodule MyGraph do
+        use Caylir.Graph, otp_app: :my_application
       end
+
+  ## Example Configuration
+
+      config :my_application, MyGraph,
+        host: "localhost",
+        port: 64210
   """
 
   use Behaviour
 
-  defmacro __using__(_opts) do
+  defmacro __using__(otp_app: otp_app) do
     quote do
       alias Caylir.Graph.Connection
 
       @behaviour unquote(__MODULE__)
+      @otp_app   unquote(otp_app)
 
       def child_spec, do: Connection.child_spec(__MODULE__)
+      def config,     do: Connection.Config.config(@otp_app, __MODULE__)
 
       def delete(quad), do: Connection.delete(__MODULE__, quad)
       def query(query), do: Connection.query(__MODULE__, query)
@@ -35,6 +42,11 @@ defmodule Caylir.Graph do
   @type t_write :: :ok | { :error, String.t }
 
   @doc """
+  Returns the child specification to start and supervise the graph connection.
+  """
+  defcallback child_spec :: Supervisor.Spec.spec
+
+  @doc """
   Should return the configuration options used to communicate with the graph.
 
   Needed parameters:
@@ -42,12 +54,7 @@ defmodule Caylir.Graph do
   - host
   - port
   """
-  defcallback conf() :: Keyword.t
-
-  @doc """
-  Returns the child specification to start and supervise the graph connection.
-  """
-  defcallback child_spec() :: Supervisor.Spec.spec
+  defcallback config :: Keyword.t
 
   @doc """
   Deletes a quad from the graph.

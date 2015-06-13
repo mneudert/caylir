@@ -12,7 +12,7 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/delete"
   """
   @spec delete(Keyword.t) :: String.t
-  def delete(graph), do: "#{ base_url graph }/delete"
+  def delete(conn), do: "#{ base_url conn }/delete"
 
   @doc """
   Returns the URL to query the graph.
@@ -23,7 +23,7 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/query/gremlin"
   """
   @spec query(Keyword.t) :: String.t
-  def query(graph), do: "#{ base_url graph }/query/gremlin"
+  def query(conn), do: "#{ base_url conn }/query/gremlin"
 
   @doc """
   Returns the URL to get the shape of a query.
@@ -34,7 +34,7 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/shape/gremlin"
   """
   @spec shape(Keyword.t) :: String.t
-  def shape(graph), do: "#{ base_url graph }/shape/gremlin"
+  def shape(conn), do: "#{ base_url conn }/shape/gremlin"
 
   @doc """
   Returns the URL for writing quads.
@@ -45,10 +45,10 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/write"
   """
   @spec write(Keyword.t) :: String.t
-  def write(graph), do: "#{ base_url graph }/write"
+  def write(conn), do: "#{ base_url conn }/write"
 
 
-  defp base_url([ host: host, port: port ]) do
-    "http://#{ host }:#{ port }/api/v1"
+  defp base_url(conn) do
+    "http://#{ conn[:host] }:#{ conn[:port] }/api/v1"
   end
 end
