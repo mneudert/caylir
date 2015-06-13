@@ -25,50 +25,42 @@ defmodule Caylir.Graph.Worker do
   # GenServer Callbacks
 
   def handle_call({ :delete, quad }, _from, graph) do
-    url     = Graph.URL.delete(graph)
-    body    = [ quad ] |> Poison.encode!
-    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
-               { 'Content-Length', byte_size(body) }]
-    body    = body |> :binary.bin_to_list()
+    url      = Graph.URL.delete(graph)
+    body     = [ quad ] |> Poison.encode!
+    response = Graph.Request.send({ :post, url, body })
 
-    case Graph.Request.send({ :post, url, headers, body }) do
+    case response do
       { :ok, 200, _success }          -> { :reply, :ok, graph }
       { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
     end
   end
 
   def handle_call({ :query, query }, _from, graph) do
-    url     = Graph.URL.query(graph)
-    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
-               { 'Content-Length', byte_size(query) }]
-    body    = query |> :binary.bin_to_list()
+    url      = Graph.URL.query(graph)
+    response = Graph.Request.send({ :post, url, query })
 
-    case Graph.Request.send({ :post, url, headers, body }) do
+    case response do
       { :ok, 200, %{ result: result }} -> { :reply, result, graph }
       { :ok, 400, %{ error:  reason }} -> { :reply, { :error, reason }, graph }
     end
   end
 
     def handle_call({ :shape, query }, _from, graph) do
-    url     = Graph.URL.shape(graph)
-    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
-               { 'Content-Length', byte_size(query) }]
-    body    = query |> :binary.bin_to_list()
+    url      = Graph.URL.shape(graph)
+    response = Graph.Request.send({ :post, url, query })
 
-    case Graph.Request.send({ :post, url, headers, body }) do
+    case response do
       { :ok, 200, shape }             -> { :reply, shape, graph }
       { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
     end
   end
 
   def handle_call({ :write, quad }, _from, graph) do
-    url     = Graph.URL.write(graph)
-    body    = [ quad ] |> Poison.encode!
-    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
-               { 'Content-Length', byte_size(body) }]
-    body    = body |> :binary.bin_to_list()
+    url      = Graph.URL.write(graph)
+    body     = [ quad ] |> Poison.encode!
+    response = Graph.Request.send({ :post, url, body })
 
-    case Graph.Request.send({ :post, url, headers, body }) do
+    case response do
       { :ok, 200, _success }          -> { :reply, :ok, graph }
       { :ok, 400, %{ error: reason }} -> { :reply, { :error, reason }, graph }
     end

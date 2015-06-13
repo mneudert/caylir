@@ -47,6 +47,7 @@ defmodule Caylir.Graph.URL do
   @spec write(Keyword.t) :: String.t
   def write(graph), do: "#{ base_url graph }/write"
 
+
   defp base_url([ host: host, port: port ]) do
     "http://#{ host }:#{ port }/api/v1"
   end
