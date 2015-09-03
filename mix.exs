@@ -23,12 +23,12 @@ defmodule Caylir.Mixfile do
   def deps(:docs) do
     deps(:prod) ++
       [ { :earmark, "~> 0.1", optional: true },
-        { :ex_doc,  "~> 0.7", optional: true } ]
+        { :ex_doc,  "~> 0.8", optional: true } ]
   end
 
   def deps(:test) do
     deps(:prod) ++
-      [ { :dialyze,     "~> 0.1", optional: true },
+      [ { :dialyze,     "~> 0.2", optional: true },
         { :excoveralls, "~> 0.3", optional: true } ]
   end
 
