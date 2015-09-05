@@ -1,4 +1,5 @@
 language: elixir
+sudo:     false
 env:      CAYLEY=0.4.1 MIX_ENV=test
 
 before_install:
