@@ -39,16 +39,16 @@ defmodule Caylir.Mixfile do
   end
 
   def docs do
-    [ main:       "README",
-      readme:     "README.md",
+    [ extras:     [ "CHANGELOG.md", "README.md" ],
+      main:       "README",
       source_ref: "master",
       source_url: @url_github ]
   end
 
   def package do
-    %{ contributors: [ "Marc Neudert" ],
-       files:        [ "CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib" ],
-       licenses:     [ "Apache 2.0" ],
-       links:        %{ "Docs" => @url_docs, "Github" => @url_github }}
+    %{ files:       [ "CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib" ],
+       licenses:    [ "Apache 2.0" ],
+       links:       %{ "Docs" => @url_docs, "GitHub" => @url_github },
+       maintainers: [ "Marc Neudert" ]}
   end
 end
