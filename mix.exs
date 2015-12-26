@@ -1,7 +1,6 @@
 defmodule Caylir.Mixfile do
   use Mix.Project
 
-  @url_docs "http://hexdocs.pm/caylir"
   @url_github "https://github.com/mneudert/caylir"
 
   def project do
@@ -48,7 +47,7 @@ defmodule Caylir.Mixfile do
   def package do
     %{ files:       [ "CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib" ],
        licenses:    [ "Apache 2.0" ],
-       links:       %{ "Docs" => @url_docs, "GitHub" => @url_github },
+       links:       %{ "GitHub" => @url_github },
        maintainers: [ "Marc Neudert" ]}
   end
 end
