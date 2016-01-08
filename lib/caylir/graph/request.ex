@@ -74,7 +74,7 @@ defmodule Caylir.Graph.Request do
     parse_response(status, response)
   end
 
-  defp parse_response(status, ''),  do: { :ok, status }
+  defp parse_response(status, ""),  do: { :ok, status }
   defp parse_response(status, body) do
     { :ok, status, Poison.decode!(body, keys: :atoms) }
   end
