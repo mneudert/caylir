@@ -11,3 +11,6 @@ before_install:
 
 after_success:
   - mix coveralls.travis
+
+after_script:
+  - ps | grep 'cayley' | grep -v 'grep' | awk '{ print $1 }' | xargs kill
