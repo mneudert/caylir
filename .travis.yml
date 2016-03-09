@@ -7,6 +7,11 @@ env:
   matrix:
       # dfb9939d == nearest (buildable) commit to release v0.4.1
     - VER_CAYLEY=dfb9939d
+    - VER_CAYLEY=master
+
+matrix:
+  allow_failures:
+    - env: VER_CAYLEY=master
 
 before_install:
   - mkdir "${HOME}/go"
