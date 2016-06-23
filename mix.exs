@@ -8,7 +8,7 @@ defmodule Caylir.Mixfile do
       name:    "Caylir",
       version: "0.3.0-dev",
       elixir:  "~> 1.0",
-      deps:    deps,
+      deps:    deps(),
 
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -23,8 +23,8 @@ defmodule Caylir.Mixfile do
       ],
 
       description:   "Cayley driver for Elixir",
-      docs:          docs,
-      package:       package,
+      docs:          docs(),
+      package:       package(),
       test_coverage: [ tool: ExCoveralls ] ]
   end
 

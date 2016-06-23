@@ -38,7 +38,7 @@ defmodule Caylir.Graph do
       def write(quad),  do: send { :write, quad }
 
       defp send(request) do
-        :poolboy.transaction(__pool__, &GenServer.call(&1, request))
+        :poolboy.transaction(__pool__(), &GenServer.call(&1, request))
       end
     end
   end
