@@ -49,6 +49,6 @@ defmodule Caylir.GraphTest do
     assert Map.has_key?(shape, :links)
     assert Map.has_key?(shape, :nodes)
 
-    assert 3 == Enum.count(shape.nodes)
+    assert 4 == Enum.count(shape.nodes)
   end
 end

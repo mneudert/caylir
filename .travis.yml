@@ -5,8 +5,7 @@ env:
   global:
     - MIX_ENV=test
   matrix:
-      # dfb9939d == nearest (buildable) commit to release v0.4.1
-    - VER_CAYLEY=dfb9939d
+    - VER_CAYLEY=v0.5.0
     - VER_CAYLEY=master
 
 matrix:
