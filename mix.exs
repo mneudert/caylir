@@ -17,9 +17,7 @@ defmodule Caylir.Mixfile do
         coveralls:          :test,
         'coveralls.detail': :test,
         'coveralls.travis': :test,
-        dialyze:            :test,
-        docs:               :docs,
-        'hex.docs':         :docs
+        dialyze:            :test
       ],
 
       description:   "Cayley driver for Elixir",
@@ -33,7 +31,7 @@ defmodule Caylir.Mixfile do
   end
 
   defp deps do
-    [ { :ex_doc,  "~> 0.12", only: :docs },
+    [ { :ex_doc, ">= 0.0.0", only: :dev },
 
       { :dialyze,     "~> 0.2", only: :test },
       { :excoveralls, "~> 0.5", only: :test },
