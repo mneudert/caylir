@@ -1,35 +1,13 @@
 language: elixir
 sudo:     false
-
-env:
-  global:
-    - MIX_ENV=test
-  matrix:
-    - VER_CAYLEY=v0.5.0
-    - VER_CAYLEY=master
-
-matrix:
-  allow_failures:
-    - env: VER_CAYLEY=master
+env:      CAYLEY=v0.5.0 MIX_ENV=test
 
 before_install:
-  - mkdir "${HOME}/go"
-  - export GOPATH="${HOME}/go"
-  - export PATH="${GOPATH}/bin:${PATH}"
-  - mkdir -p "${GOPATH}/src/github.com/google"
-  - cd "${GOPATH}/src/github.com/google"
-  - wget -q "https://github.com/google/cayley/archive/${VER_CAYLEY}.tar.gz" -O cayley.tar.gz && tar -xf cayley.tar.gz
-  - find . -maxdepth 1 -type d -name 'cayley*' -exec mv {} cayley \;
-  - cd "${GOPATH}/src/github.com/google/cayley"
-  - git init .
-  - go get github.com/tools/godep
-  - godep restore
-  - go build ./cmd/cayley
-  - go install ./cmd/cayley
+  - wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
+  - tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
+  - cd "cayley_${CAYLEY}_linux_amd64"
+  - ./cayley http --db=memstore --dbpath="" &
   - cd "${TRAVIS_BUILD_DIR}"
-
-before_script:
-  - cayley http --db=memstore --dbpath="" &
 
 after_success:
   - mix coveralls.travis
