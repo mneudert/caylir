@@ -1,6 +1,9 @@
-language: elixir
-sudo:     false
-env:      CAYLEY=v0.5.0 MIX_ENV=test
+language:    elixir
+elixir:      1.2.0
+otp_release: 18.0
+
+sudo: false
+env:  CAYLEY=v0.5.0 MIX_ENV=test
 
 before_install:
   - wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"

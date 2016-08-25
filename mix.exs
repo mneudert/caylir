@@ -7,7 +7,7 @@ defmodule Caylir.Mixfile do
     [ app:     :caylir,
       name:    "Caylir",
       version: "0.3.0-dev",
-      elixir:  "~> 1.0",
+      elixir:  "~> 1.2",
       deps:    deps(),
 
       build_embedded:  Mix.env == :prod,
