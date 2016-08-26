@@ -43,7 +43,7 @@ defmodule Caylir.Mixfile do
 
   defp docs do
     [ extras:     [ "CHANGELOG.md", "README.md" ],
-      main:       "README",
+      main:       "readme",
       source_ref: "master",
       source_url: @url_github ]
   end
