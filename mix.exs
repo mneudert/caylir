@@ -37,7 +37,7 @@ defmodule Caylir.Mixfile do
       { :excoveralls, "~> 0.5", only: :test },
 
       { :hackney, "~> 1.1" },
-      { :poison,  "~> 1.4 or ~> 2.0" },
+      { :poison,  "~> 2.0" },
       { :poolboy, "~> 1.5" } ]
   end
 
