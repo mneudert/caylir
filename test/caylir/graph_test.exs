@@ -23,9 +23,10 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid shape query string" do
-    { :error, reason } = TestGraph.shape("meh!")
+    shape = TestGraph.shape("meh!")
 
-    assert String.contains?(reason, "Unexpected token")
+    assert is_map(shape)
+    assert 0 == map_size(shape)
   end
 
 
@@ -42,8 +43,13 @@ defmodule Caylir.GraphTest do
     assert nil    == TestGraph.query(query)
   end
 
-  test "query shape" do
+  test "query shape", context do
+    quad  = %{ subject: "shapecycle",
+               predicate: "for",
+               object: to_string(context.test) }
     query = "graph.Vertex('shapecycle').Out('for').All()"
+
+    :ok   = TestGraph.write(quad)
     shape = TestGraph.shape(query)
 
     assert Map.has_key?(shape, :links)
