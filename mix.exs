@@ -16,8 +16,7 @@ defmodule Caylir.Mixfile do
       preferred_cli_env: [
         coveralls:          :test,
         'coveralls.detail': :test,
-        'coveralls.travis': :test,
-        dialyze:            :test
+        'coveralls.travis': :test
       ],
 
       description:   "Cayley driver for Elixir",
@@ -33,7 +32,6 @@ defmodule Caylir.Mixfile do
   defp deps do
     [ { :ex_doc, ">= 0.0.0", only: :dev },
 
-      { :dialyze,     "~> 0.2", only: :test },
       { :excoveralls, "~> 0.5", only: :test },
 
       { :hackney, "~> 1.1" },
