@@ -18,7 +18,7 @@ Add Caylir as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps do
-  [ { :caylir, "~> 0.2" } ]
+  [ { :caylir, "~> 0.3" } ]
 end
 ```
 
