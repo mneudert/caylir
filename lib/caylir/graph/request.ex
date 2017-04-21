@@ -65,8 +65,8 @@ defmodule Caylir.Graph.Request do
 
   defp send(method, url, payload) do
     body    = payload |> :binary.bin_to_list()
-    headers = [{ 'Content-Type',  'application/x-www-form-urlencoded' },
-               { 'Content-Length', length(body) }]
+    headers = [{ "Content-Type",   "application/x-www-form-urlencoded" },
+               { "Content-Length", length(body) }]
 
     { :ok, status, _, client } = :hackney.request(method, url, headers, body)
     { :ok, response }          = :hackney.body(client)
