@@ -72,11 +72,15 @@ Supervisor.start_link(
 Writing Data:
 
 ```elixir
+# single quad
 MyApp.MyGraph.write(%{
   subject:   "graph",
   predicate: "connection",
   object:    "target"
 })
+
+# multiple quads (bulk write)
+MyApp.MyGraph.write([ quad_1, quad_2 ])
 ```
 
 Querying data:
@@ -89,11 +93,15 @@ MyApp.MyGraph.query("graph.Vertex('graph').Out('connection').All()")
 Deleting Data:
 
 ```elixir
+# single quad
 MyApp.MyGraph.delete(%{
   subject:   "graph",
   predicate: "connection",
   object:    "target"
 })
+
+# multiple quads (bulk delete)
+MyApp.MyGraph.delete([ quad_1, quad_2 ])
 ```
 
 

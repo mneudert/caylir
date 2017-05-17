@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0-dev
+
+- Enhancements
+    - Bulk operations for write/delete are now supported
+
 ## v0.3.0 (2016-12-11)
 
 - Backwards incompatible changes

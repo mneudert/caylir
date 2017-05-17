@@ -8,10 +8,11 @@ defmodule Caylir.Graph.Request do
   @doc """
   Deletes a quad from the graph.
   """
-  @spec delete(map, Keyword.t) :: Graph.t_delete
-  def delete(quad, conn) do
+  @spec delete(map | [map], Keyword.t) :: Graph.t_delete
+  def delete(quad,  conn) when is_map(quad), do: delete([ quad ], conn)
+  def delete(quads, conn) do
     url  = Graph.URL.delete(conn)
-    body = [ quad ] |> Poison.encode!
+    body = Poison.encode!(quads)
 
     case send(:post, url, body) do
       { :ok, _,   %{ error: reason }} -> { :error, reason }
@@ -49,10 +50,11 @@ defmodule Caylir.Graph.Request do
   @doc """
   Writes a quad to the graph.
   """
-  @spec write(map, Keyword.t) :: Graph.t_write
-  def write(quad, conn) do
+  @spec write(map | [map], Keyword.t) :: Graph.t_write
+  def write(quad,  conn) when is_map(quad), do: write([ quad ], conn)
+  def write(quads, conn) do
     url  = Graph.URL.write(conn)
-    body = [ quad ] |> Poison.encode!
+    body = Poison.encode!(quads)
 
     case send(:post, url, body) do
       { :ok, _,   %{ error: reason }} -> { :error, reason }

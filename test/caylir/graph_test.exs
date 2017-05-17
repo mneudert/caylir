@@ -43,6 +43,23 @@ defmodule Caylir.GraphTest do
     assert nil    == TestGraph.query(query)
   end
 
+  test "quad lifecycle (bulk)", context do
+    quads  = [%{ subject: "bulk_lifecycle",
+                 predicate: "for",
+                 object: "#{ context.test } #1" },
+              %{ subject: "bulk_lifecycle",
+                 predicate: "for",
+                 object: "#{ context.test } #2" }]
+    query  = "graph.Vertex('bulk_lifecycle').Out('for').All()"
+    result = [%{ id: "#{ context.test } #1" },
+              %{ id: "#{ context.test } #2" }]
+
+    assert :ok    == TestGraph.write(quads)
+    assert result == TestGraph.query(query)
+    assert :ok    == TestGraph.delete(quads)
+    assert nil    == TestGraph.query(query)
+  end
+
   test "query shape", context do
     quad  = %{ subject: "shapecycle",
                predicate: "for",

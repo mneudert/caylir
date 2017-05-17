@@ -65,7 +65,7 @@ defmodule Caylir.Graph do
   @doc """
   Deletes a quad from the graph.
   """
-  @callback delete(map) :: t_delete
+  @callback delete(map | [map]) :: t_delete
 
   @doc """
   Queries the graph.
@@ -80,5 +80,5 @@ defmodule Caylir.Graph do
   @doc """
   Writes a quad to the graph.
   """
-  @callback write(map) :: t_write
+  @callback write(map | [map]) :: t_write
 end
