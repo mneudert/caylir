@@ -7,7 +7,12 @@ Cayley driver for Elixir
 
 __This module is highly experimental at the moment and may behave or change unexpectedly.__
 
-Tested cayley version: `0.6.0` (see
+Tested cayley versions:
+
+- `0.6.0`
+- `0.6.1`
+
+(see
 [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
 to be sure)
 
