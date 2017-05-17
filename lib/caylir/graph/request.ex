@@ -8,7 +8,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Deletes a quad from the graph.
   """
-  @spec delete(Keyword.t, Keyword.t) :: Graph.t_delete
+  @spec delete(map, Keyword.t) :: Graph.t_delete
   def delete(quad, conn) do
     url  = Graph.URL.delete(conn)
     body = [ quad ] |> Poison.encode!
@@ -49,7 +49,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Writes a quad to the graph.
   """
-  @spec write(Keyword.t, Keyword.t) :: Graph.t_write
+  @spec write(map, Keyword.t) :: Graph.t_write
   def write(quad, conn) do
     url  = Graph.URL.write(conn)
     body = [ quad ] |> Poison.encode!
