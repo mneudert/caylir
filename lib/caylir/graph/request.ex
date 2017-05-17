@@ -14,8 +14,8 @@ defmodule Caylir.Graph.Request do
     body = [ quad ] |> Poison.encode!
 
     case send(:post, url, body) do
+      { :ok, _,   %{ error: reason }} -> { :error, reason }
       { :ok, 200, _success }          -> :ok
-      { :ok, 400, %{ error: reason }} -> { :error, reason }
     end
   end
 
@@ -27,8 +27,8 @@ defmodule Caylir.Graph.Request do
     url = Graph.URL.query(conn)
 
     case send(:post, url, query) do
+      { :ok, _,   %{ error:  reason }} -> { :error, reason }
       { :ok, 200, %{ result: result }} -> result
-      { :ok, 400, %{ error:  reason }} -> { :error, reason }
     end
   end
 
@@ -41,8 +41,8 @@ defmodule Caylir.Graph.Request do
     url = Graph.URL.shape(conn)
 
     case send(:post, url, query) do
+      { :ok, _,   %{ error: reason }} -> { :error, reason }
       { :ok, 200, shape }             -> shape
-      { :ok, 400, %{ error: reason }} -> { :error, reason }
     end
   end
 
@@ -55,8 +55,8 @@ defmodule Caylir.Graph.Request do
     body = [ quad ] |> Poison.encode!
 
     case send(:post, url, body) do
-      { :ok, 200, _success }          -> :ok
-      { :ok, 400, %{ error: reason }} -> { :error, reason }
+      { :ok, _,   %{ error: reason }} -> { :error, reason }
+      { :ok, 200, _content }          -> :ok
     end
   end
 
