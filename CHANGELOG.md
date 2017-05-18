@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.4.0-dev
+## v0.4.0 (2017-05-18)
 
 - Enhancements
     - Bulk operations for write/delete are now supported
