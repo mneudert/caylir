@@ -9,7 +9,7 @@ env:
     - MIX_ENV=test
   matrix:
     - CAYLEY=v0.6.0
-    - CAYLEY=v0.6.1
+    - CAYLEY=v0.6.1 TRAVIS_COVERAGE=true
 
 matrix:
   include:
@@ -29,8 +29,10 @@ before_install: |-
     ./cayley http -db=memstore -dbpath="" &
   popd
 
-after_success:
-  - mix coveralls.travis
+after_success: |-
+  if [ ! -z "${TRAVIS_COVERAGE}" ]; then
+    mix coveralls.travis
+  fi
 
 after_script:
   - ps | grep 'cayley' | grep -v 'grep' | awk '{ print $1 }' | xargs kill
