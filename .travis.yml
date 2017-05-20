@@ -21,12 +21,13 @@ matrix:
       env:         CAYLEY=v0.6.1
       otp_release: 19.3
 
-before_install:
-  - wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
-  - tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
-  - cd "cayley_${CAYLEY}_linux_amd64"
-  - ./cayley http -db=memstore -dbpath="" &
-  - cd "${TRAVIS_BUILD_DIR}"
+before_install: |-
+  wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
+  tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
+
+  pushd "cayley_${CAYLEY}_linux_amd64"
+    ./cayley http -db=memstore -dbpath="" &
+  popd
 
 after_success:
   - mix coveralls.travis
