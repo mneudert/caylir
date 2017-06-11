@@ -1,7 +1,7 @@
 defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
-  alias CaylirTestHelpers.Graph, as: TestGraph
+  alias Caylir.TestHelpers.Graph, as: TestGraph
 
 
   test "invalid quads fail deleting" do
