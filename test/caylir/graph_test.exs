@@ -1,29 +1,29 @@
 defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.TestHelpers.Graph, as: TestGraph
+  alias Caylir.TestHelpers.Graphs.DefaultGraph
 
 
   test "invalid quads fail deleting" do
-    { :error, reason } = TestGraph.delete(%{ invalid: "quad" })
+    { :error, reason } = DefaultGraph.delete(%{ invalid: "quad" })
 
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid quads fail writing" do
-    { :error, reason } = TestGraph.write(%{ invalid: "quad" })
+    { :error, reason } = DefaultGraph.write(%{ invalid: "quad" })
 
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid query string" do
-    { :error, reason } = TestGraph.query("meh!")
+    { :error, reason } = DefaultGraph.query("meh!")
 
     assert String.contains?(reason, "Unexpected token")
   end
 
   test "invalid shape query string" do
-    shape = TestGraph.shape("meh!")
+    shape = DefaultGraph.shape("meh!")
 
     assert is_map(shape)
     assert 0 == map_size(shape)
@@ -37,10 +37,10 @@ defmodule Caylir.GraphTest do
     query  = "graph.Vertex('lifecycle').Out('for').All()"
     result = [%{ id: to_string(context.test) }]
 
-    assert :ok    == TestGraph.write(quad)
-    assert result == TestGraph.query(query)
-    assert :ok    == TestGraph.delete(quad)
-    assert nil    == TestGraph.query(query)
+    assert :ok    == DefaultGraph.write(quad)
+    assert result == DefaultGraph.query(query)
+    assert :ok    == DefaultGraph.delete(quad)
+    assert nil    == DefaultGraph.query(query)
   end
 
   test "quad lifecycle (bulk)", context do
@@ -54,10 +54,10 @@ defmodule Caylir.GraphTest do
     result = [%{ id: "#{ context.test } #1" },
               %{ id: "#{ context.test } #2" }]
 
-    assert :ok    == TestGraph.write(quads)
-    assert result == TestGraph.query(query)
-    assert :ok    == TestGraph.delete(quads)
-    assert nil    == TestGraph.query(query)
+    assert :ok    == DefaultGraph.write(quads)
+    assert result == DefaultGraph.query(query)
+    assert :ok    == DefaultGraph.delete(quads)
+    assert nil    == DefaultGraph.query(query)
   end
 
   test "query shape", context do
@@ -66,8 +66,8 @@ defmodule Caylir.GraphTest do
                object: to_string(context.test) }
     query = "graph.Vertex('shapecycle').Out('for').All()"
 
-    :ok   = TestGraph.write(quad)
-    shape = TestGraph.shape(query)
+    :ok   = DefaultGraph.write(quad)
+    shape = DefaultGraph.shape(query)
 
     assert Map.has_key?(shape, :links)
     assert Map.has_key?(shape, :nodes)

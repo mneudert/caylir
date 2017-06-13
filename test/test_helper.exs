@@ -1,4 +1,4 @@
-alias Caylir.TestHelpers
+alias Caylir.TestHelpers.Graphs
 alias Caylir.TestHelpers.Undeprecate
 
 
@@ -16,16 +16,16 @@ httpd_config  = [
 
 inets_env =
   :caylir
-  |> Application.get_env(TestHelpers.InetsGraph)
+  |> Application.get_env(Graphs.InetsGraph)
   |> Keyword.put(:port, :httpd.info(httpd_pid)[:port])
 
-Application.put_env(:caylir, TestHelpers.InetsGraph, inets_env)
+Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 
 
 # start graphs
 Supervisor.start_link([
-  TestHelpers.Graph.child_spec,
-  TestHelpers.InetsGraph.child_spec
+  Graphs.DefaultGraph.child_spec,
+  Graphs.InetsGraph.child_spec
 ], strategy: :one_for_one)
 
 
