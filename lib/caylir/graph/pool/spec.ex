@@ -16,8 +16,7 @@ defmodule Caylir.Graph.Pool.Spec do
   end
 
   defp get_opts(conn) do
-    { pool_opts,
-      worker_opts } = Keyword.split(conn.config, [ :size, :max_overflow ])
+    { pool_opts, _ } = Keyword.split(conn.config, [ :size, :max_overflow ])
 
     pool_opts =
          pool_opts
@@ -29,8 +28,6 @@ defmodule Caylir.Graph.Pool.Spec do
       |> Keyword.put(:name, { :local, conn.__pool__ })
       |> Keyword.put(:worker_module, Pool.Worker)
 
-    worker_opts = worker_opts |> Keyword.put(:module, conn)
-
-    { pool_opts, worker_opts }
+    { pool_opts, %{ module: conn }}
   end
 end
