@@ -2,7 +2,7 @@ defmodule Caylir.Graph.PoolTest do
   use ExUnit.Case, async: true
 
   @otp_app    :caylir_pool_test
-  @otp_config []
+  @otp_config [ prevent: :raising ]
 
 
   defmodule Conn do

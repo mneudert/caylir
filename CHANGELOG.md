@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.0-dev
+
+- Enhancements
+    - Configuration values can be fetched from the system environment
+      using `{ :system, ENV_VAR }` or `{ :system, ENV_VAR, default }`
+
 ## v0.4.0 (2017-05-18)
 
 - Enhancements

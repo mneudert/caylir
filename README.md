@@ -58,6 +58,18 @@ config :my_app, MyApp.MyGraph,
   port: 64210
 ```
 
+Configuration can be done statically (as shown above) or by referencing your
+system environment:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  port: { :system, "MY_ENV_VARIABLE" }
+
+# additional default will only be used if environment variable is UNSET
+config :my_app, MyApp.MyGraph
+  port: { :system, "MY_ENV_VARIABLE", "64210" }
+```
+
 You now have a graph definition you can hook into your supervision tree:
 
 ```elixir

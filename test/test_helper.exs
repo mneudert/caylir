@@ -25,6 +25,7 @@ Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 # start graphs
 Supervisor.start_link([
   Graphs.DefaultGraph.child_spec,
+  Graphs.EnvGraph.child_spec,
   Graphs.InetsGraph.child_spec
 ], strategy: :one_for_one)
 
