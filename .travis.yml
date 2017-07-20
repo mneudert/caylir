@@ -20,6 +20,9 @@ matrix:
     - elixir:      1.4.5
       env:         CAYLEY=v0.6.1
       otp_release: 19.3
+    - elixir:      1.4.5
+      env:         CAYLEY=v0.6.1
+      otp_release: 20.0
 
 before_install: |-
   wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
