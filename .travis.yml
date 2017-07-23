@@ -29,7 +29,7 @@ before_install: |-
   tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
 
   pushd "cayley_${CAYLEY}_linux_amd64"
-    ./cayley http -db=memstore -dbpath="" &
+    ./cayley http --db=memstore --dbpath="" &
   popd
 
 after_success: |-
