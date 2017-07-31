@@ -17,10 +17,12 @@ matrix:
       env:    CAYLEY=v0.6.1
     - elixir: 1.4.5
       env:    CAYLEY=v0.6.1
-    - elixir:      1.4.5
+    - elixir: 1.5.0
+      env:    CAYLEY=v0.6.1
+    - elixir:      1.5.0
       env:         CAYLEY=v0.6.1
       otp_release: 19.3
-    - elixir:      1.4.5
+    - elixir:      1.5.0
       env:         CAYLEY=v0.6.1
       otp_release: 20.0
 
