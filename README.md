@@ -13,7 +13,7 @@ Tested cayley versions:
 - `0.6.1`
 
 (see
-[`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
+[`.travis.yml`](https://github.com/mneudert/caylir/blob/v0.5.0/.travis.yml)
 to be sure)
 
 
@@ -23,7 +23,7 @@ Add Caylir as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps do
-  [ { :caylir, "~> 0.4" } ]
+  [ { :caylir, "~> 0.5" } ]
 end
 ```
 

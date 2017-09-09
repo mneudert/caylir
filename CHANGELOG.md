@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.5.0-dev
+## v0.5.0 (2017-09-09)
 
 - Enhancements
     - Configuration values can be fetched from the system environment
