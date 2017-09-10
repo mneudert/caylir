@@ -1,9 +1,8 @@
 alias Caylir.TestHelpers.Graphs
-alias Caylir.TestHelpers.Undeprecate
 
 
 # start fake server
-root          = Undeprecate.to_charlist(__DIR__)
+root          = Kernel.to_charlist(__DIR__)
 httpd_config  = [
   document_root: root,
   modules:       [:caylir_testhelpers_inets_proxy],

@@ -3,8 +3,6 @@ defmodule Caylir.TestHelpers.Inets.Handler do
 
   require Record
 
-  alias Caylir.TestHelpers.Undeprecate
-
 
   Record.defrecord :mod, Record.extract(:mod, from_lib: "inets/include/httpd.hrl")
 
@@ -15,7 +13,7 @@ defmodule Caylir.TestHelpers.Inets.Handler do
     body = '{"result": "dummy"}'
     head = [
       code:           200,
-      content_length: body |> length() |> Undeprecate.to_charlist(),
+      content_length: body |> length() |> Kernel.to_charlist(),
       content_type:   'application/json'
     ]
 
