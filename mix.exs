@@ -6,7 +6,7 @@ defmodule Caylir.Mixfile do
   def project do
     [ app:     :caylir,
       name:    "Caylir",
-      version: "0.6.0-dev",
+      version: "0.6.0",
       elixir:  "~> 1.3",
       deps:    deps(),
 
@@ -43,7 +43,7 @@ defmodule Caylir.Mixfile do
   defp docs do
     [ extras:     [ "CHANGELOG.md", "README.md" ],
       main:       "readme",
-      source_ref: "master",
+      source_ref: "v0.6.0",
       source_url: @url_github ]
   end
 
