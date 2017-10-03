@@ -29,8 +29,17 @@ defmodule Caylir.Graph do
 
       def __pool__, do: __MODULE__.Pool
 
-      def child_spec, do: Pool.Spec.spec(__MODULE__)
-      def config,     do: Config.config(@otp_app, __MODULE__)
+      def child_spec do
+        Supervisor.Spec.supervisor(
+          Caylir.Graph.Supervisor,
+          [ __MODULE__ ],
+          id: __MODULE__.Supervisor
+        )
+      end
+
+      def pool_spec, do: Pool.Spec.spec(__MODULE__)
+
+      def config, do: Config.config(@otp_app, __MODULE__)
 
       def delete(quad), do: send { :delete, quad }
       def query(query), do: send { :query, query }
@@ -53,7 +62,7 @@ defmodule Caylir.Graph do
   @callback __pool__ :: module
 
   @doc """
-  Returns a supervisable pool child_spec.
+  Returns a supervisable graph child_spec.
   """
   @callback child_spec :: Supervisor.Spec.spec
 
@@ -66,6 +75,11 @@ defmodule Caylir.Graph do
   Deletes a quad from the graph.
   """
   @callback delete(map | [map]) :: t_delete
+
+  @doc """
+  Returns a supervisable pool child_spec.
+  """
+  @callback pool_spec :: Supervisor.Spec.spec
 
   @doc """
   Queries the graph.
