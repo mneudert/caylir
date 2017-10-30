@@ -25,14 +25,14 @@ defmodule Caylir.Graph do
       alias Caylir.Graph.Pool
 
       @behaviour unquote(__MODULE__)
-      @otp_app   unquote(otp_app)
+      @otp_app unquote(otp_app)
 
       def __pool__, do: __MODULE__.Pool
 
       def child_spec do
         Supervisor.Spec.supervisor(
           Caylir.Graph.Supervisor,
-          [ __MODULE__ ],
+          [__MODULE__],
           id: __MODULE__.Supervisor
         )
       end
@@ -41,10 +41,10 @@ defmodule Caylir.Graph do
 
       def config, do: Config.config(@otp_app, __MODULE__)
 
-      def delete(quad), do: send { :delete, quad }
-      def query(query), do: send { :query, query }
-      def shape(query), do: send { :shape, query }
-      def write(quad),  do: send { :write, quad }
+      def delete(quad), do: send({:delete, quad})
+      def query(query), do: send({:query, query})
+      def shape(query), do: send({:shape, query})
+      def write(quad), do: send({:write, quad})
 
       defp send(request) do
         :poolboy.transaction(__pool__(), &GenServer.call(&1, request))
@@ -52,9 +52,9 @@ defmodule Caylir.Graph do
     end
   end
 
-  @type t_delete :: :ok | { :error, String.t }
-  @type t_query :: any | { :error, String.t }
-  @type t_write :: :ok | { :error, String.t }
+  @type t_delete :: :ok | {:error, String.t()}
+  @type t_query :: any | {:error, String.t()}
+  @type t_write :: :ok | {:error, String.t()}
 
   @doc """
   Returns the (internal) pool module.
@@ -64,12 +64,12 @@ defmodule Caylir.Graph do
   @doc """
   Returns a supervisable graph child_spec.
   """
-  @callback child_spec :: Supervisor.Spec.spec
+  @callback child_spec :: Supervisor.Spec.spec()
 
   @doc """
   Returns the connection configuration.
   """
-  @callback config :: Keyword.t
+  @callback config :: Keyword.t()
 
   @doc """
   Deletes a quad from the graph.
@@ -79,17 +79,17 @@ defmodule Caylir.Graph do
   @doc """
   Returns a supervisable pool child_spec.
   """
-  @callback pool_spec :: Supervisor.Spec.spec
+  @callback pool_spec :: Supervisor.Spec.spec()
 
   @doc """
   Queries the graph.
   """
-  @callback query(String.t) :: t_query
+  @callback query(String.t()) :: t_query
 
   @doc """
   Gets the shape of a query.
   """
-  @callback shape(String.t) :: t_query
+  @callback shape(String.t()) :: t_query
 
   @doc """
   Writes a quad to the graph.

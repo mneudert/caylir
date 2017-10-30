@@ -1,17 +1,17 @@
 alias Caylir.TestHelpers.Graphs
 
-
 # start fake server
-root          = Kernel.to_charlist(__DIR__)
-httpd_config  = [
+root = Kernel.to_charlist(__DIR__)
+
+httpd_config = [
   document_root: root,
-  modules:       [:caylir_testhelpers_inets_proxy],
-  port:          0,
-  server_name:   'caylir_testhelpers_inets_proxy',
-  server_root:   root
+  modules: [:caylir_testhelpers_inets_proxy],
+  port: 0,
+  server_name: 'caylir_testhelpers_inets_proxy',
+  server_root: root
 ]
 
-{ :ok, httpd_pid } = :inets.start(:httpd, httpd_config)
+{:ok, httpd_pid} = :inets.start(:httpd, httpd_config)
 
 inets_env =
   :caylir
@@ -20,14 +20,15 @@ inets_env =
 
 Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 
-
 # start graphs
-Supervisor.start_link([
-  Graphs.DefaultGraph.child_spec,
-  Graphs.EnvGraph.child_spec,
-  Graphs.InetsGraph.child_spec
-], strategy: :one_for_one)
-
+Supervisor.start_link(
+  [
+    Graphs.DefaultGraph.child_spec(),
+    Graphs.EnvGraph.child_spec(),
+    Graphs.InetsGraph.child_spec()
+  ],
+  strategy: :one_for_one
+)
 
 # start ExUnit
 ExUnit.start()
