@@ -8,7 +8,8 @@ defmodule Caylir.TestHelpers.VersionDetector do
   """
   @spec detect(module) :: String.t()
   def detect(graph) do
-    gremlin_url = Caylir.Graph.URL.query(graph.config())
+    config = Keyword.put(graph.config(), :language, :gremlin)
+    gremlin_url = Caylir.Graph.URL.query(config)
 
     {:ok, 200, _, client} = :hackney.post(gremlin_url)
     {:ok, response} = :hackney.body(client)

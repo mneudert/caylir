@@ -54,5 +54,16 @@ config =
 
 IO.puts("Running tests for Cayley version: #{version}")
 
+# configure graph query language (if necessary)
+if Version.match?(version, "== 0.6.1") do
+  Enum.each([Graphs.DefaultGraph, Graphs.EnvGraph, Graphs.InetsGraph], fn graph ->
+    Application.put_env(
+      :caylir,
+      graph,
+      Keyword.put(Application.get_env(:caylir, graph, []), :language, :gremlin)
+    )
+  end)
+end
+
 # start ExUnit
 ExUnit.start(config)

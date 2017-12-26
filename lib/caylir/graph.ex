@@ -14,9 +14,10 @@ defmodule Caylir.Graph do
   ## Example Configuration
 
       config :my_application, MyGraph,
-        host: "localhost",
-        pool: [ max_overflow: 10, size: 5 ],
-        port: 64210
+        host:     "localhost",
+        pool:     [ max_overflow: 10, size: 5 ],
+        port:     64210,
+        language: :gizmo
   """
 
   defmacro __using__(otp_app: otp_app) do

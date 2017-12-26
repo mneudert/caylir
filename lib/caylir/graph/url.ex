@@ -20,10 +20,16 @@ defmodule Caylir.Graph.URL do
   ## Example
 
       iex> query([ host: "localhost", port: 64210 ])
+      "http://localhost:64210/api/v1/query/gizmo"
+
+      iex> query([ host: "localhost", port: 64210, language: :gizmo ])
+      "http://localhost:64210/api/v1/query/gizmo"
+
+      iex> query([ host: "localhost", port: 64210, language: :gremlin ])
       "http://localhost:64210/api/v1/query/gremlin"
   """
   @spec query(Keyword.t()) :: String.t()
-  def query(config), do: "#{base_url(config)}/query/gremlin"
+  def query(config), do: "#{base_url(config)}/query/#{query_language(config[:language])}"
 
   @doc """
   Returns the URL to get the shape of a query.
@@ -31,10 +37,16 @@ defmodule Caylir.Graph.URL do
   ## Example
 
       iex> shape([ host: "localhost", port: 64210 ])
+      "http://localhost:64210/api/v1/shape/gizmo"
+
+      iex> shape([ host: "localhost", port: 64210, language: :gizmo ])
+      "http://localhost:64210/api/v1/shape/gizmo"
+
+      iex> shape([ host: "localhost", port: 64210, language: :gremlin ])
       "http://localhost:64210/api/v1/shape/gremlin"
   """
   @spec shape(Keyword.t()) :: String.t()
-  def shape(config), do: "#{base_url(config)}/shape/gremlin"
+  def shape(config), do: "#{base_url(config)}/shape/#{query_language(config[:language])}"
 
   @doc """
   Returns the URL for writing quads.
@@ -50,4 +62,8 @@ defmodule Caylir.Graph.URL do
   defp base_url(config) do
     "http://#{config[:host]}:#{config[:port]}/api/v1"
   end
+
+  defp query_language(:gizmo), do: "gizmo"
+  defp query_language(:gremlin), do: "gremlin"
+  defp query_language(nil), do: "gizmo"
 end

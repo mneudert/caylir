@@ -2,7 +2,13 @@
 
 ## v0.7.0-dev
 
+- Enhancements
+    - Basic support for defining a default graph query language
+
 - Backwards incompatible changes
+    - Default query endpoint has been updated to support cayley version `0.7.0`.
+      To use an older version you need to add `language: :gremlin` to
+      your graph configuration
     - Support for cayley version `0.6.0` has been dropped
 
 ## v0.6.0 (2017-09-17)

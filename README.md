@@ -52,9 +52,10 @@ They only need to be linked to an entry in your `config.exs`:
 
 ```elixir
 config :my_app, MyApp.MyGraph,
-  host: "localhost",
-  pool: [ max_overflow: 0, size: 1 ],
-  port: 64210
+  host:     "localhost",
+  pool:     [ max_overflow: 0, size: 1 ],
+  port:     64210,
+  language: :gizmo
 ```
 
 Configuration can be done statically (as shown above) or by referencing your
@@ -77,6 +78,12 @@ Supervisor.start_link(
   strategy: :one_for_one
 )
 ```
+
+#### Query Language
+
+You can use the `:language` configuration key to specify which query language
+you are intending to use. The default is `:gizmo` for cayley `0.7.0`. For the
+older cayley `0.6.1` you need to configure `:gremlin`.
 
 ### Queries
 
