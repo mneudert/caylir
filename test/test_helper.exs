@@ -1,4 +1,5 @@
 alias Caylir.TestHelpers.Graphs
+alias Caylir.TestHelpers.VersionDetector
 
 # start fake server
 root = Kernel.to_charlist(__DIR__)
@@ -29,6 +30,11 @@ Supervisor.start_link(
   ],
   strategy: :one_for_one
 )
+
+# detect running cayley version
+version = VersionDetector.detect(Graphs.DefaultGraph)
+
+IO.puts("Running tests for Cayley version: #{version}")
 
 # start ExUnit
 ExUnit.start()
