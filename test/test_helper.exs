@@ -31,10 +31,28 @@ Supervisor.start_link(
   strategy: :one_for_one
 )
 
-# detect running cayley version
+# configure Cayley test exclusion
+config = ExUnit.configuration()
 version = VersionDetector.detect(Graphs.DefaultGraph)
+
+config =
+  case Version.parse(version) do
+    :error ->
+      config
+
+    {:ok, version} ->
+      versions = ["0.6.1", "0.7.0"]
+      config = Keyword.put(config, :exclude, config[:exclude] || [])
+
+      Enum.reduce(versions, config, fn ver, acc ->
+        case Version.match?(version, "== #{ver}") do
+          true -> acc
+          false -> Keyword.put(acc, :exclude, [{:cayley_version, ver} | acc[:exclude]])
+        end
+      end)
+  end
 
 IO.puts("Running tests for Cayley version: #{version}")
 
 # start ExUnit
-ExUnit.start()
+ExUnit.start(config)
