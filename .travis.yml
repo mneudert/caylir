@@ -6,7 +6,6 @@ sudo: false
 
 env:
   matrix:
-    - CAYLEY=v0.6.0 CAYLEY_PKG=v0.6.0
     - CAYLEY=v0.6.1 CAYLEY_PKG=v0.6.1 TRAVIS_COVERAGE=true
     - CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
 

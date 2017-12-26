@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.7.0-dev
+
+- Backwards incompatible changes
+    - Support for cayley version `0.6.0` has been dropped
+
 ## v0.6.0 (2017-09-17)
 
 - Backwards incompatible changes
