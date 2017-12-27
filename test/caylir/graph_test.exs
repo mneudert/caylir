@@ -21,11 +21,19 @@ defmodule Caylir.GraphTest do
     assert String.contains?(reason, "Unexpected token")
   end
 
-  test "invalid shape query string" do
+  @tag cayley_version: "0.6.1"
+  test "invalid shape query string (0.6.1)" do
     shape = DefaultGraph.shape("meh!")
 
     assert is_map(shape)
     assert 0 == map_size(shape)
+  end
+
+  @tag cayley_version: "0.7.0"
+  test "invalid shape query string (0.7.0)" do
+    {:error, reason} = DefaultGraph.shape("meh!")
+
+    assert String.contains?(reason, "Unexpected token")
   end
 
   test "quad lifecycle", context do
@@ -63,7 +71,5 @@ defmodule Caylir.GraphTest do
 
     assert Map.has_key?(shape, :links)
     assert Map.has_key?(shape, :nodes)
-
-    assert 4 == Enum.count(shape.nodes)
   end
 end
