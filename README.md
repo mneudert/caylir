@@ -10,6 +10,7 @@ __This module is highly experimental at the moment and may behave or change unex
 Tested cayley versions:
 
 - `0.6.1`
+- `0.7.0`
 
 (see
 [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
