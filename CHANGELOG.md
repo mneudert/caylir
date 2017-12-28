@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.7.0-dev
+## v0.7.0 (2017-12-28)
 
 - Enhancements
     - Basic support for defining a default graph query language
