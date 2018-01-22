@@ -7,20 +7,19 @@ sudo: false
 env:
   matrix:
     - CAYLEY=v0.6.1 CAYLEY_PKG=v0.6.1
-    - CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0 TRAVIS_COVERAGE=true
+    - CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
 
 matrix:
   include:
-    - elixir: 1.4.5
-      env:    CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
-    - elixir: 1.5.1
-      env:    CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
-    - elixir:      1.5.1
+    - elixir:      1.4.5
       env:         CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
       otp_release: 19.3
-    - elixir:      1.5.1
+    - elixir:      1.5.3
       env:         CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
-      otp_release: 20.0
+      otp_release: 20.2
+    - elixir:      1.6.0
+      env:         CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0 TRAVIS_COVERAGE=true
+      otp_release: 20.2
 
 before_install: |-
   wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY_PKG}_linux_amd64.tar.gz"
