@@ -17,9 +17,10 @@ matrix:
     - elixir:      1.5.3
       env:         CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
       otp_release: 20.2
-    - elixir:      1.6.0
-      env:         CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0 TRAVIS_COVERAGE=true
-      otp_release: 20.2
+    - elixir:        1.6.0
+      env:           CAYLEY=v0.7.0 CAYLEY_PKG=0.7.0
+      otp_release:   20.2
+      after_success: mix coveralls.travis
 
 before_install: |-
   wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY}/cayley_${CAYLEY_PKG}_linux_amd64.tar.gz"
@@ -28,11 +29,6 @@ before_install: |-
   pushd "cayley_${CAYLEY_PKG}_linux_amd64"
     ./cayley http --db=memstore --dbpath="" 2>/dev/null &
   popd
-
-after_success: |-
-  if [ ! -z "${TRAVIS_COVERAGE}" ]; then
-    mix coveralls.travis
-  fi
 
 after_script:
   - ps | grep 'cayley' | grep -v 'grep' | awk '{ print $1 }' | xargs kill
