@@ -76,7 +76,14 @@ You now have a graph definition you can hook into your supervision tree:
 
 ```elixir
 Supervisor.start_link(
-  [ MyApp.MyGraph.child_spec ],
+  [
+    # ...
+    # elixir < 1.5.0
+    MyApp.MyGraph.child_spec,
+    # elixir >= 1.5.0
+    MyApp.MyGraph,
+    # ...
+  ],
   strategy: :one_for_one
 )
 ```
