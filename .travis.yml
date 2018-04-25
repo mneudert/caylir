@@ -15,6 +15,9 @@ matrix:
     - elixir: 1.6.4
       env: CAYLEY=v0.7.2 CAYLEY_PKG=0.7.2
       otp_release: 20.2
+    - elixir: 1.6.4
+      env: CAYLEY=v0.7.3 CAYLEY_PKG=0.7.3
+      otp_release: 20.2
       after_success: mix coveralls.travis
 
 before_install: |-

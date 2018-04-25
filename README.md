@@ -13,6 +13,7 @@ Tested cayley versions:
 - `0.7.0`
 - `0.7.1`
 - `0.7.2`
+- `0.7.3`
 
 (see
 [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
