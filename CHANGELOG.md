@@ -3,6 +3,10 @@
 ## v0.8.0-dev
 
 - Enhancements
+    - Configuration can be done on graph (re-) start by setting a
+      `{ mod, fun }` tuple for the config key `:init`. This method will be
+      called with the graph module name as the first (and only) parameter
+      and is expeccted to return `:ok`
     - Support for elixir 1.5 style `child_spec` has been added
 
 ## v0.7.0 (2017-12-28)

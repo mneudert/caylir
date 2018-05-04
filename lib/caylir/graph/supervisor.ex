@@ -16,6 +16,12 @@ defmodule Caylir.Graph.Supervisor do
 
   @doc false
   def init(graph) do
+    :ok =
+      case Keyword.get(graph.config, :init) do
+        nil -> :ok
+        {mod, fun} -> apply(mod, fun, [graph])
+      end
+
     supervise([graph.pool_spec], strategy: :one_for_one)
   end
 end

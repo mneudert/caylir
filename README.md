@@ -74,6 +74,17 @@ config :my_app, MyApp.MyGraph
   port: { :system, "MY_ENV_VARIABLE", "64210" }
 ```
 
+In addition to those two methods you can also use a configurable initializer
+function called upon graph (re-) start:
+
+```elixir
+# { mod, fun } tuple
+# called with graph module name as first (and only) parameter
+# expected to return `:ok`
+config :my_app, MyApp.MyGraph
+  init: { MyInitModule, :my_init_fun }
+```
+
 You now have a graph definition you can hook into your supervision tree:
 
 ```elixir
