@@ -20,13 +20,17 @@ Tested cayley versions:
 to be sure)
 
 
-## Setup
+## Package Setup
 
-Add Caylir as a dependency to your `mix.exs` file:
+Add caylir as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps do
-  [ { :caylir, "~> 0.6" } ]
+  [
+    # ...
+    {:caylir, "~> 0.6"}
+    # ...
+  ]
 end
 ```
 
@@ -34,14 +38,20 @@ You should also update your applications to include all necessary projects:
 
 ```elixir
 def application do
-  [ applications: [ :caylir ] ]
+  [
+    applications: [
+      # ...
+      :caylir
+      # ...
+    ]
+  ]
 end
 ```
 
 
-## Usage
+## Application Setup
 
-### Graph Connections
+### Graph Definition
 
 Defining a graph connection requires defining a module:
 
@@ -51,41 +61,9 @@ defmodule MyApp.MyGraph do
 end
 ```
 
-The `:otp_app` name and the name of the module can be freely chosen.
-They only need to be linked to an entry in your `config.exs`:
-
-```elixir
-config :my_app, MyApp.MyGraph,
-  host:     "localhost",
-  pool:     [ max_overflow: 0, size: 1 ],
-  port:     64210,
-  language: :gizmo
-```
-
-Configuration can be done statically (as shown above) or by referencing your
-system environment:
-
-```elixir
-config :my_app, MyApp.MyGraph,
-  port: { :system, "MY_ENV_VARIABLE" }
-
-# additional default will only be used if environment variable is UNSET
-config :my_app, MyApp.MyGraph
-  port: { :system, "MY_ENV_VARIABLE", "64210" }
-```
-
-In addition to those two methods you can also use a configurable initializer
-function called upon graph (re-) start:
-
-```elixir
-# { mod, fun } tuple
-# called with graph module name as first (and only) parameter
-# expected to return `:ok`
-config :my_app, MyApp.MyGraph
-  init: { MyInitModule, :my_init_fun }
-```
-
-You now have a graph definition you can hook into your supervision tree:
+The `:otp_app` name and the name of the module can be freely chosen but have to
+be linked to a corresponding configuration entry. This defined graph module
+needs to be hooked up into your supervision tree:
 
 ```elixir
 Supervisor.start_link(
@@ -101,22 +79,55 @@ Supervisor.start_link(
 )
 ```
 
-#### Query Language
+### Configuration (static)
 
-You can use the `:language` configuration key to specify which query language
-you are intending to use. The default is `:gizmo` for cayley `0.7.0`. For the
-older cayley `0.6.1` you need to configure `:gremlin`.
+The most simple way is to use a completely static configuration:
 
-### Queries
+```elixir
+config :my_app, MyApp.MyGraph,
+  host: "localhost",
+  pool: [max_overflow: 10, size: 50],
+  port: 64210
+```
+
+### Configuration (dynamic)
+
+If you cannot, for whatever reason, use a static application config you can
+configure an initializer module that will be called every time your graph
+is started (or restarted) in your supervision tree:
+
+```elixir
+config :my_app, MyApp.MyGraph
+  init: {MyInitModule, :my_init_fun}
+```
+
+Upon starting the function will be called with the graph module as the first
+(and only) parameter. The function is expected to always return `:ok`.
+
+### Configuration (system environment)
+
+A third way is to grab values from your system environment directly:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  port: {:system, "MY_ENV_VARIABLE"}
+
+# additional default will only be used if environment variable is UNSET
+config :my_app, MyApp.MyGraph
+  port: {:system, "MY_ENV_VARIABLE", "64210"}
+```
+
+
+## Usage
 
 Writing Data:
 
 ```elixir
 # single quad
 MyApp.MyGraph.write(%{
-  subject:   "graph",
+  subject: "graph",
   predicate: "connection",
-  object:    "target"
+  object: "target"
 })
 
 # multiple quads (bulk write)
@@ -126,7 +137,7 @@ MyApp.MyGraph.write([ quad_1, quad_2 ])
 Querying data:
 
 ```elixir
-# Gremlin Syntax!
+# Gizmo syntax!
 MyApp.MyGraph.query("graph.Vertex('graph').Out('connection').All()")
 ```
 
@@ -135,13 +146,28 @@ Deleting Data:
 ```elixir
 # single quad
 MyApp.MyGraph.delete(%{
-  subject:   "graph",
+  subject: "graph",
   predicate: "connection",
-  object:    "target"
+  object: "target"
 })
 
 # multiple quads (bulk delete)
-MyApp.MyGraph.delete([ quad_1, quad_2 ])
+MyApp.MyGraph.delete([quad_1, quad_2])
+```
+
+### Query Language Configuration
+
+If you are using a cayley version prior to `0.7.0` (e.g. `0.6.1`) you may need
+to change the default query language used:
+
+```elixir
+# default (suitable for cayley >= 0.7.0)
+config :my_app, MyApp.MyGraph,
+  language: :gizmo
+
+# old query language used in 0.6.1
+config :my_app, MyApp.MyGraph,
+  language: :gremlin
 ```
 
 
