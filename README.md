@@ -99,10 +99,25 @@ is started (or restarted) in your supervision tree:
 ```elixir
 config :my_app, MyApp.MyGraph
   init: {MyInitModule, :my_init_fun}
+
+# example initializer module/function
+defmodule MyInitModule do
+  def my_init_fun(graph) do
+    config = [
+      host: "localhost",
+      port: 64210
+    ]
+
+    Application.put_env(:my_app, graph, graph_config)
+  end
+end
 ```
 
-Upon starting the function will be called with the graph module as the first
-(and only) parameter. The function is expected to always return `:ok`.
+When the graph is started the function will be called with the graph module
+as the first (and only) parameter. This will be done before the graph is
+available for use.
+
+The function is expected to always return `:ok`.
 
 ### Configuration (system environment)
 
