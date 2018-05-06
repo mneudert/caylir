@@ -5,7 +5,7 @@ Cayley driver for Elixir
 
 ## Warning
 
-__This module is highly experimental at the moment and may behave or change unexpectedly.__
+__This module is experimental at the moment and may behave or change unexpectedly.__
 
 Tested cayley versions:
 
