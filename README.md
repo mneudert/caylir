@@ -108,7 +108,7 @@ defmodule MyInitModule do
       port: 64210
     ]
 
-    Application.put_env(:my_app, graph, graph_config)
+    Application.put_env(:my_app, graph, config)
   end
 end
 ```
