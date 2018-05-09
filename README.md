@@ -97,7 +97,7 @@ configure an initializer module that will be called every time your graph
 is started (or restarted) in your supervision tree:
 
 ```elixir
-config :my_app, MyApp.MyGraph
+config :my_app, MyApp.MyGraph,
   init: {MyInitModule, :my_init_fun}
 
 # example initializer module/function
@@ -128,7 +128,7 @@ config :my_app, MyApp.MyGraph,
   port: {:system, "MY_ENV_VARIABLE"}
 
 # additional default will only be used if environment variable is UNSET
-config :my_app, MyApp.MyGraph
+config :my_app, MyApp.MyGraph,
   port: {:system, "MY_ENV_VARIABLE", "64210"}
 ```
 
