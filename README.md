@@ -100,13 +100,15 @@ is started (or restarted) in your supervision tree:
 config :my_app, MyApp.MyGraph,
   init: {MyInitModule, :my_init_fun}
 
-# example initializer module/function
 defmodule MyInitModule do
+  @spec my_init_fun(module) :: :ok
   def my_init_fun(graph) do
-    config = [
-      host: "localhost",
-      port: 64210
-    ]
+    config =
+      Keyword.merge(
+        graph.config(),
+        host: "localhost",
+        port: 64210
+      )
 
     Application.put_env(:my_app, graph, config)
   end
