@@ -8,7 +8,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Deletes a quad from the graph.
   """
-  @spec delete(map | [map], Keyword.t()) :: Graph.t_delete()
+  @spec delete(map | [map], map) :: Graph.t_delete()
   def delete(quad, opts) when is_map(quad), do: delete([quad], opts)
 
   def delete(quads, %{module: conn}) do
@@ -24,7 +24,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Queries the graph.
   """
-  @spec query(String.t(), Keyword.t()) :: Graph.t_query()
+  @spec query(String.t(), map) :: Graph.t_query()
   def query(query, %{module: conn}) do
     url = Graph.URL.query(conn.config)
 
@@ -37,7 +37,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Gets the shape of a query.
   """
-  @spec shape(String.t(), Keyword.t()) :: Graph.t_query()
+  @spec shape(String.t(), map) :: Graph.t_query()
   def shape(query, %{module: conn}) do
     url = Graph.URL.shape(conn.config)
 
@@ -50,7 +50,7 @@ defmodule Caylir.Graph.Request do
   @doc """
   Writes a quad to the graph.
   """
-  @spec write(map | [map], Keyword.t()) :: Graph.t_write()
+  @spec write(map | [map], map) :: Graph.t_write()
   def write(quad, opts) when is_map(quad), do: write([quad], opts)
 
   def write(quads, %{module: conn}) do
