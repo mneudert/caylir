@@ -2,7 +2,6 @@
 
 Cayley driver for Elixir
 
-
 ## Warning
 
 __This module is experimental at the moment and may behave or change unexpectedly.__
@@ -20,7 +19,6 @@ Tested cayley versions:
 [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
 to be sure)
 
-
 ## Package Setup
 
 Add caylir as a dependency to your `mix.exs` file:
@@ -29,7 +27,7 @@ Add caylir as a dependency to your `mix.exs` file:
 defp deps do
   [
     # ...
-    {:caylir, "~> 0.6"}
+    {:caylir, "~> 0.6"},
     # ...
   ]
 end
@@ -42,13 +40,12 @@ def application do
   [
     applications: [
       # ...
-      :caylir
+      :caylir,
       # ...
     ]
   ]
 end
 ```
-
 
 ## Application Setup
 
@@ -135,7 +132,6 @@ config :my_app, MyApp.MyGraph,
   port: {:system, "MY_ENV_VARIABLE", "64210"}
 ```
 
-
 ## Usage
 
 Writing Data:
@@ -149,7 +145,7 @@ MyApp.MyGraph.write(%{
 })
 
 # multiple quads (bulk write)
-MyApp.MyGraph.write([ quad_1, quad_2 ])
+MyApp.MyGraph.write([quad_1, quad_2])
 ```
 
 Querying data:
@@ -187,7 +183,6 @@ config :my_app, MyApp.MyGraph,
 config :my_app, MyApp.MyGraph,
   language: :gremlin
 ```
-
 
 ## License
 
