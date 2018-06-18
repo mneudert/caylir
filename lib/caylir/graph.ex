@@ -43,7 +43,7 @@ defmodule Caylir.Graph do
       def config, do: Config.config(@otp_app, __MODULE__)
 
       def delete(quad), do: send({:delete, quad})
-      def query(query), do: send({:query, query})
+      def query(query, opts \\ []), do: send({:query, query, opts})
       def shape(query), do: send({:shape, query})
       def write(quad), do: send({:write, quad})
 
@@ -86,6 +86,11 @@ defmodule Caylir.Graph do
   Queries the graph.
   """
   @callback query(String.t()) :: t_query
+
+  @doc """
+  Queries the graph with specific query options.
+  """
+  @callback query(String.t(), list()) :: t_query
 
   @doc """
   Gets the shape of a query.

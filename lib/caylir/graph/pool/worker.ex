@@ -21,8 +21,8 @@ defmodule Caylir.Graph.Pool.Worker do
     {:reply, Request.delete(quad, conn), conn}
   end
 
-  def handle_call({:query, query}, _from, conn) do
-    {:reply, Request.query(query, conn), conn}
+  def handle_call({:query, query, opts}, _from, conn) do
+    {:reply, Request.query(query, opts, conn), conn}
   end
 
   def handle_call({:shape, query}, _from, conn) do

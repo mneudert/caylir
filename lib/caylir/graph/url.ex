@@ -27,9 +27,12 @@ defmodule Caylir.Graph.URL do
 
       iex> query([ host: "localhost", port: 64210, language: :gremlin ])
       "http://localhost:64210/api/v1/query/gremlin"
+
+      iex> query([ host: "localhost", port: 64210, language: :gremlin, limit: 3 ])
+      "http://localhost:64210/api/v1/query/gremlin?limit=3"
   """
   @spec query(Keyword.t()) :: String.t()
-  def query(config), do: url_with_language("query", config)
+  def query(config), do: url_with_language("query", config) <> query_limit(config[:limit])
 
   @doc """
   Returns the URL to get the shape of a query.
@@ -70,4 +73,7 @@ defmodule Caylir.Graph.URL do
   defp query_language(:gizmo), do: "gizmo"
   defp query_language(:gremlin), do: "gremlin"
   defp query_language(nil), do: "gizmo"
+
+  defp query_limit(nil), do: ""
+  defp query_limit(limit), do: "?limit=#{limit}"
 end

@@ -152,7 +152,14 @@ Querying data:
 
 ```elixir
 # Gizmo syntax!
-MyApp.MyGraph.query("graph.Vertex('graph').Out('connection').All()")
+query = "graph.Vertex('graph').Out('connection').All()"
+
+# Default result limit
+MyApp.MyGraph.query(query)
+
+# Custom result limit (limited + unlimited)
+MyApp.MyGraph.query(query, limit: 3)
+MyApp.MyGraph.query(query, limit: -1)
 ```
 
 Deleting Data:

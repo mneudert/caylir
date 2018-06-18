@@ -47,21 +47,6 @@ defmodule Caylir.GraphTest do
     assert nil == DefaultGraph.query(query)
   end
 
-  test "quad lifecycle (bulk)", context do
-    quads = [
-      %{subject: "bulk_lifecycle", predicate: "for", object: "#{context.test} #1"},
-      %{subject: "bulk_lifecycle", predicate: "for", object: "#{context.test} #2"}
-    ]
-
-    query = "graph.Vertex('bulk_lifecycle').Out('for').All()"
-    result = [%{id: "#{context.test} #1"}, %{id: "#{context.test} #2"}]
-
-    assert :ok == DefaultGraph.write(quads)
-    assert result == DefaultGraph.query(query)
-    assert :ok == DefaultGraph.delete(quads)
-    assert nil == DefaultGraph.query(query)
-  end
-
   test "query shape", context do
     quad = %{subject: "shapecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('shapecycle').Out('for').All()"
@@ -71,5 +56,23 @@ defmodule Caylir.GraphTest do
 
     assert Map.has_key?(shape, :links)
     assert Map.has_key?(shape, :nodes)
+  end
+
+  @tag cayley_version: "0.7.0"
+  test "query result limiting", context do
+    quads = [
+      %{subject: "query_limiting", predicate: "for", object: "#{context.test} #1"},
+      %{subject: "query_limiting", predicate: "for", object: "#{context.test} #2"}
+    ]
+
+    query = "graph.Vertex('query_limiting').Out('for').All()"
+
+    assert :ok == DefaultGraph.write(quads)
+
+    assert 2 == length(DefaultGraph.query(query))
+    assert 2 == length(DefaultGraph.query(query, [limit: -1]))
+    assert 1 == length(DefaultGraph.query(query, [limit: 1]))
+
+    assert :ok == DefaultGraph.delete(quads)
   end
 end

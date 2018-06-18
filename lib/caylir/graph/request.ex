@@ -24,9 +24,12 @@ defmodule Caylir.Graph.Request do
   @doc """
   Queries the graph.
   """
-  @spec query(String.t(), map) :: Graph.t_query()
-  def query(query, %{module: conn}) do
-    url = Graph.URL.query(conn.config)
+  @spec query(String.t(), Keyword.t(), map) :: Graph.t_query()
+  def query(query, opts, %{module: conn}) do
+    url =
+      conn.config
+      |> Keyword.merge(opts)
+      |> Graph.URL.query()
 
     case send(:post, url, query) do
       {:ok, _, %{error: reason}} -> {:error, reason}

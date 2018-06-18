@@ -7,6 +7,7 @@
       `{ mod, fun }` tuple for the config key `:init`. This method will be
       called with the graph module name as the first (and only) parameter
       and is expected to return `:ok`
+    - Queries now support the `limit` parameter
     - Support for elixir 1.5 style `child_spec` has been added
 
 ## v0.7.0 (2017-12-28)
