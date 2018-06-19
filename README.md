@@ -191,6 +191,15 @@ config :my_app, MyApp.MyGraph,
   language: :gremlin
 ```
 
+### Query Limit Configuration
+
+You can define a default query limit by adding it to your graph config:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  limit: -1
+```
+
 ## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)

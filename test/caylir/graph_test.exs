@@ -2,6 +2,7 @@ defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
   alias Caylir.TestHelpers.Graphs.DefaultGraph
+  alias Caylir.TestHelpers.Graphs.LimitGraph
 
   test "invalid quads fail deleting" do
     {:error, reason} = DefaultGraph.delete(%{invalid: "quad"})
@@ -69,12 +70,12 @@ defmodule Caylir.GraphTest do
     # graph.Vertex('query_limiting').Out('for').All()"
     query = "graph.Vertex('query_limiting').Out('for').ForEach( function(d) { g.Emit(d) })"
 
-    assert :ok == DefaultGraph.write(quads)
+    assert :ok == LimitGraph.write(quads)
 
-    assert 2 == length(DefaultGraph.query(query))
-    assert 2 == length(DefaultGraph.query(query, [limit: -1]))
-    assert 1 == length(DefaultGraph.query(query, [limit: 1]))
+    assert 1 == length(LimitGraph.query(query))
+    assert 2 == length(LimitGraph.query(query, [limit: -1]))
+    assert 1 == length(LimitGraph.query(query, [limit: 1]))
 
-    assert :ok == DefaultGraph.delete(quads)
+    assert :ok == LimitGraph.delete(quads)
   end
 end

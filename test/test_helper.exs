@@ -26,7 +26,8 @@ Supervisor.start_link(
   [
     Graphs.DefaultGraph.child_spec(),
     Graphs.EnvGraph.child_spec(),
-    Graphs.InetsGraph.child_spec()
+    Graphs.InetsGraph.child_spec(),
+    Graphs.LimitGraph.child_spec()
   ],
   strategy: :one_for_one
 )
