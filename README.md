@@ -64,17 +64,16 @@ be linked to a corresponding configuration entry. This defined graph module
 needs to be hooked up into your supervision tree:
 
 ```elixir
-Supervisor.start_link(
-  [
-    # ...
-    # elixir < 1.5.0
-    MyApp.MyGraph.child_spec,
-    # elixir >= 1.5.0
-    MyApp.MyGraph,
-    # ...
-  ],
-  strategy: :one_for_one
-)
+children = [
+  # ...
+
+  # elixir < 1.5.0
+  MyApp.MyGraph.child_spec(),
+  # elixir >= 1.5.0
+  MyApp.MyGraph,
+
+  # ...
+]
 ```
 
 ### Configuration (static)
