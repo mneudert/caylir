@@ -10,6 +10,11 @@
     - Queries now support the `limit` parameter
     - Support for elixir 1.5 style `child_spec` has been added
 
+- Soft deprecations (no warnings)
+    - Support for `{ :system, "ENV_VARIABLE" }` configuration has been
+      removed from the documentation. It will eventually be removed completely
+      after a proper deprecation phase
+
 ## v0.7.0 (2017-12-28)
 
 - Enhancements

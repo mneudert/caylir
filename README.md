@@ -118,19 +118,6 @@ available for use.
 
 The function is expected to always return `:ok`.
 
-### Configuration (system environment)
-
-A third way is to grab values from your system environment directly:
-
-```elixir
-config :my_app, MyApp.MyGraph,
-  port: {:system, "MY_ENV_VARIABLE"}
-
-# additional default will only be used if environment variable is UNSET
-config :my_app, MyApp.MyGraph,
-  port: {:system, "MY_ENV_VARIABLE", "64210"}
-```
-
 ## Usage
 
 Writing Data:
