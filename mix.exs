@@ -31,7 +31,7 @@ defmodule Caylir.Mixfile do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:excoveralls, "~> 0.8", only: :test},
+      {:excoveralls, "~> 0.10", only: :test},
       {:hackney, "~> 1.6"},
       {:poison, "~> 3.0"},
       {:poolboy, "~> 1.5"}
