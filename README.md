@@ -27,7 +27,7 @@ Add caylir as a dependency to your `mix.exs` file:
 defp deps do
   [
     # ...
-    {:caylir, "~> 0.6"},
+    {:caylir, "~> 0.8"},
     # ...
   ]
 end

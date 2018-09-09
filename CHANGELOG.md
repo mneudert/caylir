@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.8.0-dev
+## v0.8.0 (2018-09-09)
 
 - Enhancements
     - Configuration can be done on graph (re-) start by setting a
