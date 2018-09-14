@@ -8,7 +8,7 @@ defmodule Caylir.Mixfile do
       app: :caylir,
       name: "Caylir",
       version: "0.9.0-dev",
-      elixir: "~> 1.3",
+      elixir: "~> 1.5",
       deps: deps(),
       description: "Cayley driver for Elixir",
       docs: docs(),
