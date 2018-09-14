@@ -24,7 +24,7 @@ defmodule Caylir.Graph.SupervisorTest do
   end
 
   test "init function called upon graph (re-) start" do
-    _ = Supervisor.start_link([InitGraph.child_spec()], strategy: :one_for_one)
+    _ = Supervisor.start_link([InitGraph], strategy: :one_for_one)
     :ok = :timer.sleep(100)
 
     assert InitGraph == Initializer.get_init()
