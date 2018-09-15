@@ -22,16 +22,7 @@ defmodule Caylir.GraphTest do
     assert String.contains?(reason, "Unexpected token")
   end
 
-  @tag cayley_version: "0.6.1"
-  test "invalid shape query string (0.6.1)" do
-    shape = DefaultGraph.shape("meh!")
-
-    assert is_map(shape)
-    assert 0 == map_size(shape)
-  end
-
-  @tag cayley_version: "0.7.0"
-  test "invalid shape query string (0.7.0)" do
+  test "invalid shape query string" do
     {:error, reason} = DefaultGraph.shape("meh!")
 
     assert String.contains?(reason, "Unexpected token")
@@ -59,7 +50,6 @@ defmodule Caylir.GraphTest do
     assert Map.has_key?(shape, :nodes)
   end
 
-  @tag cayley_version: "0.7.0"
   test "query result limiting", context do
     quads = [
       %{subject: "query_limiting", predicate: "for", object: "#{context.test} #1"},

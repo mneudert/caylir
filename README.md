@@ -8,7 +8,6 @@ __This module is experimental at the moment and may behave or change unexpectedl
 
 Tested cayley versions:
 
-- `0.6.1`
 - `0.7.0`
 - `0.7.1`
 - `0.7.2`
@@ -159,17 +158,12 @@ MyApp.MyGraph.delete([quad_1, quad_2])
 
 ### Query Language Configuration
 
-If you are using a cayley version prior to `0.7.0` (e.g. `0.6.1`) you may need
-to change the default query language used:
+If you are using a query language other than the default `:gizmo` you
+can configure your graph to use a different endpoint:
 
 ```elixir
-# default (suitable for cayley >= 0.7.0)
 config :my_app, MyApp.MyGraph,
-  language: :gizmo
-
-# old query language used in 0.6.1
-config :my_app, MyApp.MyGraph,
-  language: :gremlin
+  language: :graphql
 ```
 
 ### Query Limit Configuration
