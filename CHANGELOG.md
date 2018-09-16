@@ -6,6 +6,11 @@
     - Minimum required elixir version is now "~> 1.5"
     - Support for cayley version `0.6.1` has been dropped
 
+- Deprecations
+    - Accessing the system environment by configuring `{ :system, var }` or
+      `{ :system, var, default }` will now result in a `Logger.info/1` message
+      and will stop working in a future release
+
 ## v0.8.0 (2018-09-09)
 
 - Enhancements

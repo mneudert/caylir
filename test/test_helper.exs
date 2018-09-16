@@ -24,7 +24,6 @@ Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 Supervisor.start_link(
   [
     Graphs.DefaultGraph,
-    Graphs.EnvGraph,
     Graphs.InetsGraph,
     Graphs.LimitGraph
   ],

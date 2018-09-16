@@ -3,6 +3,8 @@ defmodule Caylir.Graph.Config do
   Configuration helper module.
   """
 
+  require Logger
+
   @doc """
   Retrieves the connection configuration for `conn` in `otp_app`.
   """
@@ -15,6 +17,14 @@ defmodule Caylir.Graph.Config do
     |> maybe_fetch_system()
   end
 
+  defp log_system_config_deprecation() do
+    Logger.info(
+      "Accessing the system environment for configuration via" <>
+        " {:system, \"var\"} has been deprecated. Please switch" <>
+        " to an initializer function to avoid future problems."
+    )
+  end
+
   defp maybe_fetch_system(config) when is_list(config) do
     Enum.map(config, fn
       {k, v} -> {k, maybe_fetch_system(v)}
@@ -23,10 +33,16 @@ defmodule Caylir.Graph.Config do
   end
 
   defp maybe_fetch_system({:system, var, default}) do
+    log_system_config_deprecation()
+
     System.get_env(var) || default
   end
 
-  defp maybe_fetch_system({:system, var}), do: System.get_env(var)
+  defp maybe_fetch_system({:system, var}) do
+    log_system_config_deprecation()
+    System.get_env(var)
+  end
+
   defp maybe_fetch_system(config), do: config
 
   defp validate!([otp_app: otp_app], conn) do

@@ -63,8 +63,8 @@ defmodule Caylir.GraphTest do
     assert :ok == LimitGraph.write(quads)
 
     assert 1 == length(LimitGraph.query(query))
-    assert 2 == length(LimitGraph.query(query, [limit: -1]))
-    assert 1 == length(LimitGraph.query(query, [limit: 1]))
+    assert 2 == length(LimitGraph.query(query, limit: -1))
+    assert 1 == length(LimitGraph.query(query, limit: 1))
 
     assert :ok == LimitGraph.delete(quads)
   end
