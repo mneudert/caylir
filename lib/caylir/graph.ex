@@ -21,6 +21,10 @@ defmodule Caylir.Graph do
   """
 
   defmacro __using__(opts) do
+    unless Keyword.has_key?(opts, :otp_app) do
+      raise ArgumentError, "missing :otp_app value for graph #{__CALLER__.module}"
+    end
+
     quote do
       alias Caylir.Graph.Config
       alias Caylir.Graph.Pool

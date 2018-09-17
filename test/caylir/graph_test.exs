@@ -4,6 +4,14 @@ defmodule Caylir.GraphTest do
   alias Caylir.TestHelpers.Graphs.DefaultGraph
   alias Caylir.TestHelpers.Graphs.LimitGraph
 
+  test "missing :otp_app raises when compiling" do
+    assert_raise ArgumentError, ~r/missing :otp_app.+MissingOTPAppGraph/, fn ->
+      defmodule MissingOTPAppGraph do
+        use Caylir.Graph
+      end
+    end
+  end
+
   test "invalid quads fail deleting" do
     {:error, reason} = DefaultGraph.delete(%{invalid: "quad"})
 

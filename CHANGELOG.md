@@ -3,6 +3,7 @@
 ## v0.9.0-dev
 
 - Enhancements
+    - Compiling a graph module without passing an `:otp_app` will now raise
     - Graphs can be declared with compile time configuration defaults
       that are later overwritten by the application environment
 
