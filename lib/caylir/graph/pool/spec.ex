@@ -1,7 +1,5 @@
 defmodule Caylir.Graph.Pool.Spec do
-  @moduledoc """
-  Connection pool specification helper.
-  """
+  @moduledoc false
 
   alias Caylir.Graph.Pool
 

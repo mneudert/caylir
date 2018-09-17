@@ -1,7 +1,5 @@
 defmodule Caylir.Graph.Pool.Worker do
-  @moduledoc """
-  Pool worker.
-  """
+  @moduledoc false
 
   use GenServer
 

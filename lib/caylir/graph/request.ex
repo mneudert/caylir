@@ -1,7 +1,5 @@
 defmodule Caylir.Graph.Request do
-  @moduledoc """
-  Sends requests to the server.
-  """
+  @moduledoc false
 
   alias Caylir.Graph
 

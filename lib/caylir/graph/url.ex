@@ -1,7 +1,5 @@
 defmodule Caylir.Graph.URL do
-  @moduledoc """
-  Utility module to generate the URLs for graph interaction.
-  """
+  @moduledoc false
 
   @doc """
   Returns the URL for deleting quads.
