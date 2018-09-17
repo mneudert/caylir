@@ -8,10 +8,10 @@ defmodule Caylir.Graph.Config do
   @doc """
   Retrieves the connection configuration for `conn` in `otp_app`.
   """
-  @spec config(atom, module) :: Keyword.t()
-  def config(otp_app, conn) do
-    otp_app
-    |> Application.get_env(conn, [])
+  @spec config(atom, module, defaults :: Keyword.t()) :: Keyword.t()
+  def config(otp_app, conn, defaults \\ []) do
+    defaults
+    |> Keyword.merge(Application.get_env(otp_app, conn, []))
     |> Keyword.put(:otp_app, otp_app)
     |> validate!(conn)
     |> maybe_fetch_system()

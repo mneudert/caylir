@@ -2,6 +2,10 @@
 
 ## v0.9.0-dev
 
+- Enhancements
+    - Graphs can be declared with compile time configuration defaults
+      that are later overwritten by the application environment
+
 - Backwards incompatible changes
     - Minimum required elixir version is now "~> 1.5"
     - Support for cayley version `0.6.1` has been dropped

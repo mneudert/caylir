@@ -36,4 +36,21 @@ defmodule Caylir.Graph.ConfigTest do
 
     assert :exists == Keyword.get(conn.config(), key)
   end
+
+  test "inline configuration defaults" do
+    conn = Module.concat([__MODULE__, DefaultConfig])
+    key = :inline_config_key
+
+    defmodule conn do
+      use Caylir.Graph,
+        otp_app: :caylir,
+        config: [{:"#{key}", "inline value"}]
+    end
+
+    assert "inline value" == conn.config()[key]
+
+    Application.put_env(:caylir, conn, Keyword.put(conn.config(), key, "runtime value"))
+
+    assert "runtime value" == conn.config()[key]
+  end
 end

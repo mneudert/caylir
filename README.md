@@ -110,6 +110,25 @@ available for use.
 
 The function is expected to always return `:ok`.
 
+### Configuration (inline defaults)
+
+For some use cases (e.g. testing) it may be sufficient to define hardcoded
+configuration defaults outside of your application environment:
+
+```elixir
+defmodule MyApp.MyGraph do
+  use Caylir.Graph,
+    otp_app: :my_app,
+    config: [
+      host: "localhost",
+      port: 64210
+    ]
+end
+```
+
+These values will be overwritten by and/or merge with the
+application environment values when the configuration is accessed.
+
 ## Usage
 
 Writing Data:

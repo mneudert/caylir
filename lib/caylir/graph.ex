@@ -20,13 +20,15 @@ defmodule Caylir.Graph do
         language: :gizmo
   """
 
-  defmacro __using__(otp_app: otp_app) do
+  defmacro __using__(opts) do
     quote do
       alias Caylir.Graph.Config
       alias Caylir.Graph.Pool
 
       @behaviour unquote(__MODULE__)
-      @otp_app unquote(otp_app)
+
+      @otp_app unquote(opts[:otp_app])
+      @config unquote(opts[:config] || [])
 
       def __pool__, do: __MODULE__.Pool
 
@@ -40,7 +42,7 @@ defmodule Caylir.Graph do
 
       def pool_spec, do: Pool.Spec.spec(__MODULE__)
 
-      def config, do: Config.config(@otp_app, __MODULE__)
+      def config, do: Config.config(@otp_app, __MODULE__, @config)
 
       def delete(quad), do: send({:delete, quad})
       def query(query, opts \\ []), do: send({:query, query, opts})
