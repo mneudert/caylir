@@ -14,15 +14,11 @@ defmodule Caylir.Graph.Pool.Spec do
   end
 
   defp get_opts(conn) do
-    {pool_opts, _} = Keyword.split(conn.config, [:size, :max_overflow])
-
     pool_opts =
-      pool_opts
+      conn.config()
+      |> Keyword.take([:size, :max_overflow])
       |> Keyword.put_new(:max_overflow, 10)
       |> Keyword.put_new(:size, 5)
-
-    pool_opts =
-      pool_opts
       |> Keyword.put(:name, {:local, conn.__pool__})
       |> Keyword.put(:worker_module, Pool.Worker)
 
