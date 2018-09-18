@@ -10,14 +10,13 @@ defmodule Caylir.Graph.ConfigTest do
     assert [otp_app: test] ++ config == Config.config(test, __MODULE__)
   end
 
-  test "missing configuration raises", %{test: test} do
+  test "missing configuration raises" do
     exception =
       assert_raise ArgumentError, fn ->
-        Config.config(test, __MODULE__)
+        Config.config(:ignored, __MODULE__)
       end
 
     assert String.contains?(exception.message, inspect(__MODULE__))
-    assert String.contains?(exception.message, inspect(test))
   end
 
   test "runtime configuration changes" do

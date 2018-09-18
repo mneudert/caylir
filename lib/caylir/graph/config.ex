@@ -45,11 +45,11 @@ defmodule Caylir.Graph.Config do
 
   defp maybe_fetch_system(config), do: config
 
-  defp validate!([otp_app: otp_app], conn) do
-    # single key match only possible with empty environment
-    raise ArgumentError,
-          "configuration for #{inspect(conn)}" <>
-            " not found in #{inspect(otp_app)} configuration"
+  defp validate!([otp_app: _], conn) do
+    # single key match only possible if both
+    # - empty environment config
+    # - missing inline defaults
+    raise ArgumentError, "graph #{inspect(conn)} has no usable configuration"
   end
 
   defp validate!(config, _), do: config
