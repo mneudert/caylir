@@ -15,6 +15,7 @@ defmodule Caylir.Graph.PoolTest do
   test "supervision" do
     Supervisor.start_link([Conn.child_spec()], strategy: :one_for_one)
 
-    assert Enum.any?(Process.registered(), &(&1 == Conn.__pool__()))
+    assert Enum.any?(Process.registered(), &(&1 == Conn.Pool))
+    assert Enum.any?(Process.registered(), &(&1 == Conn.Supervisor))
   end
 end

@@ -34,8 +34,6 @@ defmodule Caylir.Graph do
       @otp_app unquote(opts[:otp_app])
       @config unquote(opts[:config] || [])
 
-      def __pool__, do: __MODULE__.Pool
-
       def child_spec(_ \\ []) do
         Supervisor.Spec.supervisor(
           Caylir.Graph.Supervisor,
@@ -52,7 +50,7 @@ defmodule Caylir.Graph do
       def write(quad), do: send({:write, quad})
 
       defp send(request) do
-        :poolboy.transaction(__pool__(), &GenServer.call(&1, request))
+        :poolboy.transaction(__MODULE__.Pool, &GenServer.call(&1, request))
       end
     end
   end
@@ -60,11 +58,6 @@ defmodule Caylir.Graph do
   @type t_delete :: :ok | {:error, String.t()}
   @type t_query :: any | {:error, String.t()}
   @type t_write :: :ok | {:error, String.t()}
-
-  @doc """
-  Returns the (internal) pool module.
-  """
-  @callback __pool__ :: module
 
   @doc """
   Returns a supervisable graph child_spec.
