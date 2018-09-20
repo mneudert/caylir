@@ -8,6 +8,7 @@
       that are later overwritten by the application environment
 
 - Backwards incompatible changes
+    - Public access to the internal pool child_spec has been removed
     - Minimum required elixir version is now "~> 1.5"
     - Support for cayley version `0.6.1` has been dropped
 

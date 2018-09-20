@@ -5,6 +5,8 @@ defmodule Caylir.Graph.Supervisor do
 
   use Supervisor
 
+  alias Caylir.Graph.Pool
+
   @doc """
   Starts the supervisor.
   """
@@ -23,6 +25,6 @@ defmodule Caylir.Graph.Supervisor do
         {mod, fun} -> apply(mod, fun, [graph])
       end
 
-    supervise([graph.pool_spec], strategy: :one_for_one)
+    supervise([Pool.Spec.spec(graph)], strategy: :one_for_one)
   end
 end
