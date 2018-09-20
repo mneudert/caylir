@@ -11,7 +11,7 @@ defmodule Caylir.Graph.Pool.Spec do
     pool_opts =
       conn.config()
       |> Keyword.take([:size, :max_overflow])
-      |> Keyword.put(:name, {:local, conn.__pool__})
+      |> Keyword.put(:name, {:local, conn.__pool__()})
       |> Keyword.put(:worker_module, Pool.Worker)
 
     :poolboy.child_spec(conn, pool_opts, %{module: conn})
