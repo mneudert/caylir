@@ -16,11 +16,6 @@ config :caylir, Caylir.TestHelpers.Graphs.InetsGraph,
   pool: [max_overflow: 0, size: 1],
   port: 9999
 
-config :caylir, Caylir.TestHelpers.Graphs.InitGraph,
-  host: "localhost",
-  pool: [max_overflow: 0, size: 1],
-  port: 64210
-
 config :caylir, Caylir.TestHelpers.Graphs.LimitGraph,
   host: "localhost",
   limit: 1,

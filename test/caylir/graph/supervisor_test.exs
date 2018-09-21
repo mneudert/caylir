@@ -1,8 +1,6 @@
 defmodule Caylir.Graph.SupervisorTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.TestHelpers.Graphs.InitGraph
-
   defmodule Initializer do
     def start_link, do: Agent.start_link(fn -> nil end, name: __MODULE__)
 
@@ -10,23 +8,18 @@ defmodule Caylir.Graph.SupervisorTest do
     def get_init, do: Agent.get(__MODULE__, & &1)
   end
 
-  setup do
-    env = Application.get_env(:caylir, InitGraph)
-
-    :ok =
-      Application.put_env(:caylir, InitGraph, Keyword.put(env, :init, {Initializer, :call_init}))
-
-    {:ok, _} = Initializer.start_link()
-
-    on_exit(fn ->
-      :ok = Application.put_env(:caylir, InitGraph, env)
-    end)
+  defmodule InitializerGraph do
+    use Caylir.Graph,
+      otp_app: :caylir,
+      config: [
+        init: {Caylir.Graph.SupervisorTest.Initializer, :call_init}
+      ]
   end
 
   test "init function called upon graph (re-) start" do
-    _ = Supervisor.start_link([InitGraph], strategy: :one_for_one)
-    :ok = :timer.sleep(100)
+    {:ok, _} = Initializer.start_link()
+    {:ok, _} = Supervisor.start_link([InitializerGraph], strategy: :one_for_one)
 
-    assert InitGraph == Initializer.get_init()
+    assert InitializerGraph == Initializer.get_init()
   end
 end
