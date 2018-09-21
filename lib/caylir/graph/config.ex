@@ -6,14 +6,14 @@ defmodule Caylir.Graph.Config do
   require Logger
 
   @doc """
-  Retrieves the connection configuration for `conn` in `otp_app`.
+  Retrieves the graph configuration for `graph` in `otp_app`.
   """
   @spec config(atom, module, defaults :: Keyword.t()) :: Keyword.t()
-  def config(otp_app, conn, defaults \\ []) do
+  def config(otp_app, graph, defaults \\ []) do
     defaults
-    |> Keyword.merge(Application.get_env(otp_app, conn, []))
+    |> Keyword.merge(Application.get_env(otp_app, graph, []))
     |> Keyword.put(:otp_app, otp_app)
-    |> validate!(conn)
+    |> validate!(graph)
     |> maybe_fetch_system()
   end
 
@@ -45,11 +45,11 @@ defmodule Caylir.Graph.Config do
 
   defp maybe_fetch_system(config), do: config
 
-  defp validate!([otp_app: _], conn) do
+  defp validate!([otp_app: _], graph) do
     # single key match only possible if both
     # - empty environment config
     # - missing inline defaults
-    raise ArgumentError, "graph #{inspect(conn)} has no usable configuration"
+    raise ArgumentError, "graph #{inspect(graph)} has no usable configuration"
   end
 
   defp validate!(config, _), do: config

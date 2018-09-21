@@ -65,7 +65,7 @@ defmodule Caylir.Graph do
   @callback child_spec(_ignored :: term) :: Supervisor.Spec.spec()
 
   @doc """
-  Returns the connection configuration.
+  Returns the graph configuration.
   """
   @callback config :: Keyword.t()
 

@@ -20,36 +20,36 @@ defmodule Caylir.Graph.ConfigTest do
   end
 
   test "runtime configuration changes" do
-    conn = Module.concat([__MODULE__, RuntimeChanges])
+    graph = Module.concat([__MODULE__, RuntimeChanges])
     key = :runtime_testing_key
 
-    Application.put_env(:caylir, conn, foo: :bar)
+    Application.put_env(:caylir, graph, foo: :bar)
 
-    defmodule conn do
+    defmodule graph do
       use Caylir.Graph, otp_app: :caylir
     end
 
-    refute Keyword.has_key?(conn.config(), key)
+    refute Keyword.has_key?(graph.config(), key)
 
-    Application.put_env(:caylir, conn, Keyword.put(conn.config(), key, :exists))
+    Application.put_env(:caylir, graph, Keyword.put(graph.config(), key, :exists))
 
-    assert :exists == Keyword.get(conn.config(), key)
+    assert :exists == Keyword.get(graph.config(), key)
   end
 
   test "inline configuration defaults" do
-    conn = Module.concat([__MODULE__, DefaultConfig])
+    graph = Module.concat([__MODULE__, DefaultConfig])
     key = :inline_config_key
 
-    defmodule conn do
+    defmodule graph do
       use Caylir.Graph,
         otp_app: :caylir,
         config: [{:"#{key}", "inline value"}]
     end
 
-    assert "inline value" == conn.config()[key]
+    assert "inline value" == graph.config()[key]
 
-    Application.put_env(:caylir, conn, Keyword.put(conn.config(), key, "runtime value"))
+    Application.put_env(:caylir, graph, Keyword.put(graph.config(), key, "runtime value"))
 
-    assert "runtime value" == conn.config()[key]
+    assert "runtime value" == graph.config()[key]
   end
 end

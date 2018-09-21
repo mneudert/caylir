@@ -6,21 +6,21 @@ defmodule Caylir.Deprecations.SystemConfigTest do
   alias Caylir.TestHelpers.Graphs.EnvGraph
 
   test "system configuration access" do
-    conn = Module.concat([__MODULE__, SystemConfiguration])
+    graph = Module.concat([__MODULE__, SystemConfiguration])
     key = :system_testing_key
     sys_val = "fetch from system environment"
     sys_var = "CAYLIR_TEST_CONFIG"
 
     System.put_env(sys_var, sys_val)
-    Application.put_env(:caylir, conn, [{key, {:system, sys_var}}])
+    Application.put_env(:caylir, graph, [{key, {:system, sys_var}}])
 
-    defmodule conn do
+    defmodule graph do
       use Caylir.Graph, otp_app: :caylir
     end
 
     log =
       capture_log(fn ->
-        assert sys_val == conn.config()[key]
+        assert sys_val == graph.config()[key]
       end)
 
     System.delete_env(sys_var)
@@ -29,21 +29,21 @@ defmodule Caylir.Deprecations.SystemConfigTest do
   end
 
   test "system configuration access (with default)" do
-    conn = Module.concat([__MODULE__, SystemConfigurationDefault])
+    graph = Module.concat([__MODULE__, SystemConfigurationDefault])
     key = :system_testing_key
     default = "fetch from system environment"
     sys_var = "CAYLIR_TEST_CONFIG_DEFAULT"
 
     System.delete_env(sys_var)
-    Application.put_env(:caylir, conn, [{key, {:system, sys_var, default}}])
+    Application.put_env(:caylir, graph, [{key, {:system, sys_var, default}}])
 
-    defmodule conn do
+    defmodule graph do
       use Caylir.Graph, otp_app: :caylir
     end
 
     log =
       capture_log(fn ->
-        assert default == conn.config()[key]
+        assert default == graph.config()[key]
       end)
 
     assert log =~ ~r/deprecated/i

@@ -7,27 +7,27 @@ defmodule Caylir.Graph.Pool.Worker do
 
   @behaviour :poolboy_worker
 
-  def start_link(conn) do
-    GenServer.start_link(__MODULE__, conn)
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state)
   end
 
-  def init(conn), do: {:ok, conn}
+  def init(state), do: {:ok, state}
 
   # GenServer callbacks
 
-  def handle_call({:delete, quad}, _from, conn) do
-    {:reply, Request.delete(quad, conn), conn}
+  def handle_call({:delete, quad}, _from, state) do
+    {:reply, Request.delete(quad, state), state}
   end
 
-  def handle_call({:query, query, opts}, _from, conn) do
-    {:reply, Request.query(query, opts, conn), conn}
+  def handle_call({:query, query, opts}, _from, state) do
+    {:reply, Request.query(query, opts, state), state}
   end
 
-  def handle_call({:shape, query}, _from, conn) do
-    {:reply, Request.shape(query, conn), conn}
+  def handle_call({:shape, query}, _from, state) do
+    {:reply, Request.shape(query, state), state}
   end
 
-  def handle_call({:write, quad}, _from, conn) do
-    {:reply, Request.write(quad, conn), conn}
+  def handle_call({:write, quad}, _from, state) do
+    {:reply, Request.write(quad, state), state}
   end
 end
