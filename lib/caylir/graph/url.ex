@@ -23,11 +23,11 @@ defmodule Caylir.Graph.URL do
       iex> query([ host: "localhost", port: 64210, language: :gizmo ])
       "http://localhost:64210/api/v1/query/gizmo"
 
-      iex> query([ host: "localhost", port: 64210, language: :gremlin ])
-      "http://localhost:64210/api/v1/query/gremlin"
+      iex> query([ host: "localhost", port: 64210, language: :gizmo, limit: 3 ])
+      "http://localhost:64210/api/v1/query/gizmo?limit=3"
 
-      iex> query([ host: "localhost", port: 64210, language: :gremlin, limit: 3 ])
-      "http://localhost:64210/api/v1/query/gremlin?limit=3"
+      iex> query([ host: "localhost", port: 64210, language: :graphql, limit: 3 ])
+      "http://localhost:64210/api/v1/query/graphql?limit=3"
   """
   @spec query(Keyword.t()) :: String.t()
   def query(config), do: url_with_language("query", config) <> query_limit(config[:limit])
@@ -43,8 +43,8 @@ defmodule Caylir.Graph.URL do
       iex> shape([ host: "localhost", port: 64210, language: :gizmo ])
       "http://localhost:64210/api/v1/shape/gizmo"
 
-      iex> shape([ host: "localhost", port: 64210, language: :gremlin ])
-      "http://localhost:64210/api/v1/shape/gremlin"
+      iex> shape([ host: "localhost", port: 64210, language: :graphql ])
+      "http://localhost:64210/api/v1/shape/graphql"
   """
   @spec shape(Keyword.t()) :: String.t()
   def shape(config), do: url_with_language("shape", config)
@@ -68,9 +68,8 @@ defmodule Caylir.Graph.URL do
     url(action, config) <> "/" <> query_language(config[:language])
   end
 
-  defp query_language(:gizmo), do: "gizmo"
-  defp query_language(:gremlin), do: "gremlin"
   defp query_language(nil), do: "gizmo"
+  defp query_language(language), do: to_string(language)
 
   defp query_limit(nil), do: ""
   defp query_limit(limit), do: "?limit=#{limit}"
