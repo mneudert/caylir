@@ -126,7 +126,7 @@ defmodule MyApp.MyGraph do
 end
 ```
 
-These values will be overwritten by and/or merge with the
+These values will be overwritten by and/or merged with the
 application environment values when the configuration is accessed.
 
 ## Usage
