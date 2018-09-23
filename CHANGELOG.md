@@ -9,7 +9,7 @@
 
 - Backwards incompatible changes
     - Minimum required elixir version is now "~> 1.5"
-    - Public access to the internal pool child_spec has been removed
+    - Public access to the internal pool child spec has been removed
     - Public access to the internal pool module name has been removed
     - Support for cayley version `0.6.1` has been dropped
 
