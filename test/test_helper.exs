@@ -13,10 +13,10 @@ httpd_config = [
 
 {:ok, httpd_pid} = :inets.start(:httpd, httpd_config)
 
-inets_env =
-  :caylir
-  |> Application.get_env(Graphs.InetsGraph)
-  |> Keyword.put(:port, :httpd.info(httpd_pid)[:port])
+inets_env = [
+  host: "localhost",
+  port: :httpd.info(httpd_pid)[:port]
+]
 
 Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 
