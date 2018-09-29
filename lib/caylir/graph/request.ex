@@ -7,7 +7,7 @@ defmodule Caylir.Graph.Request do
   Deletes a quad from the graph.
   """
   @spec delete(map | [map], map) :: Graph.t_delete()
-  def delete(quad, opts) when is_map(quad), do: delete([quad], opts)
+  def delete(quad, state) when is_map(quad), do: delete([quad], state)
 
   def delete(quads, %{module: graph}) do
     url = Graph.URL.delete(graph.config())
@@ -52,7 +52,7 @@ defmodule Caylir.Graph.Request do
   Writes a quad to the graph.
   """
   @spec write(map | [map], map) :: Graph.t_write()
-  def write(quad, opts) when is_map(quad), do: write([quad], opts)
+  def write(quad, state) when is_map(quad), do: write([quad], state)
 
   def write(quads, %{module: graph}) do
     url = Graph.URL.write(graph.config())
