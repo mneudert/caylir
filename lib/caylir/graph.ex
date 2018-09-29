@@ -44,13 +44,22 @@ defmodule Caylir.Graph do
 
       def config, do: Config.config(@otp_app, __MODULE__, @config)
 
-      def delete(quad, opts \\ []), do: send({:delete, quad, opts})
-      def query(query, opts \\ []), do: send({:query, query, opts})
-      def shape(query, opts \\ []), do: send({:shape, query, opts})
-      def write(quad, opts \\ []), do: send({:write, quad, opts})
+      def delete(quad, opts \\ []), do: send(:delete, quad, opts)
+      def query(query, opts \\ []), do: send(:query, query, opts)
+      def shape(query, opts \\ []), do: send(:shape, query, opts)
+      def write(quad, opts \\ []), do: send(:write, quad, opts)
 
-      defp send(request) do
-        :poolboy.transaction(__MODULE__.Pool, &GenServer.call(&1, request))
+      defp send(type, param, opts) do
+        default_pool_timeout = Keyword.get(config(), :pool_timeout, 5000)
+
+        pool_name = __MODULE__.Pool
+        pool_timeout = opts[:pool_timeout] || default_pool_timeout
+
+        worker = :poolboy.checkout(pool_name, pool_timeout)
+        result = GenServer.call(worker, {type, param, opts}, :infinity)
+        :ok = :poolboy.checkin(pool_name, worker)
+
+        result
       end
     end
   end

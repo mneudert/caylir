@@ -192,6 +192,43 @@ config :my_app, MyApp.MyGraph,
   limit: -1
 ```
 
+### Query Timeout Configuration
+
+Using all default values and no specific parameters each query is allowed to
+take up to 5000 milliseconds (`GenServer.call/2` timeout) to complete.
+That may be too long or not long enough in some cases.
+
+To change that timeout you can configure your graph:
+
+```elixir
+# lowering timeout to 500 ms
+config :my_app, MyApp.MyGraph,
+  query_timeout: 500
+```
+
+or pass an individual timeout for a single query:
+
+```elixir
+MyApp.MyGraph.query(query, timeout: 250)
+```
+
+A passed or graph wide timeout configuration override any `:recv_timeout`
+of your `:hackney` (HTTP client) configuration.
+
+This does not apply to write requests. They are currently only affected by
+configured `:recv_timeout` values. Setting a graph timeout enables you to
+have a different timeout for read and write requests.
+
+For the underlying worker pool you can define a separate timeout:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  pool_timeout: 500
+```
+
+This configuration will be used to wait for an available worker to execute a
+query and defaults to `5_000`.
+
 ## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)

@@ -7,7 +7,15 @@ defmodule Caylir.TestHelpers.Inets.Handler do
 
   def serve(mod_data), do: serve_uri(mod(mod_data, :request_uri), mod_data)
 
-  defp serve_uri('/api/v1/query/gizmo', _mod_data), do: serve_dummy()
+  defp serve_uri('/api/v1/query/timeout', _mod_data) do
+    :timer.sleep(100)
+    serve_dummy()
+  end
+
+  defp serve_uri('/api/v1/query/timeout_long', _mod_data) do
+    :timer.sleep(10000)
+    serve_dummy()
+  end
 
   defp serve_dummy() do
     body = '{"result": "dummy"}'
