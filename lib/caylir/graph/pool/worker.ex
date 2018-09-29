@@ -15,19 +15,19 @@ defmodule Caylir.Graph.Pool.Worker do
 
   # GenServer callbacks
 
-  def handle_call({:delete, quad}, _from, state) do
-    {:reply, Request.delete(quad, state), state}
+  def handle_call({:delete, quad, opts}, _from, state) do
+    {:reply, Request.delete(quad, opts, state), state}
   end
 
   def handle_call({:query, query, opts}, _from, state) do
     {:reply, Request.query(query, opts, state), state}
   end
 
-  def handle_call({:shape, query}, _from, state) do
-    {:reply, Request.shape(query, state), state}
+  def handle_call({:shape, query, opts}, _from, state) do
+    {:reply, Request.shape(query, opts, state), state}
   end
 
-  def handle_call({:write, quad}, _from, state) do
-    {:reply, Request.write(quad, state), state}
+  def handle_call({:write, quad, opts}, _from, state) do
+    {:reply, Request.write(quad, opts, state), state}
   end
 end

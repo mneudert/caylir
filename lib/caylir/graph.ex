@@ -44,10 +44,10 @@ defmodule Caylir.Graph do
 
       def config, do: Config.config(@otp_app, __MODULE__, @config)
 
-      def delete(quad), do: send({:delete, quad})
+      def delete(quad, opts \\ []), do: send({:delete, quad, opts})
       def query(query, opts \\ []), do: send({:query, query, opts})
-      def shape(query), do: send({:shape, query})
-      def write(quad), do: send({:write, quad})
+      def shape(query, opts \\ []), do: send({:shape, query, opts})
+      def write(quad, opts \\ []), do: send({:write, quad, opts})
 
       defp send(request) do
         :poolboy.transaction(__MODULE__.Pool, &GenServer.call(&1, request))

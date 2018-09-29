@@ -6,10 +6,10 @@ defmodule Caylir.Graph.Request do
   @doc """
   Deletes a quad from the graph.
   """
-  @spec delete(map | [map], map) :: Graph.t_delete()
-  def delete(quad, state) when is_map(quad), do: delete([quad], state)
+  @spec delete(map | [map], Keyword.t(), map) :: Graph.t_delete()
+  def delete(quad, opts, state) when is_map(quad), do: delete([quad], opts, state)
 
-  def delete(quads, %{module: graph}) do
+  def delete(quads, _opts, %{module: graph}) do
     url = Graph.URL.delete(graph.config())
     body = Poison.encode!(quads)
 
@@ -38,8 +38,8 @@ defmodule Caylir.Graph.Request do
   @doc """
   Gets the shape of a query.
   """
-  @spec shape(String.t(), map) :: Graph.t_query()
-  def shape(query, %{module: graph}) do
+  @spec shape(String.t(), Keyword.t(), map) :: Graph.t_query()
+  def shape(query, _opts, %{module: graph}) do
     url = Graph.URL.shape(graph.config())
 
     case send(:post, url, query) do
@@ -51,10 +51,10 @@ defmodule Caylir.Graph.Request do
   @doc """
   Writes a quad to the graph.
   """
-  @spec write(map | [map], map) :: Graph.t_write()
-  def write(quad, state) when is_map(quad), do: write([quad], state)
+  @spec write(map | [map], Keyword.t(), map) :: Graph.t_write()
+  def write(quad, opts, state) when is_map(quad), do: write([quad], opts, state)
 
-  def write(quads, %{module: graph}) do
+  def write(quads, _opts, %{module: graph}) do
     url = Graph.URL.write(graph.config())
     body = Poison.encode!(quads)
 
