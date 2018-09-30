@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.9.0-dev
+## v0.9.0 (2018-09-30)
 
 - Enhancements
     - Compiling a graph module without passing an `:otp_app` will now raise

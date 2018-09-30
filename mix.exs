@@ -7,7 +7,7 @@ defmodule Caylir.Mixfile do
     [
       app: :caylir,
       name: "Caylir",
-      version: "0.9.0-dev",
+      version: "0.9.0",
       elixir: "~> 1.5",
       deps: deps(),
       description: "Cayley driver for Elixir",
@@ -42,7 +42,7 @@ defmodule Caylir.Mixfile do
     [
       extras: ["CHANGELOG.md", "README.md"],
       main: "readme",
-      source_ref: "master",
+      source_ref: "v0.9.0",
       source_url: @url_github
     ]
   end
