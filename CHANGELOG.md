@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.10.0-dev
+
+- Backwards incompatible changes
+    - Support for `{ :system, "ENV_VARIABLE" }` configuration has been removed
+
 ## v0.9.0 (2018-09-30)
 
 - Enhancements
