@@ -25,7 +25,9 @@ defmodule Caylir.Mixfile do
   end
 
   def application do
-    [applications: [:hackney, :logger, :poison, :poolboy]]
+    [
+      extra_applications: [:logger]
+    ]
   end
 
   defp deps do
