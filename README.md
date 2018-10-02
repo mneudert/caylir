@@ -30,20 +30,6 @@ defp deps do
 end
 ```
 
-You should also update your applications to include all necessary projects:
-
-```elixir
-def application do
-  [
-    applications: [
-      # ...
-      :caylir,
-      # ...
-    ]
-  ]
-end
-```
-
 ## Application Setup
 
 ### Graph Definition
