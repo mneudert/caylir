@@ -11,11 +11,17 @@ defmodule Caylir.Graph.Request do
 
   def delete(quads, opts, %{module: graph}) do
     config = graph.config()
+    json_library = Keyword.get(config, :json_library, Poison)
 
     url = Graph.URL.delete(config)
-    body = Poison.encode!(quads)
+    body = Keyword.get(config, :json_library, Poison).encode!(quads)
 
-    case send(:post, url, body, http_opts(config, opts)) do
+    response =
+      :post
+      |> send(url, body, http_opts(config, opts))
+      |> parse_response(json_library)
+
+    case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, 200, _success} -> :ok
     end
@@ -27,13 +33,19 @@ defmodule Caylir.Graph.Request do
   @spec query(String.t(), Keyword.t(), map) :: Graph.t_query()
   def query(query, opts, %{module: graph}) do
     config = graph.config()
+    json_library = Keyword.get(config, :json_library, Poison)
 
     url =
       config
       |> Keyword.merge(opts)
       |> Graph.URL.query()
 
-    case send(:post, url, query, http_opts(config, opts)) do
+    response =
+      :post
+      |> send(url, query, http_opts(config, opts))
+      |> parse_response(json_library)
+
+    case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, 200, %{result: result}} -> result
     end
@@ -45,9 +57,15 @@ defmodule Caylir.Graph.Request do
   @spec shape(String.t(), Keyword.t(), map) :: Graph.t_query()
   def shape(query, opts, %{module: graph}) do
     config = graph.config()
+    json_library = Keyword.get(config, :json_library, Poison)
     url = Graph.URL.shape(config)
 
-    case send(:post, url, query, http_opts(config, opts)) do
+    response =
+      :post
+      |> send(url, query, http_opts(config, opts))
+      |> parse_response(json_library)
+
+    case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, 200, shape} -> shape
     end
@@ -61,11 +79,17 @@ defmodule Caylir.Graph.Request do
 
   def write(quads, opts, %{module: graph}) do
     config = graph.config()
+    json_library = Keyword.get(config, :json_library, Poison)
 
     url = Graph.URL.write(config)
-    body = Poison.encode!(quads)
+    body = json_library.encode!(quads)
 
-    case send(:post, url, body, http_opts(config, opts)) do
+    response =
+      :post
+      |> send(url, body, http_opts(config, opts))
+      |> parse_response(json_library)
+
+    case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, 200, _content} -> :ok
     end
@@ -103,15 +127,17 @@ defmodule Caylir.Graph.Request do
         {:ok, nil, %{error: reason}}
 
       {:ok, status, _headers, client} ->
-        {:ok, response} = :hackney.body(client)
+        {:ok, response_body} = :hackney.body(client)
 
-        parse_response(status, response)
+        {:ok, status, response_body}
     end
   end
 
-  defp parse_response(status, ""), do: {:ok, status}
+  defp parse_response({:ok, _, ""} = response, _), do: response
 
-  defp parse_response(status, body) do
-    {:ok, status, Poison.decode!(body, keys: :atoms)}
+  defp parse_response({:ok, status, body}, parser) when is_binary(body) do
+    {:ok, status, parser.decode!(body, keys: :atoms)}
   end
+
+  defp parse_response(response, _), do: response
 end
