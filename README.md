@@ -159,6 +159,18 @@ MyApp.MyGraph.delete(%{
 MyApp.MyGraph.delete([quad_1, quad_2])
 ```
 
+### JSON Configuration
+
+By default the library used for encoding/decoding JSON is `:poison`. For the
+time `:caylir` directly depends on it to ensure it is available.
+
+If you want to use another library you can switch it:
+
+```elixir
+config :my_app, MyGraph,
+  json_library: MyJSONLibrary
+```
+
 ### Query Language Configuration
 
 If you are using a query language other than the default `:gizmo` you

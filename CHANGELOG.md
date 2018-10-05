@@ -2,6 +2,10 @@
 
 ## v0.10.0-dev
 
+- Enhancements
+    - The library used for JSON encoding/decoding can be changed
+      by using the `:json_library` configuration
+
 - Backwards incompatible changes
     - Support for `{ :system, "ENV_VARIABLE" }` configuration has been removed
 
