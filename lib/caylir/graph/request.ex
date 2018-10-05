@@ -14,7 +14,7 @@ defmodule Caylir.Graph.Request do
     json_library = Keyword.get(config, :json_library, Poison)
 
     url = Graph.URL.delete(config)
-    body = Keyword.get(config, :json_library, Poison).encode!(quads)
+    body = json_library.encode!(quads)
 
     response =
       :post
