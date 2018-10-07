@@ -1,8 +1,6 @@
 defmodule Caylir.Graph.JSONLibraryTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.Graph.Config
-
   defmodule JSONGraph do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
