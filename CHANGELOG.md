@@ -4,7 +4,7 @@
 
 - Enhancements
     - The library used for JSON encoding/decoding can be changed
-      by using the `:json_library` configuration
+      by using the `:json_encoder` and `:json_decoder` configuration
 
 - Backwards incompatible changes
     - Support for `{ :system, "ENV_VARIABLE" }` configuration has been removed

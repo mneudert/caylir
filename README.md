@@ -168,7 +168,8 @@ If you want to use another library you can switch it:
 
 ```elixir
 config :my_app, MyGraph,
-  json_library: MyJSONLibrary
+  json_decoder: MyJSONLibrary,
+  json_encoder: MyJSONLibrary
 ```
 
 ### Query Language Configuration

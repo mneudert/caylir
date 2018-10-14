@@ -9,7 +9,8 @@ defmodule Caylir.Graph.JSONLibraryTest do
       config: [
         host: "localhost",
         port: 64210,
-        json_library: JSONLibrary
+        json_decoder: JSONLibrary,
+        json_encoder: JSONLibrary
       ]
   end
 
