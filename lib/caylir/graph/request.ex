@@ -2,6 +2,7 @@ defmodule Caylir.Graph.Request do
   @moduledoc false
 
   alias Caylir.Graph
+  alias Caylir.Graph.JSON
 
   @doc """
   Deletes a quad from the graph.
@@ -11,8 +12,8 @@ defmodule Caylir.Graph.Request do
 
   def delete(quads, opts, %{module: graph}) do
     config = graph.config()
-    json_decoder = Keyword.get(config, :json_decoder, Poison)
-    json_encoder = Keyword.get(config, :json_encoder, Poison)
+    json_decoder = JSON.decoder(graph)
+    json_encoder = JSON.encoder(graph)
 
     url = Graph.URL.delete(config)
     body = json_encoder.encode!(quads)
@@ -34,7 +35,7 @@ defmodule Caylir.Graph.Request do
   @spec query(String.t(), Keyword.t(), map) :: Graph.t_query()
   def query(query, opts, %{module: graph}) do
     config = graph.config()
-    json_decoder = Keyword.get(config, :json_decoder, Poison)
+    json_decoder = JSON.decoder(graph)
 
     url =
       config
@@ -58,7 +59,7 @@ defmodule Caylir.Graph.Request do
   @spec shape(String.t(), Keyword.t(), map) :: Graph.t_query()
   def shape(query, opts, %{module: graph}) do
     config = graph.config()
-    json_decoder = Keyword.get(config, :json_decoder, Poison)
+    json_decoder = JSON.decoder(graph)
 
     url = Graph.URL.shape(config)
 
@@ -81,8 +82,8 @@ defmodule Caylir.Graph.Request do
 
   def write(quads, opts, %{module: graph}) do
     config = graph.config()
-    json_decoder = Keyword.get(config, :json_decoder, Poison)
-    json_encoder = Keyword.get(config, :json_encoder, Poison)
+    json_decoder = JSON.decoder(graph)
+    json_encoder = JSON.encoder(graph)
 
     url = Graph.URL.write(config)
     body = json_encoder.encode!(quads)

@@ -1,8 +1,8 @@
-defmodule Caylir.Graph.JSONLibraryTest do
+defmodule Caylir.Graph.JSONTest do
   use ExUnit.Case, async: true
 
   defmodule JSONGraph do
-    alias Caylir.Graph.JSONLibraryTest.JSONLibrary
+    alias Caylir.Graph.JSONTest.JSONLibrary
 
     use Caylir.Graph,
       otp_app: :caylir,
@@ -15,7 +15,7 @@ defmodule Caylir.Graph.JSONLibraryTest do
   end
 
   defmodule JSONLibrary do
-    alias Caylir.Graph.JSONLibraryTest.JSONLogger
+    alias Caylir.Graph.JSONTest.JSONLogger
 
     def encode!(data) do
       JSONLogger.log({:encode, data})
