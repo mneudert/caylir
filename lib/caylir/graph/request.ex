@@ -116,6 +116,14 @@ defmodule Caylir.Graph.Request do
     |> Keyword.merge(call_opts)
   end
 
+  defp parse_response({:ok, _, ""} = response, _), do: response
+
+  defp parse_response({:ok, status, body}, parser) when is_binary(body) do
+    {:ok, status, parser.decode!(body, keys: :atoms)}
+  end
+
+  defp parse_response(response, _), do: response
+
   defp send(method, url, payload, http_opts) do
     body = :binary.bin_to_list(payload)
 
@@ -136,12 +144,4 @@ defmodule Caylir.Graph.Request do
         {:ok, status, response_body}
     end
   end
-
-  defp parse_response({:ok, _, ""} = response, _), do: response
-
-  defp parse_response({:ok, status, body}, parser) when is_binary(body) do
-    {:ok, status, parser.decode!(body, keys: :atoms)}
-  end
-
-  defp parse_response(response, _), do: response
 end
