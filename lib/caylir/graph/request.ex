@@ -16,7 +16,7 @@ defmodule Caylir.Graph.Request do
     json_encoder = JSON.encoder(graph)
 
     url = Graph.URL.delete(config)
-    body = json_encoder.encode!(quads)
+    body = apply_mfa(json_encoder, quads)
 
     response =
       :post
@@ -86,7 +86,7 @@ defmodule Caylir.Graph.Request do
     json_encoder = JSON.encoder(graph)
 
     url = Graph.URL.write(config)
-    body = json_encoder.encode!(quads)
+    body = apply_mfa(json_encoder, quads)
 
     response =
       :post
@@ -100,6 +100,10 @@ defmodule Caylir.Graph.Request do
   end
 
   # Utility methods
+
+  defp apply_mfa({mod, fun, extra_args}, main_arg) do
+    apply(mod, fun, [main_arg | extra_args])
+  end
 
   defp http_opts(config, opts) do
     call_opts = Keyword.get(opts, :http_opts, [])
@@ -119,7 +123,7 @@ defmodule Caylir.Graph.Request do
   defp parse_response({:ok, _, ""} = response, _), do: response
 
   defp parse_response({:ok, status, body}, parser) when is_binary(body) do
-    {:ok, status, parser.decode!(body, keys: :atoms)}
+    {:ok, status, apply_mfa(parser, body)}
   end
 
   defp parse_response(response, _), do: response

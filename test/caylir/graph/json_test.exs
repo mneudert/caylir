@@ -1,21 +1,21 @@
-defmodule Caylir.Graph.JSONTest do
+defmodule Caylir.Graph.JSONLibraryTest do
   use ExUnit.Case, async: true
 
   defmodule JSONGraph do
-    alias Caylir.Graph.JSONTest.JSONLibrary
+    alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
         host: "localhost",
         port: 64210,
-        json_decoder: JSONLibrary,
+        json_decoder: {JSONLibrary, :decode!, [[keys: :atoms]]},
         json_encoder: JSONLibrary
       ]
   end
 
   defmodule JSONLibrary do
-    alias Caylir.Graph.JSONTest.JSONLogger
+    alias Caylir.Graph.JSONLibraryTest.JSONLogger
 
     def encode!(data) do
       JSONLogger.log({:encode, data})

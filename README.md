@@ -170,7 +170,16 @@ If you want to use another library you can switch it:
 config :my_app, MyGraph,
   json_decoder: MyJSONLibrary,
   json_encoder: MyJSONLibrary
+
+config :my_app, MyGraph,
+  json_decoder: {MyJSONLibrary, :decode_it, [:foo]},
+  json_encoder: {MyJSONLibrary, :encode_it, [:bar]}
 ```
+
+If you configure only a module name it will be called as
+`module.decode!(map)` and `module.encode!(map)`. When using a complete
+`{m, f, a}` configuration the data to decode/encode will passed as the
+first argument with your configured extra arguments following.
 
 ### Query Language Configuration
 
