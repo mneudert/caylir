@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.10.0-dev
+## v0.10.0 (2018-10-28)
 
 - Enhancements
     - The library used for JSON encoding/decoding can be changed
