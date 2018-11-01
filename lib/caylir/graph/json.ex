@@ -1,8 +1,8 @@
 defmodule Caylir.Graph.JSON do
   @moduledoc false
 
-  @default_decoder {Poison, :decode!, [[keys: :atoms]]}
-  @default_encoder {Poison, :encode!, []}
+  @default_decoder {Jason, :decode!, [[keys: :atoms]]}
+  @default_encoder {Jason, :encode!, []}
 
   @doc """
   Returns the JSON decoder for a graph.

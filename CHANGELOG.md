@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.11.0-dev
+
+- Backwards incompatible changes
+    - The default JSON encoder/decoder has been switched
+      from `:poison` to `:jason`
+
 ## v0.10.0 (2018-10-28)
 
 - Enhancements

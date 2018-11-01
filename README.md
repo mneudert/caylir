@@ -161,7 +161,7 @@ MyApp.MyGraph.delete([quad_1, quad_2])
 
 ### JSON Configuration
 
-By default the library used for encoding/decoding JSON is `:poison`. For the
+By default the library used for encoding/decoding JSON is `:jason`. For the
 time `:caylir` directly depends on it to ensure it is available.
 
 If you want to use another library you can switch it:
