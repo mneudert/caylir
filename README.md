@@ -12,9 +12,7 @@ Tested cayley versions:
 - `0.7.3`
 - `0.7.4`
 
-(see
-[`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml)
-to be sure)
+(see [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml) to be sure)
 
 ## Package Setup
 
@@ -42,9 +40,7 @@ defmodule MyApp.MyGraph do
 end
 ```
 
-The `:otp_app` name and the name of the module can be freely chosen but have to
-be linked to a corresponding configuration entry. This defined graph module
-needs to be hooked up into your supervision tree:
+The `:otp_app` name and the name of the module can be freely chosen but have to be linked to a corresponding configuration entry. This defined graph module needs to be hooked up into your supervision tree:
 
 ```elixir
 children = [
@@ -67,9 +63,7 @@ config :my_app, MyApp.MyGraph,
 
 ### Configuration (dynamic)
 
-If you cannot, for whatever reason, use a static application config you can
-configure an initializer module that will be called every time your graph
-is started (or restarted) in your supervision tree:
+If you cannot, for whatever reason, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
 
 ```elixir
 config :my_app, MyApp.MyGraph,
@@ -90,16 +84,13 @@ defmodule MyInitModule do
 end
 ```
 
-When the graph is started the function will be called with the graph module
-as the first (and only) parameter. This will be done before the graph is
-available for use.
+When the graph is started the function will be called with the graph module as the first (and only) parameter. This will be done before the graph is available for use.
 
 The function is expected to always return `:ok`.
 
 ### Configuration (inline defaults)
 
-For some use cases (e.g. testing) it may be sufficient to define hardcoded
-configuration defaults outside of your application environment:
+For some use cases (e.g. testing) it may be sufficient to define hardcoded configuration defaults outside of your application environment:
 
 ```elixir
 defmodule MyApp.MyGraph do
@@ -112,8 +103,7 @@ defmodule MyApp.MyGraph do
 end
 ```
 
-These values will be overwritten by and/or merged with the
-application environment values when the configuration is accessed.
+These values will be overwritten by and/or merged with the application environment values when the configuration is accessed.
 
 ## Usage
 
@@ -161,8 +151,7 @@ MyApp.MyGraph.delete([quad_1, quad_2])
 
 ### JSON Configuration
 
-By default the library used for encoding/decoding JSON is `:jason`. For the
-time `:caylir` directly depends on it to ensure it is available.
+By default the library used for encoding/decoding JSON is `:jason`. For the time `:caylir` directly depends on it to ensure it is available.
 
 If you want to use another library you can switch it:
 
@@ -176,15 +165,11 @@ config :my_app, MyGraph,
   json_encoder: {MyJSONLibrary, :encode_it, []}
 ```
 
-If you configure only a module name it will be called as
-`module.decode!(binary)` and `module.encode!(map)`. When using a complete
-`{m, f, a}` configuration the data to decode/encode will passed as the
-first argument with your configured extra arguments following.
+If you configure only a module name it will be called as `module.decode!(binary)` and `module.encode!(map)`. When using a complete `{m, f, a}` configuration the data to decode/encode will passed as the first argument with your configured extra arguments following.
 
 ### Query Language Configuration
 
-If you are using a query language other than the default `:gizmo` you
-can configure your graph to use a different endpoint:
+If you are using a query language other than the default `:gizmo` you can configure your graph to use a different endpoint:
 
 ```elixir
 config :my_app, MyApp.MyGraph,
@@ -202,9 +187,7 @@ config :my_app, MyApp.MyGraph,
 
 ### Query Timeout Configuration
 
-Using all default values and no specific parameters each query is allowed to
-take up to 5000 milliseconds (`GenServer.call/2` timeout) to complete.
-That may be too long or not long enough in some cases.
+Using all default values and no specific parameters each query is allowed to take up to 5000 milliseconds (`GenServer.call/2` timeout) to complete. That may be too long or not long enough in some cases.
 
 To change that timeout you can configure your graph:
 
@@ -220,12 +203,9 @@ or pass an individual timeout for a single query:
 MyApp.MyGraph.query(query, timeout: 250)
 ```
 
-A passed or graph wide timeout configuration override any `:recv_timeout`
-of your `:hackney` (HTTP client) configuration.
+A passed or graph wide timeout configuration override any `:recv_timeout` of your `:hackney` (HTTP client) configuration.
 
-This does not apply to write requests. They are currently only affected by
-configured `:recv_timeout` values. Setting a graph timeout enables you to
-have a different timeout for read and write requests.
+This does not apply to write requests. They are currently only affected by configured `:recv_timeout` values. Setting a graph timeout enables you to have a different timeout for read and write requests.
 
 For the underlying worker pool you can define a separate timeout:
 
@@ -234,8 +214,7 @@ config :my_app, MyApp.MyGraph,
   pool_timeout: 500
 ```
 
-This configuration will be used to wait for an available worker to execute a
-query and defaults to `5_000`.
+This configuration will be used to wait for an available worker to execute a query and defaults to `5_000`.
 
 ## License
 
