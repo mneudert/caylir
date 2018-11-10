@@ -26,7 +26,7 @@ defmodule Caylir.Graph.SupervisorTest do
       ]
   end
 
-  setup do
+  setup_all do
     {:ok, _} = Initializer.start_link()
     :ok
   end
