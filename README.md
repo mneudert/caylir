@@ -66,12 +66,20 @@ config :my_app, MyApp.MyGraph,
 If you cannot, for whatever reason, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
 
 ```elixir
+# {mod, fun}
 config :my_app, MyApp.MyGraph,
-  init: {MyInitModule, :my_init_fun}
+  init: {MyInitModule, :my_init_mf}
+
+# {mod, fun, args}
+config :my_app, MyApp.MyGraph,
+  init: {MyInitModule, :my_init_mfa, [:foo, :bar]}
 
 defmodule MyInitModule do
-  @spec my_init_fun(module) :: :ok
-  def my_init_fun(graph) do
+  @spec my_init_mf(module) :: :ok
+  def my_init_mf(graph), do: my_init_mfa(graph, :foo, :bar)
+
+  @spec my_init_mfa(module, atom, atom) :: :ok
+  def my_init_mfa(graph, :foo, :bar) do
     config =
       Keyword.merge(
         graph.config(),
@@ -84,7 +92,7 @@ defmodule MyInitModule do
 end
 ```
 
-When the graph is started the function will be called with the graph module as the first (and only) parameter. This will be done before the graph is available for use.
+When the graph is started the function will be called with the graph module as the first parameter with optional `{m, f, a}` parameters from your configuration following. This will be done before the graph is available for use.
 
 The function is expected to always return `:ok`.
 

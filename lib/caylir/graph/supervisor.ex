@@ -23,6 +23,7 @@ defmodule Caylir.Graph.Supervisor do
       case Keyword.get(graph.config(), :init) do
         nil -> :ok
         {mod, fun} -> apply(mod, fun, [graph])
+        {mod, fun, extra_args} -> apply(mod, fun, [graph | extra_args])
       end
 
     supervise([Pool.Spec.spec(graph)], strategy: :one_for_one)
