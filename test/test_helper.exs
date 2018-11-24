@@ -5,9 +5,9 @@ root = Kernel.to_charlist(__DIR__)
 
 httpd_config = [
   document_root: root,
-  modules: [:caylir_testhelpers_inets_proxy],
+  modules: [Caylir.TestHelpers.Inets.Handler],
   port: 0,
-  server_name: 'caylir_testhelpers_inets_proxy',
+  server_name: 'caylir_testhelpers_inets_handler',
   server_root: root
 ]
 
