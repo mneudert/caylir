@@ -3,24 +3,24 @@ sudo: false
 matrix:
   include:
     - elixir: 1.5.3
-      env: CAYLEY=0.7.0
+      env: CAYLEY=0.7.0 CAYLEY_TAG=v0.7.0
       otp_release: 18.3
     - elixir: 1.6.6
-      env: CAYLEY=0.7.1
+      env: CAYLEY=0.7.1 CAYLEY_TAG=v0.7.1
       otp_release: 19.3
     - elixir: 1.7.4
-      env: CAYLEY=0.7.2
+      env: CAYLEY=0.7.2 CAYLEY_TAG=v0.7.2
       otp_release: 20.3
     - elixir: 1.7.4
-      env: CAYLEY=0.7.3
+      env: CAYLEY=0.7.3 CAYLEY_TAG=v0.7.3
       otp_release: 21.0
     - elixir: 1.7.4
-      env: CAYLEY=0.7.4
+      env: CAYLEY=0.7.4 CAYLEY_TAG=v0.7.4-2
       otp_release: 21.0
       after_success: mix coveralls.travis
 
 before_install: |-
-  wget -q "https://github.com/cayleygraph/cayley/releases/download/v${CAYLEY}/cayley_${CAYLEY}_linux_amd64.tar.gz"
+  wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY_TAG}/cayley_${CAYLEY}_linux_amd64.tar.gz"
   tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
 
   pushd "cayley_${CAYLEY}_linux_amd64"
