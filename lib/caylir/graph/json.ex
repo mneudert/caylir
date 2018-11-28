@@ -7,7 +7,7 @@ defmodule Caylir.Graph.JSON do
   @doc """
   Returns the JSON decoder for a graph.
   """
-  @spec decoder(module) :: module
+  @spec decoder(module) :: {module, atom, [term]}
   def decoder(graph) do
     graph.config()
     |> Keyword.get(:json_decoder, @default_decoder)
@@ -17,7 +17,7 @@ defmodule Caylir.Graph.JSON do
   @doc """
   Returns the JSON encoder for a graph.
   """
-  @spec encoder(module) :: module
+  @spec encoder(module) :: {module, atom, [term]}
   def encoder(graph) do
     graph.config()
     |> Keyword.get(:json_encoder, @default_encoder)
