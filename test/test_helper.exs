@@ -1,7 +1,7 @@
 alias Caylir.TestHelpers.Graphs
 
 # start fake server
-root = Kernel.to_charlist(__DIR__)
+root = String.to_charlist(__DIR__)
 
 httpd_config = [
   document_root: root,
