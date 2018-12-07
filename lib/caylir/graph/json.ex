@@ -25,5 +25,6 @@ defmodule Caylir.Graph.JSON do
   end
 
   defp convert_to_mfa({_, _, _} = mfa, _), do: mfa
+  defp convert_to_mfa({module, function}, _), do: {module, function, []}
   defp convert_to_mfa(module, function), do: {module, function, []}
 end

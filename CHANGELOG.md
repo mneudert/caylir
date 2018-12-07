@@ -4,6 +4,7 @@
 
 - Enhancements
     - Initializer modules can be defined with additional arguments by using `{mod, fun, args}`
+    - The JSON encoder/decoder can now be defined using a `{mod, fun}` tuple
 
 - Backwards incompatible changes
     - The default JSON encoder/decoder has been switched from `:poison` to `:jason`

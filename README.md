@@ -172,11 +172,15 @@ config :my_app, MyGraph,
   json_encoder: MyJSONLibrary
 
 config :my_app, MyGraph,
+  json_decoder: {MyJSONLibrary, :decoder_argless},
+  json_encoder: {MyJSONLibrary, :encoder_argless}
+
+config :my_app, MyGraph,
   json_decoder: {MyJSONLibrary, :decode_it, [[keys: :atoms]]},
   json_encoder: {MyJSONLibrary, :encode_it, []}
 ```
 
-If you configure only a module name it will be called as `module.decode!(binary)` and `module.encode!(map)`. When using a complete `{m, f, a}` configuration the data to decode/encode will passed as the first argument with your configured extra arguments following.
+If you configure only a module name it will be called as `module.decode!(binary)` and `module.encode!(map)`. When using a more complete `{m, f}` or `{m, f, a}` configuration the data to decode/encode will passed as the first argument with your configured extra arguments following.
 
 ### Query Language Configuration
 
