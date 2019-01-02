@@ -4,6 +4,7 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphModule do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
+    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -17,6 +18,7 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphPartial do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
+    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -30,6 +32,7 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphFull do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
+    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -75,10 +78,10 @@ defmodule Caylir.Graph.JSONLibraryTest do
   end
 
   defmodule JSONLogger do
-    def start_link(), do: Agent.start_link(fn -> [] end, name: __MODULE__)
+    def start_link, do: Agent.start_link(fn -> [] end, name: __MODULE__)
 
     def log(action), do: Agent.update(__MODULE__, fn actions -> [action | actions] end)
-    def flush(), do: Agent.get_and_update(__MODULE__, &{&1, []})
+    def flush, do: Agent.get_and_update(__MODULE__, &{&1, []})
   end
 
   test "json library configuration", context do

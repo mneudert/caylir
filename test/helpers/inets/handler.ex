@@ -13,11 +13,11 @@ defmodule Caylir.TestHelpers.Inets.Handler do
   end
 
   defp serve_uri('/api/v1/query/timeout_long', _mod_data) do
-    :timer.sleep(10000)
+    :timer.sleep(10_000)
     serve_dummy()
   end
 
-  defp serve_dummy() do
+  defp serve_dummy do
     body = '{"result": "dummy"}'
 
     head = [
