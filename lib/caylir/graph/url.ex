@@ -6,7 +6,7 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> delete([ host: "localhost", port: 64210 ])
+      iex> delete(host: "localhost", port: 64210)
       "http://localhost:64210/api/v1/delete"
   """
   @spec delete(Keyword.t()) :: String.t()
@@ -17,16 +17,16 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> query([ host: "localhost", port: 64210 ])
+      iex> query(host: "localhost", port: 64210)
       "http://localhost:64210/api/v1/query/gizmo"
 
-      iex> query([ host: "localhost", port: 64210, language: :gizmo ])
+      iex> query(host: "localhost", port: 64210, language: :gizmo)
       "http://localhost:64210/api/v1/query/gizmo"
 
-      iex> query([ host: "localhost", port: 64210, language: :gizmo, limit: 3 ])
+      iex> query(host: "localhost", port: 64210, language: :gizmo, limit: 3)
       "http://localhost:64210/api/v1/query/gizmo?limit=3"
 
-      iex> query([ host: "localhost", port: 64210, language: :graphql, limit: 3 ])
+      iex> query(host: "localhost", port: 64210, language: :graphql, limit: 3)
       "http://localhost:64210/api/v1/query/graphql?limit=3"
   """
   @spec query(Keyword.t()) :: String.t()
@@ -37,13 +37,13 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> shape([ host: "localhost", port: 64210 ])
+      iex> shape(host: "localhost", port: 64210)
       "http://localhost:64210/api/v1/shape/gizmo"
 
-      iex> shape([ host: "localhost", port: 64210, language: :gizmo ])
+      iex> shape(host: "localhost", port: 64210, language: :gizmo)
       "http://localhost:64210/api/v1/shape/gizmo"
 
-      iex> shape([ host: "localhost", port: 64210, language: :graphql ])
+      iex> shape(host: "localhost", port: 64210, language: :graphql)
       "http://localhost:64210/api/v1/shape/graphql"
   """
   @spec shape(Keyword.t()) :: String.t()
@@ -54,7 +54,7 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> write([ host: "localhost", port: 64210 ])
+      iex> write(host: "localhost", port: 64210)
       "http://localhost:64210/api/v1/write"
   """
   @spec write(Keyword.t()) :: String.t()
