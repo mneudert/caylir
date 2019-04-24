@@ -81,25 +81,20 @@ defmodule Caylir.Graph do
   @doc """
   Deletes a quad from the graph.
   """
-  @callback delete(map | [map]) :: t_delete
+  @callback delete(quad :: map | [map], opts :: Keyword.t()) :: t_delete
 
   @doc """
   Queries the graph.
   """
-  @callback query(String.t()) :: t_query
-
-  @doc """
-  Queries the graph with specific query options.
-  """
-  @callback query(String.t(), list()) :: t_query
+  @callback query(query :: String.t(), opts :: Keyword.t()) :: t_query
 
   @doc """
   Gets the shape of a query.
   """
-  @callback shape(String.t()) :: t_query
+  @callback shape(query :: String.t(), opts :: Keyword.t()) :: t_query
 
   @doc """
   Writes a quad to the graph.
   """
-  @callback write(map | [map]) :: t_write
+  @callback write(quad :: map | [map], opts :: Keyword.t()) :: t_write
 end
