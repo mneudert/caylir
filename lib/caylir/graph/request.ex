@@ -120,8 +120,6 @@ defmodule Caylir.Graph.Request do
     |> Keyword.merge(call_opts)
   end
 
-  defp parse_response({:ok, _, ""} = response, _), do: response
-
   defp parse_response({:ok, status, body}, parser) when is_binary(body) do
     {:ok, status, apply_mfa(parser, body)}
   end
@@ -129,14 +127,8 @@ defmodule Caylir.Graph.Request do
   defp parse_response(response, _), do: response
 
   defp send(method, url, payload, http_opts) do
-    body = :binary.bin_to_list(payload)
-
-    headers = [
-      {"Content-Type", "application/x-www-form-urlencoded"},
-      {"Content-Length", length(body)}
-    ]
-
-    response = :hackney.request(method, url, headers, body, http_opts)
+    headers = [{"Content-Type", "application/x-www-form-urlencoded"}]
+    response = :hackney.request(method, url, headers, payload, http_opts)
 
     case response do
       {:error, reason} ->
