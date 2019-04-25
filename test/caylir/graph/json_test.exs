@@ -78,17 +78,19 @@ defmodule Caylir.Graph.JSONLibraryTest do
   end
 
   defmodule JSONLogger do
-    def start_link, do: Agent.start_link(fn -> [] end, name: __MODULE__)
+    use Agent
+
+    def start_link(_), do: Agent.start_link(fn -> [] end, name: __MODULE__)
 
     def log(action), do: Agent.update(__MODULE__, fn actions -> [action | actions] end)
     def flush, do: Agent.get_and_update(__MODULE__, &{&1, []})
   end
 
   test "json library configuration", context do
-    graphs = [JSONGraphModule, JSONGraphPartial, JSONGraphFull]
-
-    {:ok, _} = JSONLogger.start_link()
-    {:ok, _} = Supervisor.start_link(graphs, strategy: :one_for_one)
+    {:ok, _} = start_supervised(JSONLogger)
+    {:ok, _} = start_supervised(JSONGraphFull)
+    {:ok, _} = start_supervised(JSONGraphModule)
+    {:ok, _} = start_supervised(JSONGraphPartial)
 
     quad = %{subject: "json_library", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('json_library').Out('for').All()"

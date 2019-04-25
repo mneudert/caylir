@@ -2,7 +2,9 @@ defmodule Caylir.Graph.InitializerTest do
   use ExUnit.Case, async: true
 
   defmodule Initializer do
-    def start_link, do: Agent.start_link(fn -> nil end, name: __MODULE__)
+    use Agent
+
+    def start_link(_), do: Agent.start_link(fn -> nil end, name: __MODULE__)
 
     def call_init(graph), do: call_init(graph, :ok_empty)
     def call_init(graph, result), do: Agent.update(__MODULE__, fn _ -> {graph, result} end)
@@ -26,19 +28,16 @@ defmodule Caylir.Graph.InitializerTest do
       ]
   end
 
-  setup_all do
-    {:ok, _} = Initializer.start_link()
-    :ok
-  end
-
   test "init {mod, fun} called upon graph (re-) start" do
-    {:ok, _} = Supervisor.start_link([InitializerGraphModFun], strategy: :one_for_one)
+    {:ok, _} = start_supervised(Initializer)
+    {:ok, _} = start_supervised(InitializerGraphModFun)
 
     assert {InitializerGraphModFun, :ok_empty} == Initializer.get_init()
   end
 
   test "init {mod, fun, args} called upon graph (re-) start" do
-    {:ok, _} = Supervisor.start_link([InitializerGraphModFunArgs], strategy: :one_for_one)
+    {:ok, _} = start_supervised(Initializer)
+    {:ok, _} = start_supervised(InitializerGraphModFunArgs)
 
     assert {InitializerGraphModFunArgs, :ok_passed} == Initializer.get_init()
   end
