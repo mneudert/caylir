@@ -1,4 +1,4 @@
-defmodule Caylir.Graph.SupervisorTest do
+defmodule Caylir.Graph.InitializerTest do
   use ExUnit.Case, async: true
 
   defmodule Initializer do
@@ -14,7 +14,7 @@ defmodule Caylir.Graph.SupervisorTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        init: {Caylir.Graph.SupervisorTest.Initializer, :call_init}
+        init: {Caylir.Graph.InitializerTest.Initializer, :call_init}
       ]
   end
 
@@ -22,7 +22,7 @@ defmodule Caylir.Graph.SupervisorTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        init: {Caylir.Graph.SupervisorTest.Initializer, :call_init, [:ok_passed]}
+        init: {Caylir.Graph.InitializerTest.Initializer, :call_init, [:ok_passed]}
       ]
   end
 
@@ -31,13 +31,13 @@ defmodule Caylir.Graph.SupervisorTest do
     :ok
   end
 
-  test "init {mod, fun} called upon supervisor (re-) start" do
+  test "init {mod, fun} called upon graph (re-) start" do
     {:ok, _} = Supervisor.start_link([InitializerGraphModFun], strategy: :one_for_one)
 
     assert {InitializerGraphModFun, :ok_empty} == Initializer.get_init()
   end
 
-  test "init {mod, fun, args} called upon supervisor (re-) start" do
+  test "init {mod, fun, args} called upon graph (re-) start" do
     {:ok, _} = Supervisor.start_link([InitializerGraphModFunArgs], strategy: :one_for_one)
 
     assert {InitializerGraphModFunArgs, :ok_passed} == Initializer.get_init()
