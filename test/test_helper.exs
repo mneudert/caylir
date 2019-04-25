@@ -1,4 +1,4 @@
-alias Caylir.TestHelpers.Graphs
+alias Caylir.TestHelpers.Graphs.InetsGraph
 
 # start fake server
 root = String.to_charlist(__DIR__)
@@ -18,16 +18,8 @@ inets_env = [
   port: :httpd.info(httpd_pid)[:port]
 ]
 
-Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
-
-# start graphs
-Supervisor.start_link(
-  [
-    Graphs.DefaultGraph,
-    Graphs.InetsGraph
-  ],
-  strategy: :one_for_one
-)
+Application.put_env(:caylir, InetsGraph, inets_env)
+Supervisor.start_link([InetsGraph], strategy: :one_for_one)
 
 # start ExUnit
 ExUnit.start()

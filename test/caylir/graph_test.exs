@@ -1,7 +1,15 @@
 defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.TestHelpers.Graphs.DefaultGraph
+  defmodule DefaultGraph do
+    # credo:disable-for-lines:6 Credo.Check.Readability.LargeNumbers
+    use Caylir.Graph,
+      otp_app: :caylir,
+      config: [
+        host: "localhost",
+        port: 64210
+      ]
+  end
 
   defmodule LimitGraph do
     # credo:disable-for-lines:7 Credo.Check.Readability.LargeNumbers
@@ -23,30 +31,36 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid quads fail deleting" do
+    {:ok, _} = start_supervised(DefaultGraph)
     {:error, reason} = DefaultGraph.delete(%{invalid: "quad"})
 
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid quads fail writing" do
+    {:ok, _} = start_supervised(DefaultGraph)
     {:error, reason} = DefaultGraph.write(%{invalid: "quad"})
 
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid query string" do
+    {:ok, _} = start_supervised(DefaultGraph)
     {:error, reason} = DefaultGraph.query("meh!")
 
     assert String.contains?(reason, "Unexpected token")
   end
 
   test "invalid shape query string" do
+    {:ok, _} = start_supervised(DefaultGraph)
     {:error, reason} = DefaultGraph.shape("meh!")
 
     assert String.contains?(reason, "Unexpected token")
   end
 
   test "quad lifecycle", context do
+    {:ok, _} = start_supervised(DefaultGraph)
+
     quad = %{subject: "lifecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('lifecycle').Out('for').All()"
     result = [%{id: to_string(context.test)}]
@@ -58,6 +72,8 @@ defmodule Caylir.GraphTest do
   end
 
   test "query shape", context do
+    {:ok, _} = start_supervised(DefaultGraph)
+
     quad = %{subject: "shapecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('shapecycle').Out('for').All()"
 
