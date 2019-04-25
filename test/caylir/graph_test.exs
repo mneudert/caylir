@@ -2,7 +2,17 @@ defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
   alias Caylir.TestHelpers.Graphs.DefaultGraph
-  alias Caylir.TestHelpers.Graphs.LimitGraph
+
+  defmodule LimitGraph do
+    # credo:disable-for-lines:7 Credo.Check.Readability.LargeNumbers
+    use Caylir.Graph,
+      otp_app: :caylir,
+      config: [
+        host: "localhost",
+        limit: 1,
+        port: 64210
+      ]
+  end
 
   test "missing :otp_app raises when compiling" do
     assert_raise ArgumentError, ~r/missing :otp_app.+MissingOTPAppGraph/, fn ->
@@ -59,6 +69,8 @@ defmodule Caylir.GraphTest do
   end
 
   test "query result limiting", context do
+    {:ok, _} = start_supervised(LimitGraph)
+
     quads = [
       %{subject: "query_limiting", predicate: "for", object: "#{context.test} #1"},
       %{subject: "query_limiting", predicate: "for", object: "#{context.test} #2"}

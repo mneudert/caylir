@@ -24,8 +24,7 @@ Application.put_env(:caylir, Graphs.InetsGraph, inets_env)
 Supervisor.start_link(
   [
     Graphs.DefaultGraph,
-    Graphs.InetsGraph,
-    Graphs.LimitGraph
+    Graphs.InetsGraph
   ],
   strategy: :one_for_one
 )
