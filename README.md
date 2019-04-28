@@ -15,7 +15,7 @@ Tested cayley versions:
 - `0.7.4`
 - `0.7.5`
 
-(see [`.travis.yml`](https://github.com/mneudert/caylir/blob/master/.travis.yml) to be sure)
+(see [`.travis.yml`](https://github.com/mneudert/caylir/blob/v0.11.0/.travis.yml) to be sure)
 
 ## Package Setup
 
@@ -25,7 +25,7 @@ Add caylir as a dependency to your `mix.exs` file:
 defp deps do
   [
     # ...
-    {:caylir, "~> 0.10"},
+    {:caylir, "~> 0.11"},
     # ...
   ]
 end
