@@ -7,10 +7,7 @@ defmodule Caylir.Graph.Supervisor do
 
   alias Caylir.Graph.Pool
 
-  @doc """
-  Starts the supervisor.
-  """
-  @spec start_link(atom) :: Supervisor.on_start()
+  @doc false
   def start_link(graph) do
     opts = [name: Module.concat(graph, Supervisor)]
 
