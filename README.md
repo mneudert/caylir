@@ -60,7 +60,6 @@ The most simple way is to use a completely static configuration:
 ```elixir
 config :my_app, MyApp.MyGraph,
   host: "localhost",
-  pool: [max_overflow: 10, size: 50],
   port: 64210
 ```
 
@@ -221,15 +220,6 @@ MyApp.MyGraph.query(query, timeout: 250)
 A passed or graph wide timeout configuration override any `:recv_timeout` of your `:hackney` (HTTP client) configuration.
 
 This does not apply to write requests. They are currently only affected by configured `:recv_timeout` values. Setting a graph timeout enables you to have a different timeout for read and write requests.
-
-For the underlying worker pool you can define a separate timeout:
-
-```elixir
-config :my_app, MyApp.MyGraph,
-  pool_timeout: 500
-```
-
-This configuration will be used to wait for an available worker to execute a query and defaults to `5_000`.
 
 ## License
 

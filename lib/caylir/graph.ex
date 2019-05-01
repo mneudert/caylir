@@ -15,7 +15,6 @@ defmodule Caylir.Graph do
 
       config :my_application, MyGraph,
         host: "localhost",
-        pool: [max_overflow: 10, size: 5],
         port: 64210,
         language: :gizmo
   """

@@ -36,8 +36,7 @@ defmodule Caylir.Mixfile do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test, runtime: false},
       {:hackney, "~> 1.6"},
-      {:jason, "~> 1.0"},
-      {:poolboy, "~> 1.5"}
+      {:jason, "~> 1.0"}
     ]
   end
 
