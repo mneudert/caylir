@@ -27,6 +27,7 @@ defmodule Caylir.Graph do
 
     quote do
       alias Caylir.Graph.Config
+      alias Caylir.Graph.Initializer
       alias Caylir.Graph.Request
 
       @behaviour unquote(__MODULE__)
@@ -34,11 +35,16 @@ defmodule Caylir.Graph do
       @otp_app unquote(opts[:otp_app])
       @config unquote(opts[:config] || [])
 
-      def child_spec(_ \\ []) do
-        Supervisor.Spec.supervisor(
-          Caylir.Graph.Supervisor,
-          [__MODULE__],
-          id: __MODULE__.Supervisor
+      def child_spec(_) do
+        initializer = Module.concat(__MODULE__, Initializer)
+        spec = %{graph: __MODULE__, initializer: initializer}
+
+        Supervisor.child_spec(
+          %{
+            id: initializer,
+            start: {Initializer, :start_link, [spec]}
+          },
+          []
         )
       end
 
@@ -58,7 +64,7 @@ defmodule Caylir.Graph do
   @doc """
   Returns a supervisable graph child_spec.
   """
-  @callback child_spec(_ignored :: term) :: Supervisor.Spec.spec()
+  @callback child_spec(_ignored :: term) :: Supervisor.child_spec()
 
   @doc """
   Returns the graph configuration.
