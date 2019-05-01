@@ -27,7 +27,7 @@ defmodule Caylir.Graph do
 
     quote do
       alias Caylir.Graph.Config
-      alias Caylir.Graph.Pool
+      alias Caylir.Graph.Request
 
       @behaviour unquote(__MODULE__)
 
@@ -44,23 +44,10 @@ defmodule Caylir.Graph do
 
       def config, do: Config.config(@otp_app, __MODULE__, @config)
 
-      def delete(quad, opts \\ []), do: send(:delete, quad, opts)
-      def query(query, opts \\ []), do: send(:query, query, opts)
-      def shape(query, opts \\ []), do: send(:shape, query, opts)
-      def write(quad, opts \\ []), do: send(:write, quad, opts)
-
-      defp send(type, param, opts) do
-        default_pool_timeout = Keyword.get(config(), :pool_timeout, 5000)
-
-        pool_name = __MODULE__.Pool
-        pool_timeout = opts[:pool_timeout] || default_pool_timeout
-
-        worker = :poolboy.checkout(pool_name, pool_timeout)
-        result = GenServer.call(worker, {type, param, opts}, :infinity)
-        :ok = :poolboy.checkin(pool_name, worker)
-
-        result
-      end
+      def delete(quad, opts \\ []), do: Request.delete(quad, __MODULE__, opts)
+      def query(query, opts \\ []), do: Request.query(query, __MODULE__, opts)
+      def shape(query, opts \\ []), do: Request.shape(query, __MODULE__, opts)
+      def write(quad, opts \\ []), do: Request.write(quad, __MODULE__, opts)
     end
   end
 

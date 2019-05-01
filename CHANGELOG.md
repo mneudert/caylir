@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.0-dev
+
+- Enhancements
+    - Queries are executed directly in the calling process without passing through a process pool
+
 ## v0.11.0 (2019-04-28)
 
 - Enhancements

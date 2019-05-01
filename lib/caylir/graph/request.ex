@@ -7,10 +7,10 @@ defmodule Caylir.Graph.Request do
   @doc """
   Deletes a quad from the graph.
   """
-  @spec delete(map | [map], Keyword.t(), map) :: Graph.t_delete()
-  def delete(quad, opts, state) when is_map(quad), do: delete([quad], opts, state)
+  @spec delete(map | [map], module, Keyword.t()) :: Graph.t_delete()
+  def delete(quad, graph, opts) when is_map(quad), do: delete([quad], graph, opts)
 
-  def delete(quads, opts, %{module: graph}) do
+  def delete(quads, graph, opts) do
     config = graph.config()
     json_decoder = JSON.decoder(graph)
     json_encoder = JSON.encoder(graph)
@@ -32,8 +32,8 @@ defmodule Caylir.Graph.Request do
   @doc """
   Queries the graph.
   """
-  @spec query(String.t(), Keyword.t(), map) :: Graph.t_query()
-  def query(query, opts, %{module: graph}) do
+  @spec query(String.t(), module, Keyword.t()) :: Graph.t_query()
+  def query(query, graph, opts) do
     config = graph.config()
     json_decoder = JSON.decoder(graph)
 
@@ -56,8 +56,8 @@ defmodule Caylir.Graph.Request do
   @doc """
   Gets the shape of a query.
   """
-  @spec shape(String.t(), Keyword.t(), map) :: Graph.t_query()
-  def shape(query, opts, %{module: graph}) do
+  @spec shape(String.t(), module, Keyword.t()) :: Graph.t_query()
+  def shape(query, graph, opts) do
     config = graph.config()
     json_decoder = JSON.decoder(graph)
 
@@ -77,10 +77,10 @@ defmodule Caylir.Graph.Request do
   @doc """
   Writes a quad to the graph.
   """
-  @spec write(map | [map], Keyword.t(), map) :: Graph.t_write()
-  def write(quad, opts, state) when is_map(quad), do: write([quad], opts, state)
+  @spec write(map | [map], module, Keyword.t()) :: Graph.t_write()
+  def write(quad, graph, opts) when is_map(quad), do: write([quad], graph, opts)
 
-  def write(quads, opts, %{module: graph}) do
+  def write(quads, graph, opts) do
     config = graph.config()
     json_decoder = JSON.decoder(graph)
     json_encoder = JSON.encoder(graph)
