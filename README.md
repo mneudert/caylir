@@ -19,7 +19,7 @@ Tested cayley versions:
 
 ## Package Setup
 
-Add caylir as a dependency to your `mix.exs` file:
+To use Caylir with your projects, edit your `mix.exs` file and add the required dependencies:
 
 ```elixir
 defp deps do
