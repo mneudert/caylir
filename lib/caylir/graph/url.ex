@@ -10,7 +10,11 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/delete"
   """
   @spec delete(Keyword.t()) :: String.t()
-  def delete(config), do: url("delete", config)
+  def delete(config) do
+    "delete"
+    |> url(config)
+    |> URI.to_string()
+  end
 
   @doc """
   Returns the URL to query the graph.
@@ -30,7 +34,12 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/query/graphql?limit=3"
   """
   @spec query(Keyword.t()) :: String.t()
-  def query(config), do: url_with_language("query", config) <> query_limit(config[:limit])
+  def query(config) do
+    "query"
+    |> url_with_language(config)
+    |> query_limit(config[:limit])
+    |> URI.to_string()
+  end
 
   @doc """
   Returns the URL to get the shape of a query.
@@ -47,7 +56,11 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/shape/graphql"
   """
   @spec shape(Keyword.t()) :: String.t()
-  def shape(config), do: url_with_language("shape", config)
+  def shape(config) do
+    "shape"
+    |> url_with_language(config)
+    |> URI.to_string()
+  end
 
   @doc """
   Returns the URL for writing quads.
@@ -58,19 +71,34 @@ defmodule Caylir.Graph.URL do
       "http://localhost:64210/api/v1/write"
   """
   @spec write(Keyword.t()) :: String.t()
-  def write(config), do: url("write", config)
+  def write(config) do
+    "write"
+    |> url(config)
+    |> URI.to_string()
+  end
 
   defp url(action, config) do
-    "http://#{config[:host]}:#{config[:port]}/api/v1/#{action}"
+    %URI{
+      scheme: "http",
+      host: config[:host],
+      port: config[:port],
+      path: "/api/v1/" <> URI.encode(action)
+    }
   end
 
   defp url_with_language(action, config) do
-    url(action, config) <> "/" <> query_language(config[:language])
+    url = url(action, config)
+    language = config[:language] |> query_language() |> URI.encode()
+
+    %URI{url | path: url.path <> "/" <> language}
   end
 
   defp query_language(nil), do: "gizmo"
-  defp query_language(language), do: to_string(language)
+  defp query_language(language), do: Kernel.to_string(language)
 
-  defp query_limit(nil), do: ""
-  defp query_limit(limit), do: "?limit=#{limit}"
+  defp query_limit(url, limit) when is_integer(limit) do
+    %URI{url | query: "limit=#{limit}"}
+  end
+
+  defp query_limit(url, _), do: url
 end
