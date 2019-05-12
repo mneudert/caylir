@@ -1,4 +1,4 @@
-defmodule Caylir.Mixfile do
+defmodule Caylir.MixProject do
   use Mix.Project
 
   @url_github "https://github.com/mneudert/caylir"
