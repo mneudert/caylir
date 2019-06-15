@@ -1,8 +1,11 @@
 defmodule Caylir.InetsProxy.TimeoutTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.TestHelpers.Graphs.InetsGraph
   alias Caylir.TestHelpers.Inets.Handler
+
+  defmodule InetsGraph do
+    use Caylir.Graph, otp_app: :caylir
+  end
 
   setup_all do
     root = String.to_charlist(__DIR__)
