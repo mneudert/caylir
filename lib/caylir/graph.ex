@@ -1,22 +1,28 @@
 defmodule Caylir.Graph do
   @moduledoc """
-  Base module to define graph connections.
+  Defines a connection to a Cayley instance.
 
-  All graph connections will be made using a user-defined
-  extension of this module.
-
-  ## Example Module
+  # Graph definition
 
       defmodule MyGraph do
         use Caylir.Graph, otp_app: :my_application
       end
 
-  ## Example Configuration
+  This connection will fetch it's configuration from the application environment
+  as defined by `:otp_app`. As an alternative you can define the configuration
+  in the module definition itself:
 
-      config :my_application, MyGraph,
-        host: "localhost",
-        port: 64210,
-        language: :gizmo
+      defmodule MyGraph do
+        use Caylir.Graph,
+          config: [
+            host: "cayley.example.com"
+          ]
+
+  Both inline and `:otp_app` configuration can be mixed. In this case the
+  application configuration will overwrite any inline values.
+
+  For more information on how to configure your connection please refer to
+  the documentation of `Caylir.Graph.Config`.
   """
 
   defmacro __using__(opts) do
