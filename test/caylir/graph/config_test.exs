@@ -43,7 +43,7 @@ defmodule Caylir.Graph.ConfigTest do
     defmodule graph do
       use Caylir.Graph,
         otp_app: :caylir,
-        config: [{:"#{key}", "inline value"}]
+        config: [{key, "inline value"}]
     end
 
     assert "inline value" == graph.config()[key]
