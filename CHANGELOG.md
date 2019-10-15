@@ -32,7 +32,7 @@
     - Minimum required elixir version is now `~> 1.5`
     - Public access to the internal pool child spec has been removed
     - Public access to the internal pool module name has been removed
-    - Support for cayley version `0.6.1` has been dropped
+    - Support for Cayley version `0.6.1` has been dropped
 
 - Deprecations
     - Accessing the system environment by configuring `{:system, var}` or `{:system, var, default}` will now result in a `Logger.info/1` message and will stop working in a future release
@@ -53,8 +53,8 @@
     - Basic support for defining a default graph query language
 
 - Backwards incompatible changes
-    - Default query endpoint has been updated to support cayley version `0.7.0`. To use an older version you need to add `language: :gremlin` to your graph configuration
-    - Support for cayley version `0.6.0` has been dropped
+    - Default query endpoint has been updated to support Cayley version `0.7.0`. To use an older version you need to add `language: :gremlin` to your graph configuration
+    - Support for Cayley version `0.6.0` has been dropped
 
 ## v0.6.0 (2017-09-17)
 

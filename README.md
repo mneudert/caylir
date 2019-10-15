@@ -6,7 +6,7 @@ __Note__: If you are reading this on [GitHub](https://github.com/mneudert/caylir
 
 ## Cayley Support
 
-Tested cayley versions:
+Tested Cayley versions:
 
 - `0.7.0`
 - `0.7.1`

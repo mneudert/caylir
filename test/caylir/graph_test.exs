@@ -92,7 +92,7 @@ defmodule Caylir.GraphTest do
       %{subject: "query_limiting", predicate: "for", object: "#{context.test} #2"}
     ]
 
-    # `All()` only respects limit in cayley 0.7.4+
+    # `All()` only respects limit in Cayley 0.7.4+
     # graph.Vertex('query_limiting').Out('for').All()"
     query = "graph.Vertex('query_limiting').Out('for').ForEach( function(d) { g.Emit(d) })"
 
