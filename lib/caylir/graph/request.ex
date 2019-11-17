@@ -25,6 +25,7 @@ defmodule Caylir.Graph.Request do
 
     case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
+      {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, _success} -> :ok
     end
   end
@@ -49,7 +50,9 @@ defmodule Caylir.Graph.Request do
 
     case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
+      {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, %{result: result}} -> result
+      {:ok, 200, %{"result" => result}} -> result
     end
   end
 
@@ -70,6 +73,7 @@ defmodule Caylir.Graph.Request do
 
     case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
+      {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, shape} -> shape
     end
   end
@@ -95,6 +99,7 @@ defmodule Caylir.Graph.Request do
 
     case response do
       {:ok, _, %{error: reason}} -> {:error, reason}
+      {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, _content} -> :ok
     end
   end
