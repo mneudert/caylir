@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.11.1-dev
+
+- Bug fixes
+    - Decoding json with string keys now works as intended ([#2](https://github.com/mneudert/instream/pull/2))
+
 ## v0.11.0 (2019-04-28)
 
 - Enhancements
