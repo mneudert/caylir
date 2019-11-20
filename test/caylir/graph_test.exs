@@ -11,6 +11,17 @@ defmodule Caylir.GraphTest do
       ]
   end
 
+  defmodule DefaultGraphJSONStringKeys do
+    # credo:disable-for-lines:6 Credo.Check.Readability.LargeNumbers
+    use Caylir.Graph,
+      otp_app: :caylir,
+      config: [
+        host: "localhost",
+        port: 64210,
+        json_decoder: {Jason, :decode!, [[keys: :strings]]}
+      ]
+  end
+
   defmodule LimitGraph do
     # credo:disable-for-lines:7 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
@@ -32,56 +43,77 @@ defmodule Caylir.GraphTest do
 
   test "invalid quads fail deleting" do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
     {:error, reason} = DefaultGraph.delete(%{invalid: "quad"})
 
+    assert {:error, ^reason} = DefaultGraphJSONStringKeys.delete(%{invalid: "quad"})
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid quads fail writing" do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
     {:error, reason} = DefaultGraph.write(%{invalid: "quad"})
 
+    assert {:error, ^reason} = DefaultGraphJSONStringKeys.write(%{invalid: "quad"})
     assert String.contains?(reason, "invalid quad")
   end
 
   test "invalid query string" do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
     {:error, reason} = DefaultGraph.query("meh!")
 
+    assert {:error, ^reason} = DefaultGraphJSONStringKeys.query("meh!")
     assert String.contains?(reason, "Unexpected token")
   end
 
   test "invalid shape query string" do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
     {:error, reason} = DefaultGraph.shape("meh!")
 
+    assert {:error, ^reason} = DefaultGraphJSONStringKeys.shape("meh!")
     assert String.contains?(reason, "Unexpected token")
   end
 
   test "quad lifecycle", context do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
 
     quad = %{subject: "lifecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('lifecycle').Out('for').All()"
-    result = [%{id: to_string(context.test)}]
+    result_atoms = [%{id: to_string(context.test)}]
+    result_strings = [%{"id" => to_string(context.test)}]
 
     assert :ok == DefaultGraph.write(quad)
-    assert result == DefaultGraph.query(query)
+
+    assert result_atoms == DefaultGraph.query(query)
+    assert result_strings == DefaultGraphJSONStringKeys.query(query)
+
     assert :ok == DefaultGraph.delete(quad)
+
     assert nil == DefaultGraph.query(query)
+    assert nil == DefaultGraphJSONStringKeys.query(query)
   end
 
   test "query shape", context do
     {:ok, _} = start_supervised(DefaultGraph)
+    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
 
     quad = %{subject: "shapecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('shapecycle').Out('for').All()"
 
     :ok = DefaultGraph.write(quad)
-    shape = DefaultGraph.shape(query)
 
-    assert Map.has_key?(shape, :links)
-    assert Map.has_key?(shape, :nodes)
+    shape_atoms = DefaultGraph.shape(query)
+    shape_strings = DefaultGraphJSONStringKeys.shape(query)
+
+    assert Map.has_key?(shape_atoms, :links)
+    assert Map.has_key?(shape_atoms, :nodes)
+
+    assert Map.has_key?(shape_strings, "links")
+    assert Map.has_key?(shape_strings, "nodes")
   end
 
   test "query result limiting", context do
