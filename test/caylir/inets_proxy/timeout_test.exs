@@ -49,7 +49,6 @@ defmodule Caylir.InetsProxy.TimeoutTest do
     {:ok, httpd_pid} = :inets.start(:httpd, httpd_config)
 
     inets_env = [
-      host: "localhost",
       port: :httpd.info(httpd_pid)[:port]
     ]
 

@@ -60,8 +60,15 @@ The most simple way is to use a completely static configuration:
 
 ```elixir
 config :my_app, MyApp.MyGraph,
-  host: "localhost",
+  host: "cayley.host",
   port: 64210
+```
+
+Default values for missing configuration keys:
+
+```elixir
+config :my_app, MyApp.MyGraph,
+  host: "cayley.host"
 ```
 
 ### Configuration (dynamic)

@@ -3,6 +3,7 @@
 ## v1.0.0-dev
 
 - Enhancements
+    - A missing `host` configuration will now default to `"localhost"`
     - Queries are executed directly in the calling process without passing through a process pool
 
 ## v0.11.1 (2019-11-20)

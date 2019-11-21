@@ -8,7 +8,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        host: "localhost",
         port: 64210,
         json_decoder: JSONLibrary,
         json_encoder: JSONLibrary
@@ -22,7 +21,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        host: "localhost",
         port: 64210,
         json_decoder: {JSONLibrary, :decode_partial},
         json_encoder: {JSONLibrary, :encode_partial}
@@ -36,7 +34,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        host: "localhost",
         port: 64210,
         json_decoder: {JSONLibrary, :decode_full, [[keys: :atoms]]},
         json_encoder: {JSONLibrary, :encode_full, []}
