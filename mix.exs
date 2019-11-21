@@ -11,6 +11,7 @@ defmodule Caylir.MixProject do
       elixir: "~> 1.5",
       deps: deps(),
       description: "Cayley driver for Elixir",
+      dialyzer: dialyzer(),
       docs: docs(),
       package: package(),
       preferred_cli_env: [
@@ -36,6 +37,17 @@ defmodule Caylir.MixProject do
       {:excoveralls, "~> 0.11", only: :test, runtime: false},
       {:hackney, "~> 1.6"},
       {:jason, "~> 1.0"}
+    ]
+  end
+
+  defp dialyzer do
+    [
+      flags: [
+        :error_handling,
+        :race_conditions,
+        :underspecs,
+        :unmatched_returns
+      ]
     ]
   end
 
