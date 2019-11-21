@@ -6,11 +6,11 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> delete(port: 64210)
+      iex> delete([])
       "http://localhost:64210/api/v1/delete"
 
-      iex> delete(host: "cayley.host", port: 64210)
-      "http://cayley.host:64210/api/v1/delete"
+      iex> delete(host: "cayley.host", port: 42160)
+      "http://cayley.host:42160/api/v1/delete"
   """
   @spec delete(Keyword.t()) :: String.t()
   def delete(config) do
@@ -24,20 +24,20 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> query(port: 64210)
+      iex> query([])
       "http://localhost:64210/api/v1/query/gizmo"
 
-      iex> query(host: "cayley.host", port: 64210)
-      "http://cayley.host:64210/api/v1/query/gizmo"
+      iex> query(host: "cayley.host", port: 42160)
+      "http://cayley.host:42160/api/v1/query/gizmo"
 
-      iex> query(host: "cayley.host", port: 64210, language: :gizmo)
-      "http://cayley.host:64210/api/v1/query/gizmo"
+      iex> query(host: "cayley.host", port: 42160, language: :gizmo)
+      "http://cayley.host:42160/api/v1/query/gizmo"
 
-      iex> query(host: "cayley.host", port: 64210, language: :gizmo, limit: 3)
-      "http://cayley.host:64210/api/v1/query/gizmo?limit=3"
+      iex> query(host: "cayley.host", port: 42160, language: :gizmo, limit: 3)
+      "http://cayley.host:42160/api/v1/query/gizmo?limit=3"
 
-      iex> query(host: "cayley.host", port: 64210, language: :graphql, limit: 3)
-      "http://cayley.host:64210/api/v1/query/graphql?limit=3"
+      iex> query(host: "cayley.host", port: 42160, language: :graphql, limit: 3)
+      "http://cayley.host:42160/api/v1/query/graphql?limit=3"
   """
   @spec query(Keyword.t()) :: String.t()
   def query(config) do
@@ -52,17 +52,17 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> shape(port: 64210)
+      iex> shape([])
       "http://localhost:64210/api/v1/shape/gizmo"
 
-      iex> shape(host: "cayley.host", port: 64210)
-      "http://cayley.host:64210/api/v1/shape/gizmo"
+      iex> shape(host: "cayley.host", port: 42160)
+      "http://cayley.host:42160/api/v1/shape/gizmo"
 
-      iex> shape(host: "cayley.host", port: 64210, language: :gizmo)
-      "http://cayley.host:64210/api/v1/shape/gizmo"
+      iex> shape(host: "cayley.host", port: 42160, language: :gizmo)
+      "http://cayley.host:42160/api/v1/shape/gizmo"
 
-      iex> shape(host: "cayley.host", port: 64210, language: :graphql)
-      "http://cayley.host:64210/api/v1/shape/graphql"
+      iex> shape(host: "cayley.host", port: 42160, language: :graphql)
+      "http://cayley.host:42160/api/v1/shape/graphql"
   """
   @spec shape(Keyword.t()) :: String.t()
   def shape(config) do
@@ -76,11 +76,11 @@ defmodule Caylir.Graph.URL do
 
   ## Example
 
-      iex> write(port: 64210)
+      iex> write([])
       "http://localhost:64210/api/v1/write"
 
-      iex> write(host: "cayley.host", port: 64210)
-      "http://cayley.host:64210/api/v1/write"
+      iex> write(host: "cayley.host", port: 42160)
+      "http://cayley.host:42160/api/v1/write"
   """
   @spec write(Keyword.t()) :: String.t()
   def write(config) do
@@ -93,7 +93,7 @@ defmodule Caylir.Graph.URL do
     %URI{
       scheme: "http",
       host: config[:host] || "localhost",
-      port: config[:port],
+      port: config[:port] || 64_210,
       path: "/api/v1/" <> URI.encode(action)
     }
   end

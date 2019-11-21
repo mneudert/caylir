@@ -3,11 +3,7 @@ defmodule Caylir.GraphTest do
 
   defmodule DefaultGraph do
     # credo:disable-for-lines:6 Credo.Check.Readability.LargeNumbers
-    use Caylir.Graph,
-      otp_app: :caylir,
-      config: [
-        port: 64210
-      ]
+    use Caylir.Graph, otp_app: :caylir
   end
 
   defmodule DefaultGraphJSONStringKeys do
@@ -15,7 +11,6 @@ defmodule Caylir.GraphTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        port: 64210,
         json_decoder: {Jason, :decode!, [[keys: :strings]]}
       ]
   end
@@ -25,8 +20,7 @@ defmodule Caylir.GraphTest do
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
-        limit: 1,
-        port: 64210
+        limit: 1
       ]
   end
 
