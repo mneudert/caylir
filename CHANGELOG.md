@@ -6,6 +6,7 @@
     - A missing `host` configuration will now default to `"localhost"`
     - A missing `port` configuration will now default to `64210`
     - Queries are executed directly in the calling process without passing through a process pool
+    - The scheme used for the requests can now be configured
 
 ## v0.11.1 (2019-11-20)
 

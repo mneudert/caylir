@@ -9,6 +9,9 @@ defmodule Caylir.Graph.URL do
       iex> delete([])
       "http://localhost:64210/api/v1/delete"
 
+      iex> delete(scheme: "https")
+      "https://localhost:64210/api/v1/delete"
+
       iex> delete(host: "cayley.host", port: 42160)
       "http://cayley.host:42160/api/v1/delete"
   """
@@ -26,6 +29,9 @@ defmodule Caylir.Graph.URL do
 
       iex> query([])
       "http://localhost:64210/api/v1/query/gizmo"
+
+      iex> query(scheme: "https")
+      "https://localhost:64210/api/v1/query/gizmo"
 
       iex> query(host: "cayley.host", port: 42160)
       "http://cayley.host:42160/api/v1/query/gizmo"
@@ -55,6 +61,9 @@ defmodule Caylir.Graph.URL do
       iex> shape([])
       "http://localhost:64210/api/v1/shape/gizmo"
 
+      iex> shape(scheme: "https")
+      "https://localhost:64210/api/v1/shape/gizmo"
+
       iex> shape(host: "cayley.host", port: 42160)
       "http://cayley.host:42160/api/v1/shape/gizmo"
 
@@ -79,6 +88,9 @@ defmodule Caylir.Graph.URL do
       iex> write([])
       "http://localhost:64210/api/v1/write"
 
+      iex> write(scheme: "https")
+      "https://localhost:64210/api/v1/write"
+
       iex> write(host: "cayley.host", port: 42160)
       "http://cayley.host:42160/api/v1/write"
   """
@@ -91,7 +103,7 @@ defmodule Caylir.Graph.URL do
 
   defp url(action, config) do
     %URI{
-      scheme: "http",
+      scheme: config[:scheme] || "http",
       host: config[:host] || "localhost",
       port: config[:port] || 64_210,
       path: "/api/v1/" <> URI.encode(action)

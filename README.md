@@ -61,7 +61,8 @@ The most simple way is to use a completely static configuration:
 ```elixir
 config :my_app, MyApp.MyGraph,
   host: "cayley.host",
-  port: 42160
+  port: 42160,
+  scheme: "https"
 ```
 
 Default values for missing configuration keys:
@@ -69,7 +70,8 @@ Default values for missing configuration keys:
 ```elixir
 config :my_app, MyApp.MyGraph,
   host: "localhost",
-  port: 64210
+  port: 64210,
+  scheme: "http"
 ```
 
 ### Configuration (dynamic)
