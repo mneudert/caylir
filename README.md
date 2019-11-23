@@ -68,7 +68,7 @@ Default values for missing configuration keys:
 
 ```elixir
 config :my_app, MyApp.MyGraph,
-  host: "cayley.host",
+  host: "localhost",
   port: 64210
 ```
 
