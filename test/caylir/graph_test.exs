@@ -2,12 +2,10 @@ defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
   defmodule DefaultGraph do
-    # credo:disable-for-lines:6 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph, otp_app: :caylir
   end
 
   defmodule DefaultGraphJSONStringKeys do
-    # credo:disable-for-lines:6 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -16,7 +14,6 @@ defmodule Caylir.GraphTest do
   end
 
   defmodule LimitGraph do
-    # credo:disable-for-lines:7 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [

@@ -4,7 +4,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphModule do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
-    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -16,7 +15,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphPartial do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
-    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
@@ -28,7 +26,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
   defmodule JSONGraphFull do
     alias Caylir.Graph.JSONLibraryTest.JSONLibrary
 
-    # credo:disable-for-lines:8 Credo.Check.Readability.LargeNumbers
     use Caylir.Graph,
       otp_app: :caylir,
       config: [
