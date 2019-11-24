@@ -8,6 +8,9 @@
     - Queries are executed directly in the calling process without passing through a process pool
     - The scheme used for the requests can now be configured
 
+- Backwards incompatible changes
+    - Support for Cayley versions earlier than `0.7.3` is no longer guaranteed
+
 ## v0.11.1 (2019-11-20)
 
 - Bug fixes
