@@ -2,12 +2,11 @@ defmodule Caylir.GraphTest do
   use ExUnit.Case, async: true
 
   defmodule DefaultGraph do
-    use Caylir.Graph, otp_app: :caylir
+    use Caylir.Graph
   end
 
   defmodule DefaultGraphJSONStringKeys do
     use Caylir.Graph,
-      otp_app: :caylir,
       config: [
         json_decoder: {Jason, :decode!, [[keys: :strings]]}
       ]
@@ -15,18 +14,9 @@ defmodule Caylir.GraphTest do
 
   defmodule LimitGraph do
     use Caylir.Graph,
-      otp_app: :caylir,
       config: [
         limit: 1
       ]
-  end
-
-  test "missing :otp_app raises when compiling" do
-    assert_raise ArgumentError, ~r/missing :otp_app.+MissingOTPAppGraph/, fn ->
-      defmodule MissingOTPAppGraph do
-        use Caylir.Graph
-      end
-    end
   end
 
   test "invalid quads fail deleting" do

@@ -5,6 +5,7 @@
 - Enhancements
     - A missing `host` configuration will now default to `"localhost"`
     - A missing `port` configuration will now default to `64210`
+    - A missing `otp_app` configuration will no longer raise and only use the (inline) defaults
     - Queries are executed directly in the calling process without passing through a process pool
     - The scheme used for the requests can now be configured
 

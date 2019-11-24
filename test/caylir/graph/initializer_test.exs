@@ -14,7 +14,6 @@ defmodule Caylir.Graph.InitializerTest do
 
   defmodule InitializerGraphModFun do
     use Caylir.Graph,
-      otp_app: :caylir,
       config: [
         init: {Caylir.Graph.InitializerTest.Initializer, :call_init}
       ]
@@ -22,7 +21,6 @@ defmodule Caylir.Graph.InitializerTest do
 
   defmodule InitializerGraphModFunArgs do
     use Caylir.Graph,
-      otp_app: :caylir,
       config: [
         init: {Caylir.Graph.InitializerTest.Initializer, :call_init, [:ok_passed]}
       ]

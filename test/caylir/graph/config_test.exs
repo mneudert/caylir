@@ -1,15 +1,6 @@
 defmodule Caylir.Graph.ConfigTest do
   use ExUnit.Case, async: true
 
-  alias Caylir.Graph.Config
-
-  test "otp_app configuration", %{test: test} do
-    config = [foo: :bar]
-    :ok = Application.put_env(test, __MODULE__, config)
-
-    assert [otp_app: test] ++ config == Config.config(test, __MODULE__)
-  end
-
   test "runtime configuration changes" do
     graph = Module.concat([__MODULE__, RuntimeChanges])
     key = :runtime_testing_key
