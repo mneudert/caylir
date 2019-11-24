@@ -9,6 +9,7 @@
     - The scheme used for the requests can now be configured
 
 - Backwards incompatible changes
+    - Minimum required elixir version is now `~> 1.7`
     - Support for Cayley versions earlier than `0.7.3` is no longer guaranteed
 
 ## v0.11.1 (2019-11-20)
