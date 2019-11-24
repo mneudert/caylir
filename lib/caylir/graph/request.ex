@@ -64,7 +64,10 @@ defmodule Caylir.Graph.Request do
     config = graph.config()
     json_decoder = JSON.decoder(graph)
 
-    url = Graph.URL.shape(config)
+    url =
+      config
+      |> Keyword.merge(opts)
+      |> Graph.URL.shape()
 
     response =
       :post

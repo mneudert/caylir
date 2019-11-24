@@ -9,6 +9,9 @@
     - Queries are executed directly in the calling process without passing through a process pool
     - The scheme used for the requests can now be configured
 
+- Bug fixes
+    - Shape queries now accept a `:language` option as expected
+
 - Backwards incompatible changes
     - Minimum required elixir version is now `~> 1.7`
     - Support for Cayley versions earlier than `0.7.3` is no longer guaranteed
