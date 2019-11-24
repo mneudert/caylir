@@ -24,6 +24,7 @@ defmodule Caylir.Graph.Request do
       |> parse_response(json_decoder)
 
     case response do
+      {:error, _} = error -> error
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, _success} -> :ok
@@ -49,6 +50,7 @@ defmodule Caylir.Graph.Request do
       |> parse_response(json_decoder)
 
     case response do
+      {:error, _} = error -> error
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, %{result: result}} -> result
@@ -75,6 +77,7 @@ defmodule Caylir.Graph.Request do
       |> parse_response(json_decoder)
 
     case response do
+      {:error, _} = error -> error
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, shape} -> shape
@@ -101,6 +104,7 @@ defmodule Caylir.Graph.Request do
       |> parse_response(json_decoder)
 
     case response do
+      {:error, _} = error -> error
       {:ok, _, %{error: reason}} -> {:error, reason}
       {:ok, _, %{"error" => reason}} -> {:error, reason}
       {:ok, 200, _content} -> :ok
@@ -138,14 +142,11 @@ defmodule Caylir.Graph.Request do
     headers = [{"Content-Type", "application/x-www-form-urlencoded"}]
     response = :hackney.request(method, url, headers, payload, http_opts)
 
-    case response do
-      {:error, reason} ->
-        {:ok, nil, %{error: reason}}
-
-      {:ok, status, _headers, client} ->
-        {:ok, response_body} = :hackney.body(client)
-
-        {:ok, status, response_body}
+    with {:ok, status, _headers, client} <- response,
+         {:ok, body} <- :hackney.body(client) do
+      {:ok, status, body}
+    else
+      {:error, _} = error -> error
     end
   end
 end

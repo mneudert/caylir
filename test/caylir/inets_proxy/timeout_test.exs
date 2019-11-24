@@ -12,6 +12,11 @@ defmodule Caylir.InetsProxy.TimeoutTest do
 
     def unquote(:do)(mod_data), do: serve_uri(mod(mod_data, :request_uri), mod_data)
 
+    defp serve_uri('/api/v1/delete', _mod_data) do
+      :timer.sleep(100)
+      serve_dummy()
+    end
+
     defp serve_uri('/api/v1/query/timeout', _mod_data) do
       :timer.sleep(100)
       serve_dummy()
@@ -19,6 +24,16 @@ defmodule Caylir.InetsProxy.TimeoutTest do
 
     defp serve_uri('/api/v1/query/timeout_long', _mod_data) do
       :timer.sleep(10_000)
+      serve_dummy()
+    end
+
+    defp serve_uri('/api/v1/shape/timeout', _mod_data) do
+      :timer.sleep(100)
+      serve_dummy()
+    end
+
+    defp serve_uri('/api/v1/write', _mod_data) do
+      :timer.sleep(100)
       serve_dummy()
     end
 
@@ -69,7 +84,10 @@ defmodule Caylir.InetsProxy.TimeoutTest do
       timeout: timeout
     ]
 
+    assert {:error, :timeout} == InetsGraph.delete(%{invalid: "quad"}, opts)
     assert {:error, :timeout} == InetsGraph.query("", opts)
+    assert {:error, :timeout} == InetsGraph.shape("", opts)
+    assert {:error, :timeout} == InetsGraph.write(%{invalid: "quad"}, opts)
   end
 
   test "timeout above GenServer defaults" do
