@@ -40,13 +40,10 @@ defmodule Caylir.Graph do
         initializer = Module.concat(__MODULE__, Initializer)
         spec = %{graph: __MODULE__, initializer: initializer}
 
-        Supervisor.child_spec(
-          %{
-            id: initializer,
-            start: {Initializer, :start_link, [spec]}
-          },
-          []
-        )
+        %{
+          id: initializer,
+          start: {Initializer, :start_link, [spec]}
+        }
       end
 
       def config, do: Config.config(@otp_app, __MODULE__, @config)
