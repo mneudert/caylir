@@ -12,8 +12,8 @@ defmodule Caylir.Graph.Request do
 
   def delete(quads, graph, opts) do
     config = graph.config()
-    json_decoder = JSON.decoder(graph)
-    json_encoder = JSON.encoder(graph)
+    json_decoder = JSON.decoder(config)
+    json_encoder = JSON.encoder(config)
 
     url = Graph.URL.delete(config)
     body = apply_mfa(json_encoder, quads)
@@ -37,7 +37,7 @@ defmodule Caylir.Graph.Request do
   @spec query(String.t(), module, Keyword.t()) :: Graph.t_query()
   def query(query, graph, opts) do
     config = graph.config()
-    json_decoder = JSON.decoder(graph)
+    json_decoder = JSON.decoder(config)
 
     url =
       config
@@ -64,7 +64,7 @@ defmodule Caylir.Graph.Request do
   @spec shape(String.t(), module, Keyword.t()) :: Graph.t_query()
   def shape(query, graph, opts) do
     config = graph.config()
-    json_decoder = JSON.decoder(graph)
+    json_decoder = JSON.decoder(config)
 
     url =
       config
@@ -92,8 +92,8 @@ defmodule Caylir.Graph.Request do
 
   def write(quads, graph, opts) do
     config = graph.config()
-    json_decoder = JSON.decoder(graph)
-    json_encoder = JSON.encoder(graph)
+    json_decoder = JSON.decoder(config)
+    json_encoder = JSON.encoder(config)
 
     url = Graph.URL.write(config)
     body = apply_mfa(json_encoder, quads)
