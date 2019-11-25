@@ -3,8 +3,6 @@ defmodule Caylir.Graph.Config do
   Configuration helper module.
   """
 
-  require Logger
-
   @doc """
   Retrieves the graph configuration for `graph` in `otp_app`.
   """

@@ -23,11 +23,7 @@ defmodule Caylir.MixProject do
     ]
   end
 
-  def application do
-    [
-      extra_applications: [:logger]
-    ]
-  end
+  def application, do: []
 
   defp deps do
     [
