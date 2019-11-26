@@ -1,4 +1,4 @@
-defmodule Caylir.InetsProxy.TimeoutTest do
+defmodule Caylir.Errors.TimeoutTest do
   use ExUnit.Case, async: true
 
   defmodule InetsGraph do
