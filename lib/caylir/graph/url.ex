@@ -70,8 +70,8 @@ defmodule Caylir.Graph.URL do
       iex> shape(host: "cayley.host", port: 42160, language: :gizmo)
       "http://cayley.host:42160/api/v1/shape/gizmo"
 
-      iex> shape(host: "cayley.host", port: 42160, language: :graphql)
-      "http://cayley.host:42160/api/v1/shape/graphql"
+      iex> shape(host: "cayley.host", port: 42160, language: :mql)
+      "http://cayley.host:42160/api/v1/shape/mql"
   """
   @spec shape(Keyword.t()) :: String.t()
   def shape(config) do
