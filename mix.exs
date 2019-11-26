@@ -32,7 +32,8 @@ defmodule Caylir.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.12", only: :test, runtime: false},
       {:hackney, "~> 1.6"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:ranch, "~> 2.0.0-rc", only: :test, runtime: false}
     ]
   end
 
