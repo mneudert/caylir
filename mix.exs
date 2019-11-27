@@ -33,7 +33,7 @@ defmodule Caylir.MixProject do
       {:excoveralls, "~> 0.12", only: :test, runtime: false},
       {:hackney, "~> 1.6"},
       {:jason, "~> 1.0"},
-      {:ranch, "~> 2.0.0-rc", only: :test, runtime: false}
+      {:ranch, "~> 1.7", only: :test}
     ]
   end
 
