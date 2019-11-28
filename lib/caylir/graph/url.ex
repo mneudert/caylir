@@ -103,9 +103,9 @@ defmodule Caylir.Graph.URL do
 
   defp url(action, config) do
     %URI{
-      scheme: config[:scheme] || "http",
-      host: config[:host] || "localhost",
-      port: config[:port] || 64_210,
+      scheme: Keyword.get(config, :scheme, "http"),
+      host: Keyword.get(config, :host, "localhost"),
+      port: Keyword.get(config, :port, 64_210),
       path: "/api/v1/" <> URI.encode(action)
     }
   end
