@@ -19,7 +19,7 @@
 ## v0.11.1 (2019-11-20)
 
 - Bug fixes
-    - Decoding json with string keys now works as intended ([#2](https://github.com/mneudert/instream/pull/2))
+    - Decoding json with string keys now works as intended ([#2](https://github.com/mneudert/caylir/pull/2))
 
 ## v0.11.0 (2019-04-28)
 
