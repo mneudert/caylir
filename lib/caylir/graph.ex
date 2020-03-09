@@ -55,6 +55,13 @@ defmodule Caylir.Graph do
     end
   end
 
+  @type t_quad :: %{
+          :subject => binary,
+          :predicate => binary,
+          :object => binary,
+          optional(:label) => binary
+        }
+
   @type t_delete :: :ok | {:error, String.t()}
   @type t_query :: any | {:error, String.t()}
   @type t_write :: :ok | {:error, String.t()}
@@ -72,7 +79,7 @@ defmodule Caylir.Graph do
   @doc """
   Deletes a quad from the graph.
   """
-  @callback delete(quad :: map | [map], opts :: Keyword.t()) :: t_delete
+  @callback delete(quad :: t_quad | [t_quad], opts :: Keyword.t()) :: t_delete
 
   @doc """
   Queries the graph.
@@ -87,5 +94,5 @@ defmodule Caylir.Graph do
   @doc """
   Writes a quad to the graph.
   """
-  @callback write(quad :: map | [map], opts :: Keyword.t()) :: t_write
+  @callback write(quad :: t_quad | [t_quad], opts :: Keyword.t()) :: t_write
 end
