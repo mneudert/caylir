@@ -2,7 +2,7 @@ defmodule Caylir.Graph do
   @moduledoc """
   Defines a connection to a Cayley instance.
 
-  # Graph definition
+  ## Graph definition
 
       defmodule MyGraph do
         use Caylir.Graph, otp_app: :my_application
