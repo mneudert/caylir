@@ -2,7 +2,27 @@ defmodule Caylir.Graph do
   @moduledoc """
   Defines a connection to a Cayley instance.
 
-  ## Graph definition
+  ## Graph Definition
+
+  To start connecting to a Cayley instance you need to define a connection
+  module:
+
+      defmodule MyGraph do
+        use Caylir.Graph, otp_app: :my_application
+      end
+
+  This module should then be hooked into the supervision tree of your
+  application:
+
+      children = [
+        # ...
+        MyGraph,
+        # ...
+      ]
+
+  ## Graph Configuration
+
+  Referring back to the previously mentioned module:
 
       defmodule MyGraph do
         use Caylir.Graph, otp_app: :my_application

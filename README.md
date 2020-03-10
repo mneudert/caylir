@@ -51,6 +51,8 @@ children = [
 ]
 ```
 
+For a more detailed explanation of how to get started with a graph please consult the inline documentation of the `Caylir.Graph` module.
+
 ### Configuration (static)
 
 The most simple way is to use a completely static configuration:
