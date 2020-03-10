@@ -43,6 +43,48 @@ defmodule Caylir.Graph do
 
   For more information on how to configure your connection please refer to
   the documentation of `Caylir.Graph.Config`.
+
+  ## Graph Usage
+
+  ### Querying Data
+
+      MyGraph.query("graph.Vertex('graph').Out('connection').All()")
+
+  If you want to limit the number of results you can pass the `:limit` option:
+
+      MyGraph.query(query, limit: 3)
+      MyGraph.query(query, limit: -1)
+
+  Passing `-1` will return "unlimited" results while also deactivating any
+  potential default limits implied by Cayley itself.
+
+  ### Writing Data
+
+  You can write a single quad:
+
+      MyGraph.write(%{
+        subject: "graph",
+        predicate: "connection",
+        object: "target"
+      })
+
+  Or multiple quads at once:
+
+      MyGraph.write([quad_1, quad_2])
+
+  ### Deleting Data
+
+  You can delete a single quad:
+
+      MyGraph.delete(%{
+        subject: "graph",
+        predicate: "connection",
+        object: "target"
+      })
+
+  Or multiple quads at once:
+
+      MyGraph.delete([quad_1, quad_2])
   """
 
   defmacro __using__(opts) do

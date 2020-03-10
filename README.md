@@ -127,47 +127,33 @@ These values will be overwritten by and/or merged with the application environme
 
 ## Usage
 
+Querying data:
+
+```elixir
+MyApp.MyGraph.query("graph.Vertex('graph').Out('connection').All()")
+```
+
 Writing Data:
 
 ```elixir
-# single quad
 MyApp.MyGraph.write(%{
   subject: "graph",
   predicate: "connection",
   object: "target"
 })
-
-# multiple quads (bulk write)
-MyApp.MyGraph.write([quad_1, quad_2])
-```
-
-Querying data:
-
-```elixir
-# Gizmo syntax!
-query = "graph.Vertex('graph').Out('connection').All()"
-
-# Default result limit
-MyApp.MyGraph.query(query)
-
-# Custom result limit (limited + unlimited)
-MyApp.MyGraph.query(query, limit: 3)
-MyApp.MyGraph.query(query, limit: -1)
 ```
 
 Deleting Data:
 
 ```elixir
-# single quad
 MyApp.MyGraph.delete(%{
   subject: "graph",
   predicate: "connection",
   object: "target"
 })
-
-# multiple quads (bulk delete)
-MyApp.MyGraph.delete([quad_1, quad_2])
 ```
+
+A more detailed usage documentation can be found inline at the `Caylir.Graph` module.
 
 ### JSON Configuration
 
