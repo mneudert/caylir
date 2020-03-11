@@ -41,8 +41,8 @@ defmodule Caylir.Graph do
   Both inline and `:otp_app` configuration can be mixed. In this case the
   application configuration will overwrite any inline values.
 
-  For more information on how to configure your connection please refer to
-  the documentation of `Caylir.Graph.Config`.
+  For more information on how (and what) to configure your connection please
+  refer to the documentation of `Caylir.Graph.Config`.
 
   ## Graph Usage
 
