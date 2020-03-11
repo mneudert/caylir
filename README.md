@@ -84,14 +84,14 @@ config :my_app, MyApp.MyGraph,
 
 # {mod, fun, args}
 config :my_app, MyApp.MyGraph,
-  init: {MyInitModule, :my_init_mfa, [:foo, :bar]}
+  init: {MyInitModule, :my_init_mfargs, [:foo, :bar]}
 
 defmodule MyInitModule do
   @spec my_init_mf(module) :: :ok
-  def my_init_mf(graph), do: my_init_mfa(graph, :foo, :bar)
+  def my_init_mf(graph), do: my_init_mfargs(graph, :foo, :bar)
 
-  @spec my_init_mfa(module, atom, atom) :: :ok
-  def my_init_mfa(graph, :foo, :bar) do
+  @spec my_init_mfargs(module, atom, atom) :: :ok
+  def my_init_mfargs(graph, :foo, :bar) do
     config =
       Keyword.merge(
         graph.config(),

@@ -11,7 +11,7 @@ defmodule Caylir.Graph.JSON do
   def decoder(graph_config) do
     graph_config
     |> Keyword.get(:json_decoder, @default_decoder)
-    |> convert_to_mfa(:decode!)
+    |> convert_to_mfargs(:decode!)
   end
 
   @doc """
@@ -21,10 +21,10 @@ defmodule Caylir.Graph.JSON do
   def encoder(graph_config) do
     graph_config
     |> Keyword.get(:json_encoder, @default_encoder)
-    |> convert_to_mfa(:encode!)
+    |> convert_to_mfargs(:encode!)
   end
 
-  defp convert_to_mfa({_, _, _} = mfa, _), do: mfa
-  defp convert_to_mfa({module, function}, _), do: {module, function, []}
-  defp convert_to_mfa(module, function), do: {module, function, []}
+  defp convert_to_mfargs({_, _, _} = mfargs, _), do: mfargs
+  defp convert_to_mfargs({module, function}, _), do: {module, function, []}
+  defp convert_to_mfargs(module, function), do: {module, function, []}
 end
