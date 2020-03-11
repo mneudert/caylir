@@ -48,7 +48,16 @@ defmodule Caylir.Graph do
 
   ### Querying Data
 
+  By default a query is sent to the Gizmo language endpoint:
+
       MyGraph.query("graph.Vertex('graph').Out('connection').All()")
+
+  If you want to send a query to a language specific endpoint not configured
+  as your default (e.g. if you are mixing Gizmo and GraphQL queries) you can
+  pass the `:language` option:
+
+      MyGraph.query(query, language: :gizmo)
+      MyGraph.query(query, language: :graphql)
 
   If you want to limit the number of results you can pass the `:limit` option:
 
