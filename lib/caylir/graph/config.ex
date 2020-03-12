@@ -1,6 +1,6 @@
 defmodule Caylir.Graph.Config do
   @moduledoc """
-  ### JSON Configuration
+  ## JSON Decoder/Encoder Configuration
 
   By default the library used for encoding/decoding JSON is `:jason`.
   For the time `:caylir` directly depends on it to ensure it is available.
