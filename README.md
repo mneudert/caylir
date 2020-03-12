@@ -155,15 +155,6 @@ MyGraph.delete(%{
 
 A more detailed usage documentation can be found inline at the `Caylir.Graph` module.
 
-### Query Language Configuration
-
-If you are using a query language other than the default `:gizmo` you can configure your graph to use a different endpoint:
-
-```elixir
-config :my_app, MyGraph,
-  language: :graphql
-```
-
 ### Query Limit Configuration
 
 You can define a default query limit by adding it to your graph config:

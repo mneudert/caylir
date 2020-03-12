@@ -1,5 +1,19 @@
 defmodule Caylir.Graph.Config do
   @moduledoc """
+  ## Query Language Configuration
+
+  By default all queries are expected to use the Gizmo query language.
+
+  Using the configuration key `:language` you can switch the default
+  language endpoint to use:
+
+      config :my_app, MyGraph,
+        language: :graphql
+
+  The HTTP URLs used to send the queries (for both `:query` and `:shape` calls)
+  are constructed as `/api/v1/\#{call}/\#{language}`. Depending on your
+  choice and used Cayley version the `:shape` endpoint might not be available.
+
   ## JSON Decoder/Encoder Configuration
 
   By default the library used for encoding/decoding JSON is `:jason`.
