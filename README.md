@@ -36,7 +36,7 @@ end
 Defining a graph connection requires defining a module:
 
 ```elixir
-defmodule MyApp.MyGraph do
+defmodule MyGraph do
   use Caylir.Graph, otp_app: :my_app
 end
 ```
@@ -46,7 +46,7 @@ The `:otp_app` name and the name of the module can be freely chosen but have to 
 ```elixir
 children = [
   # ...
-  MyApp.MyGraph,
+  MyGraph,
   # ...
 ]
 ```
@@ -58,7 +58,7 @@ For a more detailed explanation of how to get started with a graph please consul
 The most simple way is to use a completely static configuration:
 
 ```elixir
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   host: "cayley.host",
   port: 42160,
   scheme: "https"
@@ -67,7 +67,7 @@ config :my_app, MyApp.MyGraph,
 Default values for missing configuration keys:
 
 ```elixir
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   host: "localhost",
   port: 64210,
   scheme: "http"
@@ -79,11 +79,11 @@ If you cannot, for whatever reason, use a static application config you can conf
 
 ```elixir
 # {mod, fun}
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   init: {MyInitModule, :my_init_mf}
 
 # {mod, fun, args}
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   init: {MyInitModule, :my_init_mfargs, [:foo, :bar]}
 
 defmodule MyInitModule do
@@ -113,7 +113,7 @@ The function is expected to always return `:ok`.
 For some use cases (e.g. testing) it may be sufficient to define hardcoded configuration defaults outside of your application environment:
 
 ```elixir
-defmodule MyApp.MyGraph do
+defmodule MyGraph do
   use Caylir.Graph,
     otp_app: :my_app,
     config: [
@@ -130,13 +130,13 @@ These values will be overwritten by and/or merged with the application environme
 Querying data:
 
 ```elixir
-MyApp.MyGraph.query("graph.Vertex('graph').Out('connection').All()")
+MyGraph.query("graph.Vertex('graph').Out('connection').All()")
 ```
 
 Writing Data:
 
 ```elixir
-MyApp.MyGraph.write(%{
+MyGraph.write(%{
   subject: "graph",
   predicate: "connection",
   object: "target"
@@ -146,7 +146,7 @@ MyApp.MyGraph.write(%{
 Deleting Data:
 
 ```elixir
-MyApp.MyGraph.delete(%{
+MyGraph.delete(%{
   subject: "graph",
   predicate: "connection",
   object: "target"
@@ -160,7 +160,7 @@ A more detailed usage documentation can be found inline at the `Caylir.Graph` mo
 If you are using a query language other than the default `:gizmo` you can configure your graph to use a different endpoint:
 
 ```elixir
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   language: :graphql
 ```
 
@@ -169,7 +169,7 @@ config :my_app, MyApp.MyGraph,
 You can define a default query limit by adding it to your graph config:
 
 ```elixir
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   limit: -1
 ```
 
@@ -181,14 +181,14 @@ To change that timeout you can configure your graph:
 
 ```elixir
 # lowering timeout to 500 ms
-config :my_app, MyApp.MyGraph,
+config :my_app, MyGraph,
   query_timeout: 500
 ```
 
 or pass an individual timeout for a single query:
 
 ```elixir
-MyApp.MyGraph.query(query, timeout: 250)
+MyGraph.query(query, timeout: 250)
 ```
 
 A passed or graph wide timeout configuration override any `:recv_timeout` of your `:hackney` (HTTP client) configuration.
