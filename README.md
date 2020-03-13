@@ -155,15 +155,6 @@ MyGraph.delete(%{
 
 A more detailed usage documentation can be found inline at the `Caylir.Graph` module.
 
-### Query Limit Configuration
-
-You can define a default query limit by adding it to your graph config:
-
-```elixir
-config :my_app, MyGraph,
-  limit: -1
-```
-
 ### Query Timeout Configuration
 
 Using all default values and no specific parameters each query is allowed to take up to 5000 milliseconds (`GenServer.call/2` timeout) to complete. That may be too long or not long enough in some cases.

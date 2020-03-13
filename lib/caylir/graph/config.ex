@@ -14,6 +14,13 @@ defmodule Caylir.Graph.Config do
   are constructed as `/api/v1/\#{call}/\#{language}`. Depending on your
   choice and used Cayley version the `:shape` endpoint might not be available.
 
+  ## Query Limit Configuration
+
+  You can define a default query limit by adding it to your graph config:
+
+      config :my_app, MyGraph,
+        limit: -1
+
   ## JSON Decoder/Encoder Configuration
 
   By default the library used for encoding/decoding JSON is `:jason`.
