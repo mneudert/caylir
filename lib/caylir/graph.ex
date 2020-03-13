@@ -67,6 +67,11 @@ defmodule Caylir.Graph do
   Passing `-1` will return "unlimited" results while also deactivating any
   potential default limits implied by Cayley itself.
 
+  By default a query has a timeout of 5 seconds (5000ms). If you want to change
+  that layout to a lower or higher value you can pass the `:timeout` option:
+
+      MyGraph.query(query, timeout: 250)
+
   ### Writing Data
 
   You can write a single quad:
