@@ -28,8 +28,13 @@ defmodule Caylir.Graph do
         use Caylir.Graph, otp_app: :my_application
       end
 
-  This connection will fetch it's configuration from the application environment
-  as defined by `:otp_app`. As an alternative you can define the configuration
+  This connection will fetch it's configuration from the
+  application environment as defined by `:otp_app`:
+
+      config :my_application, MyGraph,
+        host: "cayley.example.com"
+
+  As an alternative you can define the configuration
   in the module definition itself:
 
       defmodule MyGraph do
