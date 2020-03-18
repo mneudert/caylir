@@ -41,7 +41,7 @@ defmodule MyGraph do
 end
 ```
 
-The `:otp_app` name and the name of the module can be freely chosen but have to be linked to a corresponding configuration entry. This defined graph module needs to be hooked up into your supervision tree:
+This defined graph module needs to be hooked up into your supervision tree:
 
 ```elixir
 children = [
@@ -53,9 +53,7 @@ children = [
 
 For a more detailed explanation of how to get started with a graph please consult the inline documentation of the `Caylir.Graph` module.
 
-### Configuration (static)
-
-The most simple way is to use a completely static configuration:
+To configure your connection you can use the application environment:
 
 ```elixir
 config :my_app, MyGraph,
@@ -64,7 +62,9 @@ config :my_app, MyGraph,
   scheme: "https"
 ```
 
-Default values for missing configuration keys:
+The entry should match the chosen `:otp_app` and module name defined earlier.
+
+#### Default Configuration Values
 
 ```elixir
 config :my_app, MyGraph,
@@ -75,7 +75,7 @@ config :my_app, MyGraph,
 
 ### Configuration (dynamic)
 
-If you cannot, for whatever reason, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
+If you cannot, or do not want to, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
 
 ```elixir
 # {mod, fun}
