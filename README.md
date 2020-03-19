@@ -64,41 +64,6 @@ config :my_app, MyGraph,
 
 The entry should match the chosen `:otp_app` and module name defined earlier.
 
-### Configuration (dynamic)
-
-If you cannot, or do not want to, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
-
-```elixir
-# {mod, fun}
-config :my_app, MyGraph,
-  init: {MyInitModule, :my_init_mf}
-
-# {mod, fun, args}
-config :my_app, MyGraph,
-  init: {MyInitModule, :my_init_mfargs, [:foo, :bar]}
-
-defmodule MyInitModule do
-  @spec my_init_mf(module) :: :ok
-  def my_init_mf(graph), do: my_init_mfargs(graph, :foo, :bar)
-
-  @spec my_init_mfargs(module, atom, atom) :: :ok
-  def my_init_mfargs(graph, :foo, :bar) do
-    config =
-      Keyword.merge(
-        graph.config(),
-        host: "localhost",
-        port: 64210
-      )
-
-    Application.put_env(:my_app, graph, config)
-  end
-end
-```
-
-When the graph is started the function will be called with the graph module as the first parameter with optional `{m, f, a}` parameters from your configuration following. This will be done before the graph is available for use.
-
-The function is expected to always return `:ok`.
-
 ## Usage
 
 Querying data:
