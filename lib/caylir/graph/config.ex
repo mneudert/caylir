@@ -22,6 +22,18 @@ defmodule Caylir.Graph.Config do
 
   ## What To Configure
 
+  Several configuration entries will be set to default values
+  if they are not set manually:
+
+      [
+        host: "localhost",
+        json_decoder: {Jason, :decode!, [[keys: :atoms]]},
+        json_encoder: {Jason, :encode!, []},
+        language: :gizmo,
+        port: 64210,
+        scheme: "http"
+      ]
+
   ### Query Language Configuration
 
   By default all queries are expected to use the Gizmo query language.

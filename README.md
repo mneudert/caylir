@@ -64,15 +64,6 @@ config :my_app, MyGraph,
 
 The entry should match the chosen `:otp_app` and module name defined earlier.
 
-#### Default Configuration Values
-
-```elixir
-config :my_app, MyGraph,
-  host: "localhost",
-  port: 64210,
-  scheme: "http"
-```
-
 ### Configuration (dynamic)
 
 If you cannot, or do not want to, use a static application config you can configure an initializer module that will be called every time your graph is started (or restarted) in your supervision tree:
