@@ -1,6 +1,28 @@
 defmodule Caylir.Graph.Config do
   @moduledoc """
-  ## Query Language Configuration
+  ## How To Configure
+
+  ### Inline Configuration
+
+  For some use cases (e.g. testing) it may be sufficient to define hardcoded
+  configuration defaults outside of your application environment:
+
+      defmodule MyGraph do
+        use Caylir.Graph,
+          otp_app: :my_app,
+          config: [
+            host: "localhost",
+            port: 64210
+          ]
+      end
+
+  If you combine inline configuration with an `:otp_app` setting the inline
+  defaults will be overwritten by and/or merged with the application
+  environment values when the configuration is accessed.
+
+  ## What To Configure
+
+  ### Query Language Configuration
 
   By default all queries are expected to use the Gizmo query language.
 
@@ -14,14 +36,14 @@ defmodule Caylir.Graph.Config do
   are constructed as `/api/v1/\#{call}/\#{language}`. Depending on your
   choice and used Cayley version the `:shape` endpoint might not be available.
 
-  ## Query Limit Configuration
+  ### Query Limit Configuration
 
   You can define a default query limit by adding it to your graph config:
 
       config :my_app, MyGraph,
         limit: -1
 
-  ## JSON Decoder/Encoder Configuration
+  ### JSON Decoder/Encoder Configuration
 
   By default the library used for encoding/decoding JSON is `:jason`.
   For the time `:caylir` directly depends on it to ensure it is available.
