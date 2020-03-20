@@ -6,6 +6,7 @@
     - A missing `host` configuration will now default to `"localhost"`
     - A missing `port` configuration will now default to `64210`
     - A missing `otp_app` configuration will no longer raise and only use the (inline) defaults
+    - Documentation is now available inline (`@moduledoc`, ...) with the `README.md` file targeting the repository (development) instead of releases
     - Errors from `:hackney.body/1` are now passed to the caller instead of raising a `MatchError`
     - Queries are executed directly in the calling process without passing through a process pool
     - The scheme used for the requests can now be configured

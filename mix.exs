@@ -50,8 +50,7 @@ defmodule Caylir.MixProject do
 
   defp docs do
     [
-      extras: ["CHANGELOG.md", "README.md"],
-      main: "readme",
+      main: "Caylir.Graph",
       source_ref: "master",
       source_url: @url_github
     ]

@@ -2,8 +2,6 @@
 
 Cayley driver for Elixir
 
-__Note__: If you are reading this on [GitHub](https://github.com/mneudert/caylir) then the information in this file may be out of sync with the [Hex package](https://hex.pm/packages/caylir). If you are using this library through Hex please refer to the appropriate documentation on [HexDocs](https://hexdocs.pm/caylir).
-
 ## Cayley Support
 
 Tested Cayley versions:
