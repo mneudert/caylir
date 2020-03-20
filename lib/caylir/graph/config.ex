@@ -123,19 +123,17 @@ defmodule Caylir.Graph.Config do
 
   If you want to use another library you can switch it:
 
-  ```elixir
-  config :my_app, MyGraph,
-    json_decoder: MyJSONLibrary,
-    json_encoder: MyJSONLibrary
+      config :my_app, MyGraph,
+        json_decoder: MyJSONLibrary,
+        json_encoder: MyJSONLibrary
 
-  config :my_app, MyGraph,
-    json_decoder: {MyJSONLibrary, :decoder_argless},
-    json_encoder: {MyJSONLibrary, :encoder_argless}
+      config :my_app, MyGraph,
+        json_decoder: {MyJSONLibrary, :decoder_argless},
+        json_encoder: {MyJSONLibrary, :encoder_argless}
 
-  config :my_app, MyGraph,
-    json_decoder: {MyJSONLibrary, :decode_it, [[keys: :atoms]]},
-    json_encoder: {MyJSONLibrary, :encode_it, []}
-  ```
+      config :my_app, MyGraph,
+        json_decoder: {MyJSONLibrary, :decode_it, [[keys: :atoms]]},
+        json_encoder: {MyJSONLibrary, :encode_it, []}
 
   If you configure only a module name it will be called
   as `module.decode!(binary)` and `module.encode!(map)`. When using
