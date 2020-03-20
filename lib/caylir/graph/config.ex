@@ -93,6 +93,29 @@ defmodule Caylir.Graph.Config do
       config :my_app, MyGraph,
         limit: -1
 
+  ### Query Timeout Configuration
+
+  Using all default values and no specific parameters each query is allowed
+  to take up to 5000 milliseconds (`GenServer.call/2` timeout) to complete.
+  That may be too long or not long enough in some cases.
+
+  To change that timeout you can configure your graph:
+
+      # lowering timeout to 500 ms
+      config :my_app, MyGraph,
+        query_timeout: 500
+
+  or pass an individual timeout for a single query:
+
+      MyGraph.query(query, timeout: 250)
+
+  A passed or graph wide timeout configuration override any
+  `:recv_timeout` of your `:hackney` (HTTP client) configuration.
+
+  This does not apply to write requests. They are currently only affected by
+  configured `:recv_timeout` values. Setting a graph timeout enables you to
+  have a different timeout for read and write requests.
+
   ### JSON Decoder/Encoder Configuration
 
   By default the library used for encoding/decoding JSON is `:jason`.
