@@ -45,13 +45,16 @@ defmodule Caylir.Graph.Config do
   is started (or restarted) in your supervision tree:
 
       # {mod, fun}
-      config :my_app, MyGraph,
+      [
         init: {MyInitModule, :my_init_mf}
+      ]
 
       # {mod, fun, args}
-      config :my_app, MyGraph,
+      [
         init: {MyInitModule, :my_init_mfargs, [:foo, :bar]}
+      ]
 
+      # the configured initializer module
       defmodule MyInitModule do
         @spec my_init_mf(module) :: :ok
         def my_init_mf(graph), do: my_init_mfargs(graph, :foo, :bar)
@@ -78,6 +81,9 @@ defmodule Caylir.Graph.Config do
 
   ## What To Configure
 
+  As every configuration value can be set both inline and using the
+  application environment the documentation using plain keyword lists.
+
   Several configuration entries will be set to default values
   if they are not set manually:
 
@@ -97,8 +103,9 @@ defmodule Caylir.Graph.Config do
   Using the configuration key `:language` you can switch the default
   language endpoint to use:
 
-      config :my_app, MyGraph,
+      [
         language: :graphql
+      ]
 
   The HTTP URLs used to send the queries (for both `:query` and `:shape` calls)
   are constructed as `/api/v1/\#{call}/\#{language}`. Depending on your
@@ -108,8 +115,9 @@ defmodule Caylir.Graph.Config do
 
   You can define a default query limit by adding it to your graph config:
 
-      config :my_app, MyGraph,
+      [
         limit: -1
+      ]
 
   ### Query Timeout Configuration
 
@@ -120,8 +128,9 @@ defmodule Caylir.Graph.Config do
   To change that timeout you can configure your graph:
 
       # lowering timeout to 500 ms
-      config :my_app, MyGraph,
+      [
         query_timeout: 500
+      ]
 
   or pass an individual timeout for a single query:
 
@@ -141,17 +150,20 @@ defmodule Caylir.Graph.Config do
 
   If you want to use another library you can switch it:
 
-      config :my_app, MyGraph,
+      [
         json_decoder: MyJSONLibrary,
         json_encoder: MyJSONLibrary
+      ]
 
-      config :my_app, MyGraph,
+      [
         json_decoder: {MyJSONLibrary, :decoder_argless},
         json_encoder: {MyJSONLibrary, :encoder_argless}
+      ]
 
-      config :my_app, MyGraph,
+      [
         json_decoder: {MyJSONLibrary, :decode_it, [[keys: :atoms]]},
         json_encoder: {MyJSONLibrary, :encode_it, []}
+      ]
 
   If you configure only a module name it will be called
   as `module.decode!(binary)` and `module.encode!(map)`. When using
