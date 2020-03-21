@@ -2,6 +2,15 @@ defmodule Caylir.Graph.Config do
   @moduledoc """
   ## How To Configure
 
+  Configuration values can be stored in two locations:
+
+  - hardcoded inline
+  - application environment
+
+  If you combine inline configuration with an `:otp_app` setting the
+  inline defaults will be overwritten by and/or merged with the
+  application environment values when the configuration is accessed.
+
   ### Inline Configuration
 
   For some use cases (e.g. testing) it may be sufficient to define hardcoded
@@ -9,16 +18,25 @@ defmodule Caylir.Graph.Config do
 
       defmodule MyGraph do
         use Caylir.Graph,
-          otp_app: :my_app,
           config: [
             host: "localhost",
             port: 64210
           ]
       end
 
-  If you combine inline configuration with an `:otp_app` setting the inline
-  defaults will be overwritten by and/or merged with the application
-  environment values when the configuration is accessed.
+  ### Environment Configuration
+
+  When not using hardcoded configuration values you can use the
+  application environment for configuration:
+
+      defmodule MyGraph do
+        use Caylir.Graph,
+          otp_app: :my_app
+      end
+
+      config :my_app, MyGraph,
+        host: "localhost",
+        port: 64210
 
   ### Dynamic Configuration
 
