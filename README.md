@@ -62,6 +62,8 @@ config :my_app, MyGraph,
 
 The entry should match the chosen `:otp_app` and module name defined earlier.
 
+For more information on how (and what) to configure please refer to the inline documentation of the `Caylir.Graph.Config` module.
+
 ## Usage
 
 Querying data:
