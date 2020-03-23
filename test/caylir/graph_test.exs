@@ -20,8 +20,9 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid quads fail deleting" do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
+
     {:error, reason} = DefaultGraph.delete(%{invalid: "quad"})
 
     assert {:error, ^reason} = DefaultGraphJSONStringKeys.delete(%{invalid: "quad"})
@@ -29,8 +30,9 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid quads fail writing" do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
+
     {:error, reason} = DefaultGraph.write(%{invalid: "quad"})
 
     assert {:error, ^reason} = DefaultGraphJSONStringKeys.write(%{invalid: "quad"})
@@ -38,8 +40,9 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid query string" do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
+
     {:error, reason} = DefaultGraph.query("meh!")
 
     assert {:error, ^reason} = DefaultGraphJSONStringKeys.query("meh!")
@@ -47,8 +50,9 @@ defmodule Caylir.GraphTest do
   end
 
   test "invalid shape query string" do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
+
     {:error, reason} = DefaultGraph.shape("meh!")
 
     assert {:error, ^reason} = DefaultGraphJSONStringKeys.shape("meh!")
@@ -56,8 +60,8 @@ defmodule Caylir.GraphTest do
   end
 
   test "quad lifecycle", context do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
 
     quad = %{subject: "lifecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('lifecycle').Out('for').All()"
@@ -76,8 +80,8 @@ defmodule Caylir.GraphTest do
   end
 
   test "query shape", context do
-    {:ok, _} = start_supervised(DefaultGraph)
-    {:ok, _} = start_supervised(DefaultGraphJSONStringKeys)
+    start_supervised!(DefaultGraph)
+    start_supervised!(DefaultGraphJSONStringKeys)
 
     quad = %{subject: "shapecycle", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('shapecycle').Out('for').All()"
@@ -95,7 +99,7 @@ defmodule Caylir.GraphTest do
   end
 
   test "query result limiting", context do
-    {:ok, _} = start_supervised(LimitGraph)
+    start_supervised!(LimitGraph)
 
     quads = [
       %{subject: "query_limiting", predicate: "for", object: "#{context.test} #1"},

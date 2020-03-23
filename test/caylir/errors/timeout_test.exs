@@ -69,7 +69,7 @@ defmodule Caylir.Errors.TimeoutTest do
 
     Application.put_env(:caylir, InetsGraph, inets_env)
 
-    {:ok, _} = start_supervised(InetsGraph)
+    start_supervised!(InetsGraph)
 
     on_exit(fn ->
       :inets.stop(:httpd, httpd_pid)

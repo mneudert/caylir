@@ -27,15 +27,15 @@ defmodule Caylir.Graph.InitializerTest do
   end
 
   test "init {mod, fun} called upon graph (re-) start" do
-    {:ok, _} = start_supervised(Initializer)
-    {:ok, _} = start_supervised(InitializerGraphModFun)
+    start_supervised!(Initializer)
+    start_supervised!(InitializerGraphModFun)
 
     assert {InitializerGraphModFun, :ok_empty} == Initializer.get_init()
   end
 
   test "init {mod, fun, args} called upon graph (re-) start" do
-    {:ok, _} = start_supervised(Initializer)
-    {:ok, _} = start_supervised(InitializerGraphModFunArgs)
+    start_supervised!(Initializer)
+    start_supervised!(InitializerGraphModFunArgs)
 
     assert {InitializerGraphModFunArgs, :ok_passed} == Initializer.get_init()
   end
