@@ -15,7 +15,7 @@ defmodule Caylir.Graph.ConfigTest do
 
     Application.put_env(:caylir, graph, Keyword.put(graph.config(), key, :exists))
 
-    assert :exists == Keyword.get(graph.config(), key)
+    assert Keyword.get(graph.config(), key) == :exists
   end
 
   test "inline configuration defaults" do
@@ -28,10 +28,10 @@ defmodule Caylir.Graph.ConfigTest do
         config: [{key, "inline value"}]
     end
 
-    assert "inline value" == graph.config()[key]
+    assert Keyword.get(graph.config(), key) == "inline value"
 
     Application.put_env(:caylir, graph, Keyword.put(graph.config(), key, "runtime value"))
 
-    assert "runtime value" == graph.config()[key]
+    assert Keyword.get(graph.config(), key) == "runtime value"
   end
 end
