@@ -103,7 +103,7 @@ defmodule Caylir.GraphTest do
     ]
 
     # `All()` only respects limit in Cayley 0.7.4+
-    # graph.Vertex('query_limiting').Out('for').All()"
+    # graph.Vertex('query_limiting').Out('for').All()
     query = "graph.Vertex('query_limiting').Out('for').ForEach( function(d) { g.Emit(d) })"
 
     assert :ok == LimitGraph.write(quads)
