@@ -76,9 +76,6 @@ defmodule Caylir.Graph.JSONLibraryTest do
 
   test "json library configuration", context do
     start_supervised!(JSONLogger)
-    start_supervised!(JSONGraphFull)
-    start_supervised!(JSONGraphModule)
-    start_supervised!(JSONGraphPartial)
 
     quad = %{subject: "json_library", predicate: "for", object: to_string(context.test)}
     query = "graph.Vertex('json_library').Out('for').All()"
