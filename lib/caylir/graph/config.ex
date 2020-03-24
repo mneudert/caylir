@@ -11,6 +11,10 @@ defmodule Caylir.Graph.Config do
   inline defaults will be overwritten by and/or merged with the
   application environment values when the configuration is accessed.
 
+  Additionally you can insert use your application supervision tree to
+  trigger an initializer module ("dynamic configuration") that is able to
+  configure your application environment during startup.
+
   ### Inline Configuration
 
   For some use cases (e.g. testing) it may be sufficient to define hardcoded

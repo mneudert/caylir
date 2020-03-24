@@ -11,8 +11,8 @@ defmodule Caylir.Graph do
         use Caylir.Graph, otp_app: :my_application
       end
 
-  This module should then be hooked into the supervision tree of your
-  application:
+  If you intend to use initializer modules this module then needs to be
+  inserted into the supervision tree of your application:
 
       children = [
         # ...
