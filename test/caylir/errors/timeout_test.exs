@@ -10,34 +10,12 @@ defmodule Caylir.Errors.TimeoutTest do
 
     Record.defrecord(:mod, Record.extract(:mod, from_lib: "inets/include/httpd.hrl"))
 
-    def unquote(:do)(mod_data), do: serve_uri(mod(mod_data, :request_uri), mod_data)
+    def unquote(:do)(mod_data) do
+      case mod(mod_data, :request_uri) do
+        '/api/v1/query/timeout_long' -> :timer.sleep(10_000)
+        _ -> :timer.sleep(100)
+      end
 
-    defp serve_uri('/api/v1/delete', _mod_data) do
-      :timer.sleep(100)
-      serve_dummy()
-    end
-
-    defp serve_uri('/api/v1/query/timeout', _mod_data) do
-      :timer.sleep(100)
-      serve_dummy()
-    end
-
-    defp serve_uri('/api/v1/query/timeout_long', _mod_data) do
-      :timer.sleep(10_000)
-      serve_dummy()
-    end
-
-    defp serve_uri('/api/v1/shape/timeout', _mod_data) do
-      :timer.sleep(100)
-      serve_dummy()
-    end
-
-    defp serve_uri('/api/v1/write', _mod_data) do
-      :timer.sleep(100)
-      serve_dummy()
-    end
-
-    defp serve_dummy do
       body = '{"result": "dummy"}'
 
       head = [
