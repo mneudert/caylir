@@ -7,7 +7,7 @@ defmodule Caylir.MixProject do
     [
       app: :caylir,
       name: "Caylir",
-      version: "1.0.0",
+      version: "1.1.0-dev",
       elixir: "~> 1.7",
       deps: deps(),
       description: "Cayley driver for Elixir",
@@ -51,7 +51,7 @@ defmodule Caylir.MixProject do
   defp docs do
     [
       main: "Caylir.Graph",
-      source_ref: "v1.0.0",
+      source_ref: "master",
       source_url: @url_github
     ]
   end
