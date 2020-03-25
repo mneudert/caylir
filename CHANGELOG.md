@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.0-dev
+## v1.0.0 (2020-03-25)
 
 - Enhancements
     - A missing `host` configuration will now default to `"localhost"`

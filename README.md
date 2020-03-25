@@ -21,7 +21,7 @@ To use Caylir with your projects, edit your `mix.exs` file and add the required 
 defp deps do
   [
     # ...
-    {:caylir, "~> 0.11"},
+    {:caylir, "~> 1.0"},
     # ...
   ]
 end
