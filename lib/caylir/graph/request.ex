@@ -111,8 +111,6 @@ defmodule Caylir.Graph.Request do
     end
   end
 
-  # Utility methods
-
   defp apply_mfargs({mod, fun, extra_args}, main_arg) do
     apply(mod, fun, [main_arg | extra_args])
   end
