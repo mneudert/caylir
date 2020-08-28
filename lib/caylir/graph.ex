@@ -155,7 +155,7 @@ defmodule Caylir.Graph do
   @doc """
   Returns the graph configuration.
   """
-  @callback config :: Keyword.t()
+  @callback config() :: Keyword.t()
 
   @doc """
   Deletes a quad from the graph.

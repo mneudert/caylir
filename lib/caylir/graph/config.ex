@@ -179,7 +179,7 @@ defmodule Caylir.Graph.Config do
   @doc """
   Retrieves the graph configuration for `graph` in `otp_app`.
   """
-  @spec config(atom, module, defaults :: Keyword.t()) :: Keyword.t()
+  @spec config(atom, module, Keyword.t()) :: Keyword.t()
   def config(nil, _, defaults), do: defaults
 
   def config(otp_app, graph, defaults) do
