@@ -8,7 +8,7 @@ defmodule Caylir.Graph do
   module:
 
       defmodule MyGraph do
-        use Caylir.Graph, otp_app: :my_application
+        use Caylir.Graph, otp_app: :my_app
       end
 
   If you intend to use initializer modules this module then needs to be
@@ -25,13 +25,13 @@ defmodule Caylir.Graph do
   Referring back to the previously mentioned module:
 
       defmodule MyGraph do
-        use Caylir.Graph, otp_app: :my_application
+        use Caylir.Graph, otp_app: :my_app
       end
 
   This connection will fetch it's configuration from the
   application environment as defined by `:otp_app`:
 
-      config :my_application, MyGraph,
+      config :my_app, MyGraph,
         host: "cayley.example.com"
 
   As an alternative you can define the configuration
