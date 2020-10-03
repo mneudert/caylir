@@ -6,6 +6,7 @@ cache:
   directories:
     - _build
     - deps
+    - "${HOME}/cayley"
 
 jobs:
   include:
@@ -15,12 +16,12 @@ jobs:
       env: CAYLEY=0.7.3 CAYLEY_TAG=v0.7.3
       otp_release: 19.3
       before_install: |-
-        wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY_TAG}/cayley_${CAYLEY}_linux_amd64.tar.gz"
-        tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
-
-        pushd "cayley_${CAYLEY}_linux_amd64"
-          ./cayley http --db=memstore --dbpath="" 2>/dev/null &
-        popd
+        [ ! -x "${HOME}/cayley/cayley" ]; then
+          wget -q "https://github.com/cayleygraph/cayley/releases/download/${CAYLEY_TAG}/cayley_${CAYLEY}_linux_amd64.tar.gz"
+          tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
+          mv "cayley_${CAYLEY}_linux_amd64" "${HOME}/cayley"
+        fi
+      bevore_script: "${HOME}/cayley/cayley" http --db=memstore --dbpath="" 2>/dev/null &
       after_script: ps | grep 'cayley' | grep -v 'grep' | awk '{ print $1 }' | xargs kill
     - <<: *test
       elixir: 1.8.2
