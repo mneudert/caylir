@@ -21,7 +21,7 @@ jobs:
           tar -xvzf "cayley_${CAYLEY}_linux_amd64.tar.gz"
           mv "cayley_${CAYLEY}_linux_amd64" "${HOME}/cayley"
         fi
-      bevore_script: "${HOME}/cayley/cayley" http --db=memstore --dbpath="" 2>/dev/null &
+      before_script: "${HOME}/cayley/cayley" http --db=memstore --dbpath="" 2>/dev/null &
       after_script: ps | grep 'cayley' | grep -v 'grep' | awk '{ print $1 }' | xargs kill
     - <<: *test
       elixir: 1.8.2
