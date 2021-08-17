@@ -10,7 +10,7 @@ jobs:
           - elixir: '1.7.4'
             otp: '19.3'
             cayley: 'v0.7.3'
-            runs-on: ubuntu-16.04
+            runs-on: ubuntu-18.04
           - elixir: '1.8.2'
             otp: '20.3'
             cayley: 'v0.7.4'
