@@ -10,11 +10,8 @@ defmodule Caylir.Errors.TimeoutTest do
 
     Record.defrecord(:mod, Record.extract(:mod, from_lib: "inets/include/httpd.hrl"))
 
-    def unquote(:do)(mod_data) do
-      case mod(mod_data, :request_uri) do
-        '/api/v1/query/timeout_long' -> :timer.sleep(10_000)
-        _ -> :timer.sleep(100)
-      end
+    def unquote(:do)(_mod_data) do
+      :timer.sleep(100)
 
       body = '{"result": "dummy"}'
 
@@ -66,16 +63,5 @@ defmodule Caylir.Errors.TimeoutTest do
     assert {:error, :timeout} == InetsGraph.query("", opts)
     assert {:error, :timeout} == InetsGraph.shape("", opts)
     assert {:error, :timeout} == InetsGraph.write(%{invalid: "quad"}, opts)
-  end
-
-  test "timeout above GenServer defaults" do
-    timeout = 7500
-
-    opts = [
-      language: "timeout_long",
-      timeout: timeout
-    ]
-
-    assert {:error, :timeout} == InetsGraph.query("", opts)
   end
 end
