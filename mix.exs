@@ -7,7 +7,7 @@ defmodule Caylir.MixProject do
     [
       app: :caylir,
       name: "Caylir",
-      version: "1.1.0-dev",
+      version: "2.0.0-dev",
       elixir: "~> 1.7",
       deps: deps(),
       description: "Cayley driver for Elixir",
