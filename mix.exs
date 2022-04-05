@@ -2,12 +2,13 @@ defmodule Caylir.MixProject do
   use Mix.Project
 
   @url_github "https://github.com/mneudert/caylir"
+  @version "2.0.0-dev"
 
   def project do
     [
       app: :caylir,
       name: "Caylir",
-      version: "2.0.0-dev",
+      version: @version,
       elixir: "~> 1.9",
       deps: deps(),
       description: "Cayley driver for Elixir",
@@ -52,7 +53,7 @@ defmodule Caylir.MixProject do
   defp docs do
     [
       main: "Caylir.Graph",
-      source_ref: "master",
+      source_ref: "v#{@version}",
       source_url: @url_github
     ]
   end
