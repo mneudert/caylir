@@ -53,6 +53,11 @@ defmodule Caylir.MixProject do
   defp docs do
     [
       main: "Caylir.Graph",
+      extras: [
+        "CHANGELOG.md",
+        LICENSE: [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
       formatters: ["html"],
       source_ref: "v#{@version}",
       source_url: @url_github
