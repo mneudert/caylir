@@ -53,6 +53,7 @@ defmodule Caylir.MixProject do
   defp docs do
     [
       main: "Caylir.Graph",
+      formatters: ["html"],
       source_ref: "v#{@version}",
       source_url: @url_github
     ]
