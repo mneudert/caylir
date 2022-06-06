@@ -24,6 +24,9 @@ jobs:
           - elixir: '1.13.4'
             otp: '24.3'
             cayley: 'v0.7.6'
+          - elixir: '1.13.4'
+            otp: '25.0'
+            cayley: 'v0.7.6'
 
     services:
       cayley:
