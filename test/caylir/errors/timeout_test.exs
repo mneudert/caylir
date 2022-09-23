@@ -13,12 +13,12 @@ defmodule Caylir.Errors.TimeoutTest do
     def unquote(:do)(_mod_data) do
       :timer.sleep(100)
 
-      body = '{"result": "dummy"}'
+      body = ~C({"result": "dummy"})
 
       head = [
         code: 200,
         content_length: body |> length() |> Kernel.to_charlist(),
-        content_type: 'application/json'
+        content_type: ~C(application/json)
       ]
 
       {:proceed, [{:response, {:response, head, body}}]}
@@ -32,7 +32,7 @@ defmodule Caylir.Errors.TimeoutTest do
       document_root: root,
       modules: [InetsHandler],
       port: 0,
-      server_name: 'caylir_inets_proxy_timeout_test',
+      server_name: ~C(caylir_inets_proxy_timeout_test),
       server_root: root
     ]
 
