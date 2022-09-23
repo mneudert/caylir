@@ -28,7 +28,7 @@ defmodule Caylir.Graph do
         use Caylir.Graph, otp_app: :my_app
       end
 
-  This connection will fetch it's configuration from the
+  This connection will fetch its configuration from the
   application environment as defined by `:otp_app`:
 
       config :my_app, MyGraph,
