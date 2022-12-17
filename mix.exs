@@ -10,7 +10,7 @@ defmodule Caylir.MixProject do
       app: :caylir,
       name: "Caylir",
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.11",
       deps: deps(),
       description: "Cayley driver for Elixir",
       dialyzer: dialyzer(),
