@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.runs-on }}
 
     strategy:
       matrix:
@@ -12,18 +12,23 @@ jobs:
           - elixir: '1.11.4'
             otp: '21.3'
             cayley: 'v0.7.3'
+            runs-on: ubuntu-20.04
           - elixir: '1.12.3'
             otp: '22.3'
             cayley: 'v0.7.4'
+            runs-on: ubuntu-20.04
           - elixir: '1.13.4'
             otp: '23.3'
             cayley: 'v0.7.5'
+            runs-on: ubuntu-20.04
           - elixir: '1.14.2'
             otp: '24.3'
             cayley: 'v0.7.6'
+            runs-on: ubuntu-22.04
           - elixir: '1.14.2'
             otp: '25.0'
             cayley: 'v0.7.6'
+            runs-on: ubuntu-22.04
 
     services:
       cayley:
