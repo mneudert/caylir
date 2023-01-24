@@ -21,11 +21,11 @@ jobs:
             otp: '23.3'
             cayley: 'v0.7.5'
             runs-on: ubuntu-20.04
-          - elixir: '1.14.2'
+          - elixir: '1.14.3'
             otp: '24.3'
             cayley: 'v0.7.6'
             runs-on: ubuntu-22.04
-          - elixir: '1.14.2'
+          - elixir: '1.14.3'
             otp: '25.2'
             cayley: 'v0.7.6'
             runs-on: ubuntu-22.04
