@@ -3,7 +3,7 @@
 ## v2.0.0-dev
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.11`
+    - Minimum required Elixir version is now `~> 1.11`
 
 ## v1.0.0 (2020-03-25)
 
@@ -20,7 +20,7 @@
     - Shape queries now accept a `:language` option as expected
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.7`
+    - Minimum required Elixir version is now `~> 1.7`
     - Support for Cayley versions earlier than `0.7.3` is no longer guaranteed
 
 ## v0.11.1 (2019-11-20)
@@ -52,7 +52,7 @@
     - Graphs can be declared with compile time configuration defaults that are later overwritten by the application environment
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.5`
+    - Minimum required Elixir version is now `~> 1.5`
     - Public access to the internal pool child spec has been removed
     - Public access to the internal pool module name has been removed
     - Support for Cayley version `0.6.1` has been dropped
@@ -65,7 +65,7 @@
 - Enhancements
     - Configuration can be done on graph (re-) start by setting a `{mod, fun}` tuple for the config key `:init`. This method will be called with the graph module name as the first (and only) parameter and is expected to return `:ok`
     - Queries now support the `limit` parameter
-    - Support for elixir 1.5 style `child_spec` has been added
+    - Support for Elixir 1.5 style `child_spec` has been added
 
 - Soft deprecations (no warnings)
     - Support for `{:system, "ENV_VARIABLE"}` configuration has been removed from the documentation. It will eventually be removed completely after a proper deprecation phase
@@ -82,7 +82,7 @@
 ## v0.6.0 (2017-09-17)
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.3`
+    - Minimum required Elixir version is now `~> 1.3`
 
 ## v0.5.0 (2017-09-09)
 
@@ -97,8 +97,8 @@
 ## v0.3.0 (2016-12-11)
 
 - Backwards incompatible changes
-    - Minimum required elixir version is now `~> 1.2`
-    - Minimum required erlang version is now `~> 18.0`
+    - Minimum required Elixir version is now `~> 1.2`
+    - Minimum required Erlang version is now `~> 18.0`
     - Support for `:poison < 2.0` has been removed
 
 ## v0.2.0 (2015-06-13)
