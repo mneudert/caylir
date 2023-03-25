@@ -28,10 +28,10 @@ defmodule Caylir.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.6", only: :dev, runtime: false},
+      {:credo, "~> 1.7", only: :dev, runtime: false},
       {:dialyxir, "~> 1.2", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.15.0", only: :test, runtime: false},
+      {:excoveralls, "~> 0.16.0", only: :test, runtime: false},
       {:hackney, "~> 1.6"},
       {:jason, "~> 1.0"},
       {:ranch, "~> 1.7.0", only: :test}
