@@ -24,7 +24,11 @@ defmodule Caylir.MixProject do
     ]
   end
 
-  def application, do: []
+  def application do
+    [
+      extra_applications: extra_applications(Mix.env())
+    ]
+  end
 
   defp deps do
     [
@@ -63,6 +67,9 @@ defmodule Caylir.MixProject do
       source_url: @url_github
     ]
   end
+
+  defp extra_applications(:test), do: [:inets]
+  defp extra_applications(_), do: []
 
   defp package do
     %{
