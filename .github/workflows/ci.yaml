@@ -107,44 +107,36 @@ jobs:
         run: mix credo --strict
 
   test:
-    runs-on: ${{ matrix.runs-on }}
+    runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
       matrix:
         include:
           - elixir: '1.11.4'
-            otp: '21.3'
+            otp: '24.3'
             cayley: 'v0.7.3'
-            runs-on: ubuntu-20.04
           - elixir: '1.12.3'
-            otp: '22.3'
+            otp: '24.3'
             cayley: 'v0.7.4'
-            runs-on: ubuntu-20.04
           - elixir: '1.13.4'
-            otp: '23.3'
+            otp: '24.3'
             cayley: 'v0.7.5'
-            runs-on: ubuntu-20.04
           - elixir: '1.14.5'
             otp: '24.3'
             cayley: 'v0.7.6'
-            runs-on: ubuntu-22.04
           - elixir: '1.15.7'
             otp: '25.3'
             cayley: 'v0.7.6'
-            runs-on: ubuntu-24.04
           - elixir: '1.16.3'
             otp: '26.2'
             cayley: 'v0.7.6'
-            runs-on: ubuntu-24.04
           - elixir: '1.17.3'
             otp: '27.3'
             cayley: 'v0.7.6'
-            runs-on: ubuntu-24.04
           - elixir: '1.18.3'
             otp: '27.3'
             cayley: 'v0.7.6'
-            runs-on: ubuntu-24.04
 
     services:
       cayley:
