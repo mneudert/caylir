@@ -114,14 +114,14 @@ defmodule Caylir.Graph.URL do
     url = url(action, config)
     language = config[:language] |> query_language() |> URI.encode()
 
-    %URI{url | path: url.path <> "/" <> language}
+    %{url | path: url.path <> "/" <> language}
   end
 
   defp query_language(nil), do: "gizmo"
   defp query_language(language), do: Kernel.to_string(language)
 
   defp query_limit(url, limit) when is_integer(limit) do
-    %URI{url | query: "limit=#{limit}"}
+    %{url | query: "limit=#{limit}"}
   end
 
   defp query_limit(url, _), do: url
