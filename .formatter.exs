@@ -1,6 +1,6 @@
 [
   inputs: [
     "{lib,test}/**/*.{ex,exs}",
-    "{.formatter,mix}.exs"
+    "{.dialyzer_ignore,.formatter,mix}.exs"
   ]
 ]

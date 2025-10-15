@@ -50,6 +50,7 @@ defmodule Caylir.MixProject do
         :underspecs,
         :unmatched_returns
       ],
+      ignore_warnings: ".dialyzer_ignore.exs",
       plt_core_path: "plts",
       plt_local_path: "plts"
     ]
